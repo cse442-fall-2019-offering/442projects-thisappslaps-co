@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a442projects_thisappslaps_co.DeviceSpecUtil;
 import com.example.a442projects_thisappslaps_co.R;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.gallery_fragment, container, false);
 
         RecyclerView galleryRecyclerView = view.findViewById(R.id.gallery_recycler_view);
-        galleryRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        galleryRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), getSpanCount()));
         GalleryAdapter galleryAdapter = new GalleryAdapter(mGalleryController.createDummyList());
         galleryRecyclerView.setAdapter(galleryAdapter);
 
@@ -42,6 +43,26 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
         homeImageButton.setOnClickListener(this);
 
         return view;
+    }
+
+    private int getSpanCount() {
+        int spanCount;
+        int screenWidthDp = (int) DeviceSpecUtil.getScreenWidthDp(getContext());
+
+        if (screenWidthDp < 350) {
+            spanCount = 2;
+        }
+        else if (screenWidthDp < 500) {
+            spanCount = 3;
+        }
+        else if (screenWidthDp < 750) {
+            spanCount = 4;
+        }
+        else {
+            spanCount = 5;
+        }
+
+        return spanCount;
     }
 
     @Override
