@@ -1,7 +1,5 @@
 package com.example.a442projects_thisappslaps_co.Gallery;
 
-import android.content.Context;
-
 import com.example.a442projects_thisappslaps_co.R;
 
 import java.util.ArrayList;
@@ -9,11 +7,7 @@ import java.util.List;
 
 class GalleryController {
 
-    private Context mContext;
-
-    GalleryController(Context context) {
-        mContext = context;
-    }
+    GalleryController() { }
 
     List<Integer> createDummyList() {
         List<Integer> dummyList = new ArrayList<>();

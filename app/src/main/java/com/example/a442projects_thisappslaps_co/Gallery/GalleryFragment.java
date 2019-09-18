@@ -27,7 +27,7 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mGalleryController = new GalleryController(getContext());
+        mGalleryController = new GalleryController();
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
