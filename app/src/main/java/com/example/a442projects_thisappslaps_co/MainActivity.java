@@ -19,14 +19,19 @@ import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsController;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.a442projects_thisappslaps_co.Gallery.GalleryFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static int MY_CAMERA_PERMISSIONS;
 
-    private ImageButton mARObjectsImageButton;
     private BottomSheetBehavior mBottomSheetBehavior;
     private RecyclerView mARObjectsRecyclerView;
+    private ImageButton mARObjectsImageButton;
+    private ImageButton mGalleryImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +44,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initializeViewVariables() {
-        mARObjectsImageButton = findViewById(R.id.ar_objects_image_btn);
         mBottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.ar_objects_bottom_sheet));
         mARObjectsRecyclerView = findViewById(R.id.ar_objects_recycler_view);
+        mARObjectsImageButton = findViewById(R.id.ar_objects_image_btn);
+        mGalleryImageButton = findViewById(R.id.gallery_image_btn);
     }
 
     private void setListeners() {
         mARObjectsImageButton.setOnClickListener(this);
+        mGalleryImageButton.setOnClickListener(this);
     }
 
     private void setARObjectsAdapter() {
@@ -90,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.ar_objects_image_btn:
                 mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
+            case R.id.gallery_image_btn:
+                startFragment(new GalleryFragment(), true);
+                break;
             default:
                 break;
         }
@@ -129,5 +139,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public int getItemCount() {
             return mARObjectDrawableResList.size();
         }
+    }
+
+    private void startFragment(Fragment fragment, boolean shouldAddToBackStack) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        if (shouldAddToBackStack) {
+            fragmentTransaction.addToBackStack(null);
+        }
+        fragmentTransaction.commit();
     }
 }
