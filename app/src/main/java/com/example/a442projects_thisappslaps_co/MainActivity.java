@@ -37,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestPermissionForCamera();
 
         initializeViewVariables();
         setListeners();
@@ -59,12 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mARObjectsRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mARObjectsRecyclerView.setAdapter(
                 new ARObjectsAdapter(new ARObjectsController().createARObjectsDummyList()));
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        requestPermissionForCamera();
     }
 
     private void requestPermissionForCamera() {
