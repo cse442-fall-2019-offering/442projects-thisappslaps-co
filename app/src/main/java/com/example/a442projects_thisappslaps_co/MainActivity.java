@@ -4,19 +4,54 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsController;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static int MY_CAMERA_PERMISSIONS;
+
+    private ImageButton mARObjectsImageButton;
+    private BottomSheetBehavior mBottomSheetBehavior;
+    private RecyclerView mARObjectsRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initializeViewVariables();
+        setListeners();
+        setARObjectsAdapter();
+    }
+
+    private void initializeViewVariables() {
+        mARObjectsImageButton = findViewById(R.id.ar_objects_image_btn);
+        mBottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.ar_objects_bottom_sheet));
+        mARObjectsRecyclerView = findViewById(R.id.ar_objects_recycler_view);
+    }
+
+    private void setListeners() {
+        mARObjectsImageButton.setOnClickListener(this);
+    }
+
+    private void setARObjectsAdapter() {
+        mARObjectsRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        mARObjectsRecyclerView.setAdapter(
+                new ARObjectsAdapter(new ARObjectsController().createARObjectsDummyList()));
     }
 
     @Override
@@ -46,6 +81,53 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 startActivity(intent);
             }
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ar_objects_image_btn:
+                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private class ARObjectsHolder extends RecyclerView.ViewHolder {
+
+        ARObjectsHolder(LayoutInflater inflater, ViewGroup viewGroup) {
+            super(inflater.inflate(R.layout.ar_object_item, viewGroup, false));
+        }
+
+        void bind(Integer drawableRes) {
+            itemView.setBackgroundResource(drawableRes);
+        }
+    }
+
+    private class ARObjectsAdapter extends RecyclerView.Adapter<ARObjectsHolder> {
+
+        private ArrayList<Integer> mARObjectDrawableResList;
+
+        ARObjectsAdapter(ArrayList<Integer> arObjectDrawableResList) {
+            mARObjectDrawableResList = arObjectDrawableResList;
+        }
+
+        @NonNull
+        @Override
+        public ARObjectsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ARObjectsHolder(LayoutInflater.from(getApplicationContext()), parent);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ARObjectsHolder holder, int position) {
+            holder.bind(mARObjectDrawableResList.get(position));
+        }
+
+        @Override
+        public int getItemCount() {
+            return mARObjectDrawableResList.size();
         }
     }
 }
