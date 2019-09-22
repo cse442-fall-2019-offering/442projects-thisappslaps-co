@@ -5,30 +5,40 @@
     android:background="@color/colorPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageButton
+        android:id="@+id/home_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/home_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/profile_image"/>
+
 
     <TextView
-        android:id="@+id/my_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/account"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_marginTop="70dp"
+        android:textSize="30sp"
+        android:textColor="@color/colorWhite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/profile_image"
+        app:layout_constraintBottom_toTopOf="@id/profile_image"/>
 
-        />
 
     <ImageView
         android:id="@+id/profile_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/setting1"
+        app:layout_constraintBottom_toTopOf="@id/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/my_account"
+        app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/setting_profile_image_layerlist" />
+
 
     <TextView
         android:id="@+id/name"
@@ -59,11 +69,10 @@
         android:layout_height="wrap_content"
         android:text="@string/setting1"
         android:textColor="@color/colorWhite"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/setting2"
         app:layout_constraintEnd_toStartOf="@+id/switch1"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch1"
@@ -158,7 +167,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch4"
         app:layout_constraintBottom_toBottomOf="parent" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
