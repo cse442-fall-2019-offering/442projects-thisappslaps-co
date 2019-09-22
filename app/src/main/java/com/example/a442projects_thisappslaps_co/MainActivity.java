@@ -19,6 +19,8 @@ import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsController;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -35,6 +37,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try{
+            Thread.sleep(4000);
+        }
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
