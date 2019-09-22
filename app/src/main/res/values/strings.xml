@@ -9,4 +9,5 @@
     <string name = "account">My Account</string>
     <string name = "name_field"> Name:</string>
     <string name = "user_name">Hertz</string>
+    <string name="my_projects_text_view">My Projects</string>
 </resources>
