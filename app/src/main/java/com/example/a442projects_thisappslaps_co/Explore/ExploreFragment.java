@@ -43,8 +43,8 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
         ExploreAdapter exploreAdapter = new ExploreAdapter(mExploreControler.createDummyList());
         exploreRecyclerView.setAdapter(exploreAdapter);
 
-        ImageButton homeImageButton = view.findViewById(R.id.home_image_button);
-        homeImageButton.setOnClickListener(this);
+        ImageButton backButton = view.findViewById(R.id.back_button);
+        backButton.setOnClickListener(this);
 
         return view;
     }
@@ -71,7 +71,7 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.home_image_button) {
+        if (view.getId() == R.id.back_button) {
             assert getFragmentManager() != null;
             getFragmentManager().popBackStackImmediate();
         }

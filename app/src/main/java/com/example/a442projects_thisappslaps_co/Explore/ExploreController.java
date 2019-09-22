@@ -13,9 +13,6 @@ public class ExploreController {
             if (i % 5 == 0) {
                 dummyList.add(R.color.colorPrimaryDark);
             }
-            else if (i % 3 == 0) {
-                dummyList.add(R.color.colorWhite);
-            }
             else if (i % 2 == 0) {
                 dummyList.add(R.color.design_default_color_primary);
             }

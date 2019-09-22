@@ -39,7 +39,7 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
         GalleryAdapter galleryAdapter = new GalleryAdapter(mGalleryController.createDummyList());
         galleryRecyclerView.setAdapter(galleryAdapter);
 
-        ImageButton homeImageButton = view.findViewById(R.id.home_image_button);
+        ImageButton homeImageButton = view.findViewById(R.id.back_button);
         homeImageButton.setOnClickListener(this);
 
         return view;
@@ -67,7 +67,7 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.home_image_button) {
+        if (view.getId() == R.id.back_button) {
             assert getFragmentManager() != null;
             getFragmentManager().popBackStackImmediate();
         }
