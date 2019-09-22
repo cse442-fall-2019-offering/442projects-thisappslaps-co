@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView mARObjectsRecyclerView;
     private ImageButton mARObjectsImageButton;
     private ImageButton mGalleryImageButton;
+    private ImageButton mSettingsImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +56,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mARObjectsRecyclerView = findViewById(R.id.ar_objects_recycler_view);
         mARObjectsImageButton = findViewById(R.id.ar_objects_image_btn);
         mGalleryImageButton = findViewById(R.id.gallery_image_btn);
+        mSettingsImageButton = findViewById(R.id.settings_image_btn);
     }
 
     private void setListeners() {
         mARObjectsImageButton.setOnClickListener(this);
         mGalleryImageButton.setOnClickListener(this);
+        mSettingsImageButton.setOnClickListener(this);
     }
 
     private void setARObjectsAdapter() {
@@ -102,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startFragment(new GalleryFragment(), true);
                 break;
             case R.id.settings_image_btn:
-                startFragment(new GalleryFragment(), true);
+                startFragment(new SettingsFragment(), true);
             default:
                 break;
         }
