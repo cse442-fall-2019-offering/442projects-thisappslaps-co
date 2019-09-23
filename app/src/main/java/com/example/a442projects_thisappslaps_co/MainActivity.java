@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsController;
+import com.example.a442projects_thisappslaps_co.Settings.SettingsFragment;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
