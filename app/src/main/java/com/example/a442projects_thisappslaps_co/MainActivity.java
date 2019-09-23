@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsController;
+import com.example.a442projects_thisappslaps_co.Shop.ShopFragment;
 import com.example.a442projects_thisappslaps_co.Settings.SettingsFragment;
 import com.example.a442projects_thisappslaps_co.Explore.ExploreFragment;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView mARObjectsRecyclerView;
     private ImageButton mARObjectsImageButton;
     private ImageButton mGalleryImageButton;
+    private ImageButton mShopImageButton;
     private ImageButton mSettingsImageButton;
     private ImageButton mExploreImageButton;
 
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mARObjectsRecyclerView = findViewById(R.id.ar_objects_recycler_view);
         mARObjectsImageButton = findViewById(R.id.ar_objects_image_btn);
         mGalleryImageButton = findViewById(R.id.gallery_image_btn);
+        mShopImageButton = findViewById(R.id.shop_image_button);
         mSettingsImageButton = findViewById(R.id.settings_image_btn);
         mExploreImageButton = findViewById(R.id.explore_image_btn);
     }
@@ -75,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setListeners() {
         mARObjectsImageButton.setOnClickListener(this);
         mGalleryImageButton.setOnClickListener(this);
+        mShopImageButton.setOnClickListener(this);
         mSettingsImageButton.setOnClickListener(this);
         mExploreImageButton.setOnClickListener(this);
     }
@@ -118,6 +122,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.gallery_image_btn:
                 startFragment(new GalleryFragment(), true);
                 break;
+            case R.id.shop_image_button:
+                startFragment(new ShopFragment(), true);
             case R.id.settings_image_btn:
                 startFragment(new SettingsFragment(), true);
                 break;
