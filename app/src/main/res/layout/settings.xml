@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageButton
-        android:id="@+id/home_image_button"
+        android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/home_icon"
+        android:src="@drawable/back_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -20,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/account"
+        android:id="@+id/header"
         android:textSize="30sp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
@@ -35,22 +37,21 @@
         android:layout_height="wrap_content"
         android:text="@string/name_field"
         android:textColor="@color/colorWhite"
-        app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintBottom_toTopOf="@id/setting1"
-        app:layout_constraintEnd_toStartOf="@+id/user_name"
-        />
+        app:layout_constraintEnd_toStartOf="@id/user_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
+
     <TextView
         android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/user_name"
         android:textColor="@color/colorWhite"
-        app:layout_constraintStart_toEndOf="@+id/name_text_view"
-
-        app:layout_constraintBottom_toTopOf="@id/setting1"
+        app:layout_constraintBottom_toTopOf="@id/switch1"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toEndOf="@+id/name_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
 
     <TextView
         android:id="@+id/setting1"
@@ -61,7 +62,7 @@
         app:layout_constraintBottom_toTopOf="@id/setting2"
         app:layout_constraintEnd_toStartOf="@+id/switch1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/name_text_view" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switch1"
@@ -69,7 +70,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/setting1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_name"
         app:layout_constraintBottom_toTopOf="@+id/switch2" />
 
     <TextView

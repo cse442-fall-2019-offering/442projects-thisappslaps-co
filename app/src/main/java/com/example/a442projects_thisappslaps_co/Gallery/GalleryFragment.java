@@ -39,8 +39,8 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
         GalleryAdapter galleryAdapter = new GalleryAdapter(mGalleryController.createDummyList());
         galleryRecyclerView.setAdapter(galleryAdapter);
 
-        ImageButton homeImageButton = view.findViewById(R.id.back_button);
-        homeImageButton.setOnClickListener(this);
+        ImageButton backImageButton = view.findViewById(R.id.back_button);
+        backImageButton.setOnClickListener(this);
 
         return view;
     }

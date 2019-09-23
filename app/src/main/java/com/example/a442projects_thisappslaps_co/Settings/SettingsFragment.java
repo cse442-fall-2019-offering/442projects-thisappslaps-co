@@ -31,15 +31,15 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         View view = inflater.inflate(R.layout.settings, container, false);
 
-        ImageButton homeImageButton = view.findViewById(R.id.home_image_button);
-        homeImageButton.setOnClickListener(this);
+        ImageButton backImageButton = view.findViewById(R.id.back_button);
+        backImageButton.setOnClickListener(this);
 
         return view;
     }
     
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.home_image_button) {
+        if (view.getId() == R.id.back_button) {
             assert getFragmentManager() != null;
             getFragmentManager().popBackStackImmediate();
         }
