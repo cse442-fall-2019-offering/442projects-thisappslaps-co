@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsController;
+import com.example.a442projects_thisappslaps_co.Shop.ShopFragment;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView mARObjectsRecyclerView;
     private ImageButton mARObjectsImageButton;
     private ImageButton mGalleryImageButton;
+    private ImageButton mShopImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +56,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mARObjectsRecyclerView = findViewById(R.id.ar_objects_recycler_view);
         mARObjectsImageButton = findViewById(R.id.ar_objects_image_btn);
         mGalleryImageButton = findViewById(R.id.gallery_image_btn);
+        mShopImageButton = findViewById(R.id.shop_image_button);
     }
 
     private void setListeners() {
         mARObjectsImageButton.setOnClickListener(this);
         mGalleryImageButton.setOnClickListener(this);
+        mShopImageButton.setOnClickListener(this);
     }
 
     private void setARObjectsAdapter() {
@@ -99,6 +103,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.gallery_image_btn:
                 startFragment(new GalleryFragment(), true);
+                break;
+            case R.id.shop_image_button:
+                startFragment(new ShopFragment(), true);
                 break;
             default:
                 break;
