@@ -15,8 +15,7 @@
     <string name="setting3">Setting 3</string>
     <string name="setting4">Setting 4</string>
     <string name="setting5">Setting 5</string>
+    <string name="user_name">User Name</string>
     <string name="account">My Account</string>
-    <string name="name_field"> Name:</string>
-    <string name="user_name">Hertz</string>
     <string name="explore_text_view">Explore</string>
 </resources>

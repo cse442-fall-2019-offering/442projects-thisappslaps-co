@@ -22,7 +22,6 @@ import com.example.a442projects_thisappslaps_co.Explore.ExploreFragment;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -124,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.shop_image_button:
                 startFragment(new ShopFragment(), true);
+                break;
             case R.id.settings_image_btn:
                 startFragment(new SettingsFragment(), true);
                 break;

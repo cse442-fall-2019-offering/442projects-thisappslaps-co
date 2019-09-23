@@ -1,23 +1,14 @@
 package com.example.a442projects_thisappslaps_co.Settings;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a442projects_thisappslaps_co.DeviceSpecUtil;
 import com.example.a442projects_thisappslaps_co.R;
-
-import java.util.List;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
 
@@ -29,9 +20,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
-        View view = inflater.inflate(R.layout.settings, container, false);
+        View view = inflater.inflate(R.layout.settings_fragment, container, false);
 
-        ImageButton backImageButton = view.findViewById(R.id.back_button);
+        ImageButton backImageButton = view.findViewById(R.id.back_image_btn);
         backImageButton.setOnClickListener(this);
 
         return view;
@@ -39,10 +30,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.back_button) {
+        if (view.getId() == R.id.back_image_btn) {
             assert getFragmentManager() != null;
             getFragmentManager().popBackStackImmediate();
         }
     }
-
 }
