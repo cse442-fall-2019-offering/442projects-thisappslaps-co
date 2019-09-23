@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">442projects-thisappslaps-co</string>
     <string name="action_settings">Settings</string>
-    <string name = "setting1">Setting 1</string>
-    <string name = "setting2">Setting 2</string>
-    <string name = "setting3">Setting 3</string>
-    <string name = "setting4">Setting 4</string>
-    <string name = "setting5">Setting 5</string>
-    <string name = "account">My Account</string>
-    <string name = "name_field"> Name:</string>
-    <string name = "user_name">Hertz</string>
+    <string name="setting1">Setting 1</string>
+    <string name="setting2">Setting 2</string>
+    <string name="setting3">Setting 3</string>
+    <string name="setting4">Setting 4</string>
+    <string name="setting5">Setting 5</string>
+    <string name="account">My Account</string>
+    <string name="user_name">User Name</string>
     <string name="my_projects_text_view">My Projects</string>
 </resources>
