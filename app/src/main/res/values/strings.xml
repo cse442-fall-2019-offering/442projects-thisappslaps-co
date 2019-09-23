@@ -2,7 +2,6 @@
     <string name="app_name">442projects-thisappslaps-co</string>
     <string name="action_settings">Settings</string>
     <string name="my_projects_text_view">My Projects</string>
-
     <string name="shop_header_1_content">Tulips Starting \n Only at</string>
     <string name="shop_header_1_price">$9.99</string>
     <string name="shop_header_2_content">Give a Gift \n For Mom</string>
@@ -11,4 +10,13 @@
     <string name="shop_popular_products_text">Popular Products</string>
     <string name="shop_recommended_text">Recommended For You</string>
     <string name="shop_halloween_text">Halloween</string>
+    <string name="setting1">Setting 1</string>
+    <string name="setting2">Setting 2</string>
+    <string name="setting3">Setting 3</string>
+    <string name="setting4">Setting 4</string>
+    <string name="setting5">Setting 5</string>
+    <string name="account">My Account</string>
+    <string name="name_field"> Name:</string>
+    <string name="user_name">Hertz</string>
+    <string name="explore_text_view">Explore</string>
 </resources>

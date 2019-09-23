@@ -17,9 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsController;
 import com.example.a442projects_thisappslaps_co.Shop.ShopFragment;
+import com.example.a442projects_thisappslaps_co.Settings.SettingsFragment;
+import com.example.a442projects_thisappslaps_co.Explore.ExploreFragment;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -34,9 +38,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton mARObjectsImageButton;
     private ImageButton mGalleryImageButton;
     private ImageButton mShopImageButton;
+    private ImageButton mSettingsImageButton;
+    private ImageButton mExploreImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try{
+            Thread.sleep(4000);
+        }
+        catch (InterruptedException ex){
+            Thread.currentThread().interrupt();
+        }
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
@@ -57,12 +71,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mARObjectsImageButton = findViewById(R.id.ar_objects_image_btn);
         mGalleryImageButton = findViewById(R.id.gallery_image_btn);
         mShopImageButton = findViewById(R.id.shop_image_button);
+        mSettingsImageButton = findViewById(R.id.settings_image_btn);
+        mExploreImageButton = findViewById(R.id.explore_image_btn);
     }
 
     private void setListeners() {
         mARObjectsImageButton.setOnClickListener(this);
         mGalleryImageButton.setOnClickListener(this);
         mShopImageButton.setOnClickListener(this);
+        mSettingsImageButton.setOnClickListener(this);
+        mExploreImageButton.setOnClickListener(this);
     }
 
     private void setARObjectsAdapter() {
@@ -106,6 +124,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.shop_image_button:
                 startFragment(new ShopFragment(), true);
+            case R.id.settings_image_btn:
+                startFragment(new SettingsFragment(), true);
+                break;
+            case R.id.explore_image_btn:
+                startFragment(new ExploreFragment(), true);
                 break;
             default:
                 break;
