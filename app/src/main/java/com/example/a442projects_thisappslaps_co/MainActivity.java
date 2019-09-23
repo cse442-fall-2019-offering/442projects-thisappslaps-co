@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.shop_image_button:
                 startFragment(new ShopFragment(), true);
+                break;
             case R.id.settings_image_btn:
                 startFragment(new SettingsFragment(), true);
                 break;
