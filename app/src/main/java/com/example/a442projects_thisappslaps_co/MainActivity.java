@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsController;
 import com.example.a442projects_thisappslaps_co.Settings.SettingsFragment;
+import com.example.a442projects_thisappslaps_co.Explore.ExploreFragment;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton mARObjectsImageButton;
     private ImageButton mGalleryImageButton;
     private ImageButton mSettingsImageButton;
+    private ImageButton mExploreImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +69,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mARObjectsImageButton = findViewById(R.id.ar_objects_image_btn);
         mGalleryImageButton = findViewById(R.id.gallery_image_btn);
         mSettingsImageButton = findViewById(R.id.settings_image_btn);
+        mExploreImageButton = findViewById(R.id.explore_image_btn);
     }
 
     private void setListeners() {
         mARObjectsImageButton.setOnClickListener(this);
         mGalleryImageButton.setOnClickListener(this);
         mSettingsImageButton.setOnClickListener(this);
+        mExploreImageButton.setOnClickListener(this);
     }
 
     private void setARObjectsAdapter() {
@@ -116,6 +120,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.settings_image_btn:
                 startFragment(new SettingsFragment(), true);
+            case R.id.explore_image_btn:
+                startFragment(new ExploreFragment(), true);
+                break;
             default:
                 break;
         }

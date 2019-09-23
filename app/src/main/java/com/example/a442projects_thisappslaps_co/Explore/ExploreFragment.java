@@ -1,4 +1,6 @@
-package com.example.a442projects_thisappslaps_co.Gallery;
+package com.example.a442projects_thisappslaps_co.Explore;
+
+import androidx.fragment.app.Fragment;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -10,7 +12,6 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,28 +20,31 @@ import com.example.a442projects_thisappslaps_co.R;
 
 import java.util.List;
 
-public class GalleryFragment extends Fragment implements View.OnClickListener {
 
-    private GalleryController mGalleryController;
 
-    public GalleryFragment() { }
+
+public class ExploreFragment extends Fragment implements View.OnClickListener {
+
+    private ExploreController mExploreControler;
+
+    public ExploreFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mGalleryController = new GalleryController();
+        mExploreControler = new ExploreController();
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
-        View view = inflater.inflate(R.layout.gallery_fragment, container, false);
+        View view = inflater.inflate(R.layout.explore_fragment, container, false);
 
-        RecyclerView galleryRecyclerView = view.findViewById(R.id.gallery_recycler_view);
-        galleryRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), getSpanCount()));
-        GalleryAdapter galleryAdapter = new GalleryAdapter(mGalleryController.createDummyList());
-        galleryRecyclerView.setAdapter(galleryAdapter);
+        RecyclerView exploreRecyclerView = view.findViewById(R.id.explore_recycler_view);
+        exploreRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), getSpanCount()));
+        ExploreAdapter exploreAdapter = new ExploreAdapter(mExploreControler.createDummyList());
+        exploreRecyclerView.setAdapter(exploreAdapter);
 
-        ImageButton homeImageButton = view.findViewById(R.id.back_button);
-        homeImageButton.setOnClickListener(this);
+        ImageButton backButton = view.findViewById(R.id.back_button);
+        backButton.setOnClickListener(this);
 
         return view;
     }
@@ -73,10 +77,10 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private class GalleryViewHolder extends RecyclerView.ViewHolder {
+    private class ExploreViewHolder extends RecyclerView.ViewHolder {
 
-        GalleryViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
-            super(inflater.inflate(R.layout.gallery_item, viewGroup, false));
+        ExploreViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
+            super(inflater.inflate(R.layout.explore_item, viewGroup, false));
         }
 
         void bind(int color) {
@@ -88,28 +92,30 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
+    private class ExploreAdapter extends RecyclerView.Adapter<ExploreViewHolder> {
 
-        private List<Integer> mGalleryColorList;
+        private List<Integer> mExploreColorList;
 
-        private GalleryAdapter(List<Integer> galleryColorList) {
-            mGalleryColorList = galleryColorList;
+        private ExploreAdapter(List<Integer> exploreColorList) {
+            mExploreColorList = exploreColorList;
         }
 
         @NonNull
         @Override
-        public GalleryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new GalleryViewHolder(LayoutInflater.from(getActivity()), parent);
+        public ExploreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ExploreViewHolder(LayoutInflater.from(getActivity()), parent);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull GalleryViewHolder holder, int position) {
-            holder.bind(mGalleryColorList.get(position));
+        public void onBindViewHolder(@NonNull ExploreViewHolder holder, int position) {
+            holder.bind(mExploreColorList.get(position));
         }
 
         @Override
         public int getItemCount() {
-            return mGalleryColorList.size();
+            return mExploreColorList.size();
         }
     }
 }
+
+
