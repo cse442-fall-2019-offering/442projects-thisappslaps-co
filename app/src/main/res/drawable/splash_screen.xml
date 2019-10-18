@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-
-
-
     <item android:drawable="@color/colorAccent"/>
     <item
-
-        android:scaleType="fitCenter">
+        android:scaleType="centerCrop">
         <bitmap android:gravity="center"
-                android:src="@drawable/ic_garden_splash"/>
+                android:src="@drawable/ic_garden_flower"/>
     </item>
-
-
 </layer-list>
