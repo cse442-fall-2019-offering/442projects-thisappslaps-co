@@ -73,21 +73,23 @@
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintBottom_toTopOf="@id/setting_2_text_view"
+            app:layout_constraintBottom_toTopOf="@id/password_edit_text"
             app:layout_constraintEnd_toStartOf="@+id/user_name_save_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/setting_2_text_view"
+        <EditText
+            android:id="@+id/password_edit_text"
+            android:inputType="textPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/setting2"
+            android:hint="Change Password"
+            android:ellipsize="start"
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintBottom_toTopOf="@id/setting_3_text_view"
-            app:layout_constraintEnd_toStartOf="@+id/switch_2_switch_compat"
+            app:layout_constraintEnd_toStartOf="@+id/password_save_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_name_edit_text" />
 
@@ -102,7 +104,7 @@
             app:layout_constraintBottom_toTopOf="@id/setting_4_text_view"
             app:layout_constraintEnd_toStartOf="@+id/switch_3_switch_compat"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/setting_2_text_view" />
+            app:layout_constraintTop_toBottomOf="@id/password_edit_text" />
 
         <TextView
             android:id="@+id/setting_4_text_view"
@@ -135,18 +137,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save"
-            app:layout_constraintBottom_toTopOf="@+id/switch_2_switch_compat"
+            app:layout_constraintBottom_toTopOf="@+id/password_save_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/user_name_edit_text"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_2_switch_compat"
+        <Button
+            android:id="@+id/password_save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/save"
             app:layout_constraintBottom_toTopOf="@+id/switch_3_switch_compat"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/setting_2_text_view"
+            app:layout_constraintStart_toEndOf="@+id/password_edit_text"
             app:layout_constraintTop_toBottomOf="@+id/user_name_save_button" />
 
         <androidx.appcompat.widget.SwitchCompat
@@ -156,7 +159,7 @@
             app:layout_constraintBottom_toTopOf="@+id/switch_4_switch_compat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/setting_3_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/switch_2_switch_compat" />
+            app:layout_constraintTop_toBottomOf="@+id/password_save_button" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_4_switch_compat"
