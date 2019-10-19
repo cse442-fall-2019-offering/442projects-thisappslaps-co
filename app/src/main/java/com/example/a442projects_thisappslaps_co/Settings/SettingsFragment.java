@@ -18,13 +18,22 @@ import com.example.a442projects_thisappslaps_co.R;
 public class SettingsFragment extends Fragment implements View.OnClickListener {
     SwitchCompat switch1;
     SwitchCompat switch2;
+    SwitchCompat switch3;
+    SwitchCompat switch4;
+    SwitchCompat switch5;
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String SWITCH1 = "switch1";
     public static final String SWITCH2 = "switch2";
+    public static final String SWITCH3 = "switch3";
+    public static final String SWITCH4 = "switch4";
+    public static final String SWITCH5 = "switch5";
 
     private boolean switch1_checked_value;
     private boolean switch2_checked_value;
+    private boolean switch3_checked_value;
+    private boolean switch4_checked_value;
+    private boolean switch5_checked_value;
 
     public SettingsFragment() { }
 
@@ -42,6 +51,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
         switch1 = view.findViewById(R.id.switch_1_switch_compat);
         switch2 = view.findViewById(R.id.switch_2_switch_compat);
+        switch3 = view.findViewById(R.id.switch_3_switch_compat);
+        switch4 = view.findViewById(R.id.switch_4_switch_compat);
+        switch5 = view.findViewById(R.id.switch_5_switch_compat);
+        
         loadData();
         updateViews();
 
@@ -60,6 +73,34 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
                 saveData();
             }
         });
+
+        switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                saveData();
+                Toast.makeText(getActivity().getApplicationContext(),
+                        "Switch1 has Changed", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        switch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                saveData();
+                Toast.makeText(getActivity().getApplicationContext(),
+                        "Switch1 has Changed", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        switch5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                saveData();
+                Toast.makeText(getActivity().getApplicationContext(),
+                        "Switch1 has Changed", Toast.LENGTH_LONG).show();
+            }
+        });
+
         return view;
     }
     
@@ -77,6 +118,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
         editor.putBoolean(SWITCH1, switch1.isChecked());
         editor.putBoolean(SWITCH2, switch2.isChecked());
+        editor.putBoolean(SWITCH3, switch3.isChecked());
+        editor.putBoolean(SWITCH4, switch4.isChecked());
+        editor.putBoolean(SWITCH5, switch5.isChecked());
 
         editor.apply();
     }
@@ -85,11 +129,18 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, 0);
         switch1_checked_value = sharedPreferences.getBoolean(SWITCH1, false);
         switch2_checked_value = sharedPreferences.getBoolean(SWITCH2, false);
+        switch3_checked_value = sharedPreferences.getBoolean(SWITCH3, false);
+        switch4_checked_value = sharedPreferences.getBoolean(SWITCH4, false);
+        switch5_checked_value = sharedPreferences.getBoolean(SWITCH5, false);
+
     }
 
     public void updateViews(){
         switch1.setChecked(switch1_checked_value);
         switch2.setChecked(switch2_checked_value);
+        switch3.setChecked(switch3_checked_value);
+        switch4.setChecked(switch4_checked_value);
+        switch5.setChecked(switch5_checked_value);
     }
 
 }
