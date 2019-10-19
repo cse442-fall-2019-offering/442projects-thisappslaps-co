@@ -65,16 +65,16 @@
         app:layout_constraintTop_toBottomOf="@id/setting_switch_top_horizontal_guideline"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/setting_1_text_view"
+        <EditText
+            android:id="@+id/user_name_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/setting1"
+            android:hint="@string/edit_username"
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintBottom_toTopOf="@id/setting_2_text_view"
-            app:layout_constraintEnd_toStartOf="@+id/switch_1_switch_compat"
+            app:layout_constraintEnd_toStartOf="@+id/user_name_save_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,14 +89,14 @@
             app:layout_constraintBottom_toTopOf="@id/setting_3_text_view"
             app:layout_constraintEnd_toStartOf="@+id/switch_2_switch_compat"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/setting_1_text_view" />
+            app:layout_constraintTop_toBottomOf="@id/user_name_edit_text" />
 
-        <EditText
+        <TextView
             android:id="@+id/setting_3_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/edit_username"
             android:textColor="@color/colorWhite"
+            android:text="@string/setting3"
             android:textSize="20sp"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintBottom_toTopOf="@id/setting_4_text_view"
@@ -130,13 +130,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/setting_4_text_view" />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_1_switch_compat"
+        <Button
+            android:id="@+id/user_name_save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/save"
             app:layout_constraintBottom_toTopOf="@+id/switch_2_switch_compat"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/setting_1_text_view"
+            app:layout_constraintStart_toEndOf="@+id/user_name_edit_text"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.SwitchCompat
@@ -146,13 +147,12 @@
             app:layout_constraintBottom_toTopOf="@+id/switch_3_switch_compat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/setting_2_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/switch_1_switch_compat" />
+            app:layout_constraintTop_toBottomOf="@+id/user_name_save_button" />
 
-        <Button
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_3_switch_compat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
             app:layout_constraintBottom_toTopOf="@+id/switch_4_switch_compat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/setting_3_text_view"

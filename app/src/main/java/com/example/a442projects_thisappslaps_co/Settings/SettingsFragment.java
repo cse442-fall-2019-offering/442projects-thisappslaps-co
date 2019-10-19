@@ -21,11 +21,10 @@ import com.example.a442projects_thisappslaps_co.R;
 public class SettingsFragment extends Fragment implements View.OnClickListener {
     SwitchCompat switch1;
     SwitchCompat switch2;
-//    SwitchCompat switch3;
     SwitchCompat switch4;
     SwitchCompat switch5;
     TextView username_text_view;
-    private Button saveButton;
+    Button saveButton;
     EditText username_edit_text;
 
     public static final String SHARED_PREFS = "sharedPrefs";
@@ -55,13 +54,13 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         backImageButton.setOnClickListener(this);
 
 
-        switch1 = view.findViewById(R.id.switch_1_switch_compat);
-        switch2 = view.findViewById(R.id.switch_2_switch_compat);
+        switch1 = view.findViewById(R.id.switch_2_switch_compat);
+        switch2 = view.findViewById(R.id.switch_3_switch_compat);
         switch4 = view.findViewById(R.id.switch_4_switch_compat);
         switch5 = view.findViewById(R.id.switch_5_switch_compat);
-        saveButton = view.findViewById(R.id.switch_3_switch_compat);
+        saveButton = view.findViewById(R.id.user_name_save_button);
         username_text_view = view.findViewById(R.id.user_name_text_view);
-        username_edit_text = view.findViewById(R.id.setting_3_text_view);
+        username_edit_text = view.findViewById(R.id.user_name_edit_text);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
