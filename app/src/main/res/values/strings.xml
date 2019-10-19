@@ -19,4 +19,5 @@
     <string name="account">My Account</string>
     <string name="explore_text_view">Explore</string>
     <string name="ar_objects">AR Objects</string>
+    <string name="edit_username">Edit Username</string>
 </resources>
