@@ -88,39 +88,39 @@
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintBottom_toTopOf="@id/setting_3_text_view"
+            app:layout_constraintBottom_toTopOf="@id/dark_mode_text_view"
             app:layout_constraintEnd_toStartOf="@+id/password_save_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_name_edit_text" />
 
         <TextView
-            android:id="@+id/setting_3_text_view"
+            android:id="@+id/dark_mode_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
             android:text="@string/dark_mode"
             android:textSize="20sp"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintBottom_toTopOf="@id/setting_4_text_view"
-            app:layout_constraintEnd_toStartOf="@+id/switch_3_switch_compat"
+            app:layout_constraintBottom_toTopOf="@id/two_factor_text_view"
+            app:layout_constraintEnd_toStartOf="@+id/dark_mode_switch_compat"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/password_edit_text" />
 
         <TextView
-            android:id="@+id/setting_4_text_view"
+            android:id="@+id/two_factor_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/two_factor_authentication"
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintBottom_toTopOf="@id/setting_5_text_view"
-            app:layout_constraintEnd_toStartOf="@+id/switch_4_switch_compat"
+            app:layout_constraintBottom_toTopOf="@id/save_photos_text_view"
+            app:layout_constraintEnd_toStartOf="@+id/two_factor_switch_compat"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/setting_3_text_view" />
+            app:layout_constraintTop_toBottomOf="@id/dark_mode_text_view" />
 
         <TextView
-            android:id="@+id/setting_5_text_view"
+            android:id="@+id/save_photos_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save_photos"
@@ -128,9 +128,9 @@
             android:textSize="20sp"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/switch_5_switch_compat"
+            app:layout_constraintEnd_toStartOf="@+id/save_photos_switch_compat"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/setting_4_text_view" />
+            app:layout_constraintTop_toBottomOf="@id/two_factor_text_view" />
 
         <Button
             android:id="@+id/user_name_save_button"
@@ -147,37 +147,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save"
-            app:layout_constraintBottom_toTopOf="@+id/switch_3_switch_compat"
+            app:layout_constraintBottom_toTopOf="@+id/dark_mode_switch_compat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/password_edit_text"
             app:layout_constraintTop_toBottomOf="@+id/user_name_save_button" />
 
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_3_switch_compat"
+            android:id="@+id/dark_mode_switch_compat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/switch_4_switch_compat"
+            app:layout_constraintBottom_toTopOf="@+id/two_factor_switch_compat"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/setting_3_text_view"
+            app:layout_constraintStart_toEndOf="@+id/dark_mode_text_view"
             app:layout_constraintTop_toBottomOf="@+id/password_save_button" />
 
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_4_switch_compat"
+            android:id="@+id/two_factor_switch_compat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/switch_5_switch_compat"
+            app:layout_constraintBottom_toTopOf="@+id/save_photos_switch_compat"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/setting_4_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/switch_3_switch_compat" />
+            app:layout_constraintStart_toEndOf="@+id/two_factor_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/dark_mode_switch_compat" />
 
         <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch_5_switch_compat"
+            android:id="@+id/save_photos_switch_compat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/setting_5_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/switch_4_switch_compat" />
+            app:layout_constraintStart_toEndOf="@+id/save_photos_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/two_factor_switch_compat" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

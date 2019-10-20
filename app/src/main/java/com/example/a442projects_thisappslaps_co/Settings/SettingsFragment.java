@@ -54,9 +54,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         backImageButton.setOnClickListener(this);
 
 
-        switch3 = view.findViewById(R.id.switch_3_switch_compat);
-        switch4 = view.findViewById(R.id.switch_4_switch_compat);
-        switch5 = view.findViewById(R.id.switch_5_switch_compat);
+        switch3 = view.findViewById(R.id.dark_mode_switch_compat);
+        switch4 = view.findViewById(R.id.two_factor_switch_compat);
+        switch5 = view.findViewById(R.id.save_photos_switch_compat);
 
         username_saveButton = view.findViewById(R.id.user_name_save_button);
         username_text_view = view.findViewById(R.id.user_name_text_view);
@@ -65,6 +65,14 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         password_edit_text = view.findViewById(R.id.password_edit_text);
 
         username_saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                username_text_view.setText(username_edit_text.getText().toString());
+                saveData();
+            }
+        });
+
+        password_saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 username_text_view.setText(username_edit_text.getText().toString());
