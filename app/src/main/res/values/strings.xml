@@ -18,7 +18,9 @@
     <string name="user_name">User Name</string>
     <string name="account">My Account</string>
     <string name="explore_text_view">Explore</string>
-    <string name="expolore_home">HOME</string>
+    <string name="explore_home">HOME</string>
     <string name="explore_favorites">FAVORITES</string>
     <string name="ar_objects">AR Objects</string>
+    <string name="article_title">Small Space Garden Strategies</string>
+
 </resources>
