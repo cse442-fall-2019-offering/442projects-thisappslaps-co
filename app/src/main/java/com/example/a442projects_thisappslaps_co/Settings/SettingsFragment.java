@@ -18,27 +18,27 @@ import androidx.fragment.app.Fragment;
 import com.example.a442projects_thisappslaps_co.R;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
-    SwitchCompat switch3;
-    SwitchCompat switch4;
-    SwitchCompat switch5;
-    TextView username_text_view;
-    EditText username_edit_text;
-    Button username_saveButton;
-    EditText password_edit_text;
-    Button password_saveButton;
+    private SwitchCompat dark_mode_switch;
+    private SwitchCompat two_factor_switch;
+    private SwitchCompat save_photos_switch;
+    private TextView username_text_view;
+    private EditText username_edit_text;
+    private Button username_saveButton;
+    private EditText password_edit_text;
+    private Button password_saveButton;
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
-    public static final String SWITCH3 = "switch3";
-    public static final String SWITCH4 = "switch4";
-    public static final String SWITCH5 = "switch5";
+    public static final String DARK_MODE = "dark_mode";
+    public static final String TWO_FACTOR = "two_factor";
+    public static final String SAVE_PHOTO = "save_photo";
 
     private String  username_value;
     private String  password_value;
-    private boolean switch3_checked_value;
-    private boolean switch4_checked_value;
-    private boolean switch5_checked_value;
+    private boolean dark_mode_checked_value;
+    private boolean two_factor_checked_value;
+    private boolean save_photo_checked_value;
 
     public SettingsFragment() { }
 
@@ -54,9 +54,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         backImageButton.setOnClickListener(this);
 
 
-        switch3 = view.findViewById(R.id.dark_mode_switch_compat);
-        switch4 = view.findViewById(R.id.two_factor_switch_compat);
-        switch5 = view.findViewById(R.id.save_photos_switch_compat);
+        dark_mode_switch = view.findViewById(R.id.dark_mode_switch_compat);
+        two_factor_switch = view.findViewById(R.id.two_factor_switch_compat);
+        save_photos_switch = view.findViewById(R.id.save_photos_switch_compat);
 
         username_saveButton = view.findViewById(R.id.user_name_save_button);
         username_text_view = view.findViewById(R.id.user_name_text_view);
@@ -83,21 +83,21 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         loadData();
         updateViews();
 
-        switch3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        dark_mode_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 saveData();
             }
         });
 
-        switch4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        two_factor_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 saveData();
             }
         });
 
-        switch5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        save_photos_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 saveData();
@@ -121,9 +121,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
         editor.putString(USERNAME, username_edit_text.getText().toString());
         editor.putString(PASSWORD, password_edit_text.getText().toString());
-        editor.putBoolean(SWITCH3, switch3.isChecked());
-        editor.putBoolean(SWITCH4, switch4.isChecked());
-        editor.putBoolean(SWITCH5, switch5.isChecked());
+        editor.putBoolean(DARK_MODE, dark_mode_switch.isChecked());
+        editor.putBoolean(TWO_FACTOR, two_factor_switch.isChecked());
+        editor.putBoolean(SAVE_PHOTO, save_photos_switch.isChecked());
 
         editor.apply();
     }
@@ -132,16 +132,16 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, 0);
         username_value = sharedPreferences.getString(USERNAME, "User Name");
         password_value = sharedPreferences.getString(PASSWORD, "");
-        switch3_checked_value = sharedPreferences.getBoolean(SWITCH3, false);
-        switch4_checked_value = sharedPreferences.getBoolean(SWITCH4, false);
-        switch5_checked_value = sharedPreferences.getBoolean(SWITCH5, false);
+        dark_mode_checked_value = sharedPreferences.getBoolean(DARK_MODE, false);
+        two_factor_checked_value = sharedPreferences.getBoolean(TWO_FACTOR, false);
+        save_photo_checked_value = sharedPreferences.getBoolean(SAVE_PHOTO, false);
 
     }
 
     public void updateViews(){
-        switch3.setChecked(switch3_checked_value);
-        switch4.setChecked(switch4_checked_value);
-        switch5.setChecked(switch5_checked_value);
+        dark_mode_switch.setChecked(dark_mode_checked_value);
+        two_factor_switch.setChecked(two_factor_checked_value);
+        save_photos_switch.setChecked(save_photo_checked_value);
         username_text_view.setText(username_value);
     }
 
