@@ -12,9 +12,9 @@
     <string name="shop_halloween_text">Halloween</string>
     <string name="setting1">Setting 1</string>
     <string name="setting2">Setting 2</string>
-    <string name="setting3">Setting 3</string>
-    <string name="setting4">Setting 4</string>
-    <string name="setting5">Setting 5</string>
+    <string name="dark_mode">Enable Dark Mode</string>
+    <string name="two_factor_authentication">Two Factor Authentication</string>
+    <string name="save_photos">Enable Save Photos</string>
     <string name="user_name">User Name</string>
     <string name="account">My Account</string>
     <string name="explore_text_view">Explore</string>
@@ -23,4 +23,6 @@
     <string name="ar_objects">AR Objects</string>
     <string name="article_title">Small Space Garden Strategies</string>
 
+    <string name="edit_username">Edit Username</string>
+    <string name="save">Save</string>
 </resources>
