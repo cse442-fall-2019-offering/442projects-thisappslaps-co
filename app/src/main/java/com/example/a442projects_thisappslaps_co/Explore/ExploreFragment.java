@@ -2,78 +2,88 @@ package com.example.a442projects_thisappslaps_co.Explore;
 
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Pair;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.a442projects_thisappslaps_co.DeviceSpecUtil;
 import com.example.a442projects_thisappslaps_co.R;
 import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
-
-
 
 
 public class ExploreFragment extends Fragment implements View.OnClickListener {
 
-    private ExploreController mExploreControler;
+    private ArticleAdapter adapter;
+    private List<Article> articleList;
+    private RecyclerView recyclerView;
 
     public ExploreFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mExploreControler = new ExploreController();
+
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
-        View view = inflater.inflate(R.layout.explore_fragment, container, false);
 
-//        RecyclerView exploreRecyclerView = view.findViewById(R.id.explore_recycler_view);
-//        exploreRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), getSpanCount()));
-//        ExploreAdapter exploreAdapter = new ExploreAdapter(mExploreControler.createDummyList());
-//        exploreRecyclerView.setAdapter(exploreAdapter);
+        View view = inflater.inflate(R.layout.explore_fragment, container, false);
 
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(this);
 
-//        BottomNavigationView bottomNavBar= view.findViewById(R.id.bottom_navigation);
-//        bottomNavBar.setNavigationOnClickListener(this);
+//        BottomNavigationView bottomNavBar = view.findViewById(R.id.bottom_navigation);
+//        bottomNavBar.setOnClickListener(this);
+
+        recyclerView = view.findViewById(R.id.recycler_view);
+
+        articleList = new ArrayList<>();
+        adapter = new ArticleAdapter(getContext(), articleList);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 1);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
+        prepareArticles();
+
+//        try {
+//            Glide.with(getContext()).load(R.drawable.cover).into((ImageView) findViewById(R.id.backdrop));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
         return view;
     }
 
-    private int getSpanCount() {
-        int spanCount;
-        int screenWidthDp = (int) DeviceSpecUtil.getScreenWidthDp(getContext());
-
-        if (screenWidthDp < 350) {
-            spanCount = 2;
-        }
-        else if (screenWidthDp < 500) {
-            spanCount = 3;
-        }
-        else if (screenWidthDp < 750) {
-            spanCount = 4;
-        }
-        else {
-            spanCount = 5;
-        }
-
-        return spanCount;
-    }
-
+    // for the back button on the toolbar
     @Override
     public void onClick(View view) {
 //        if (view.getId() == R.id.toolbar) {
@@ -82,45 +92,169 @@ public class ExploreFragment extends Fragment implements View.OnClickListener {
 //        }
     }
 
-    private class ExploreViewHolder extends RecyclerView.ViewHolder {
+//    public class ExploreViewHolder extends RecyclerView.ViewHolder {
+//
+//        public ExploreViewHolder(@NonNull View itemView) {
+//            super(itemView);
+//        }
+//
+//    }
 
-        ExploreViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
-            super(inflater.inflate(R.layout.explore_item, viewGroup, false));
+    public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.MyViewHolder> {
+
+        private Context mContext;
+        private List<Article> articleList;
+
+        public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+            public TextView title;
+            public ImageView articleImg, favorite, share;
+            private String mUrl;
+
+            public MyViewHolder(View view) {
+                super(view);
+                title = view.findViewById(R.id.article_title);
+                articleImg = view.findViewById(R.id.article_img);
+                itemView.setOnClickListener(this);
+//            favorite = view.findViewById(R.id.favorite);
+//            share = view.findViewById(R.id.share);
+            }
+
+            void bind(String url) {
+                mUrl = url;
+            }
+
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mUrl));
+                startActivity(browserIntent);
+            }
         }
 
-        void bind(int color) {
-            Drawable drawable =
-                    AppCompatResources.getDrawable(getContext(), R.drawable.rectangle_border);
-            Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
-            DrawableCompat.setTint(wrappedDrawable, getContext().getColor(color));
-            itemView.setBackground(drawable);
-        }
-    }
-
-    private class ExploreAdapter extends RecyclerView.Adapter<ExploreViewHolder> {
-
-        private List<Integer> mExploreColorList;
-
-        private ExploreAdapter(List<Integer> exploreColorList) {
-            mExploreColorList = exploreColorList;
+        public ArticleAdapter(Context mContext, List<Article> articleList) {
+            this.mContext = mContext;
+            this.articleList = articleList;
         }
 
-        @NonNull
         @Override
-        public ExploreViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ExploreViewHolder(LayoutInflater.from(getActivity()), parent);
+        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View itemView = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.explore_item, parent, false);
+
+            return new MyViewHolder(itemView);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ExploreViewHolder holder, int position) {
-            holder.bind(mExploreColorList.get(position));
+        public void onBindViewHolder(final MyViewHolder holder, int position) {
+            Article article = articleList.get(position);
+            holder.title.setText(article.getName());
+            holder.bind(article.getUrl());
+            // loading article images using Glide library
+            Glide.with(mContext).load(article.getThumbnail()).into(holder.articleImg);
         }
-
         @Override
         public int getItemCount() {
-            return mExploreColorList.size();
+            return articleList.size();
         }
     }
+
+
+
+
+    private void prepareArticles() {
+
+        int[] covers = new int[]{
+                R.drawable.article1,
+                R.drawable.article2,
+                R.drawable.article3,
+                R.drawable.article4,
+                R.drawable.article5,
+                R.drawable.article6,
+                R.drawable.article7,
+                R.drawable.article8,
+                R.drawable.article9,
+                R.drawable.article10,
+                R.drawable.article11,
+                R.drawable.article12};
+
+        Article a = new Article("Small Space Garden Strategies", "https://www.bhg.com/gardening/plans/small-space-garden-strategies/", covers[0]);
+        articleList.add(a);
+
+        a = new Article("Five Fabulous Garden Plans", "https://www.bhg.com/gardening/plans/easy/five-fab-garden-plans/", covers[1]);
+        articleList.add(a);
+
+        a = new Article("Easy-Care Summer Garden Plan", "https://www.bhg.com/gardening/plans/easy/easy-care-summer-garden-plan/", covers[2]);
+        articleList.add(a);
+
+        a = new Article("No-Fuss Garden Plans", "https://www.bhg.com/gardening/plans/easy/15-no-fuss-garden-plans/", covers[3]);
+        articleList.add(a);
+
+        a = new Article("25 Best Fall Plants and Flowers to Beautify Your Front Yard This Season", "https://www.countryliving.com/gardening/garden-ideas/g4662/fall-flowers/", covers[4]);
+        articleList.add(a);
+
+        a = new Article("Our Best Cactus Garden Tips for Creating a Stunning, at-Home Oasis", "https://www.countryliving.com/gardening/garden-ideas/a26265781/cactus-garden/", covers[5]);
+        articleList.add(a);
+
+        a = new Article("15 Best Low-Maintenance Flowers for Any Kind of Garden", "https://www.countryliving.com/gardening/garden-ideas/g27092607/low-maintenance-flowers/", covers[6]);
+        articleList.add(a);
+
+        a = new Article("22 Creative DIY Bench Ideas to Add to Your Garden This Year", "https://www.countryliving.com/gardening/garden-ideas/g3120/upcycled-garden-benches/", covers[7]);
+        articleList.add(a);
+
+        a = new Article("Colorful planting around an arbor", "https://www.gardengatemagazine.com/articles/garden-plans/entries/colorful-planting-around-an-arbor/", covers[8]);
+        articleList.add(a);
+
+        a = new Article("Budget-friendly garden border", "https://www.gardengatemagazine.com/articles/garden-plans/beds-borders/budget-friendly-garden-border/", covers[9]);
+        articleList.add(a);
+
+        a = new Article("Butterfly-friendly garden plan", "https://www.gardengatemagazine.com/articles/garden-plans/wildlife-friendly/create-a-butterfly-friendly-garden/", covers[10]);
+        articleList.add(a);
+
+        a = new Article("Plant a garden that will attract pollinators all season", "https://www.gardengatemagazine.com/articles/garden-plans/wildlife-friendly/plant-a-garden-that-will-attract-pollinators-all-season/", covers[11]);
+        articleList.add(a);
+
+        adapter.notifyDataSetChanged();
+    }
+
+    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+
+        private int spanCount;
+        private int spacing;
+        private boolean includeEdge;
+
+        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
+            this.spanCount = spanCount;
+            this.spacing = spacing;
+            this.includeEdge = includeEdge;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            int position = parent.getChildAdapterPosition(view); // item position
+            int column = position % spanCount; // item column
+
+            if (includeEdge) {
+                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
+                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
+
+                if (position < spanCount) { // top edge
+                    outRect.top = spacing;
+                }
+                outRect.bottom = spacing; // item bottom
+            } else {
+                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
+                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
+                if (position >= spanCount) {
+                    outRect.top = spacing; // item top
+                }
+            }
+        }
+    }
+
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
 }
+
 
 
