@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/ar_icon"
+        android:src="@drawable/ic_ar_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:src="@drawable/setting_icon"
+        android:src="@drawable/ic_setting_icon"
         android:layout_marginTop="32dp"
         android:layout_marginStart="32dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginBottom="48dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/gallery_icon"
+        android:src="@drawable/ic_gallery_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -62,9 +62,9 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="48dp"
         android:background="@android:color/transparent"
-        android:scaleX="-.8"
-        android:scaleY=".8"
-        android:src="@drawable/explore_icon"
+        android:scaleX="-1"
+        android:scaleY="1"
+        android:src="@drawable/ic_explore_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -72,7 +72,7 @@
         android:id="@+id/shop_image_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/shopping_icon"
+        android:src="@drawable/ic_shopping_icon"
         android:background="@android:color/transparent"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"

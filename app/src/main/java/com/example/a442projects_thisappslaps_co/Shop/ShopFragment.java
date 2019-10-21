@@ -1,6 +1,9 @@
 package com.example.a442projects_thisappslaps_co.Shop;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a442projects_thisappslaps_co.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ShopFragment extends Fragment implements View.OnClickListener {
 
@@ -55,7 +59,7 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initializeRecyclerViewsAndSetAdapters() {
-        ArrayList<Integer> dummyList = mShopController.createDummyList();
+        ArrayList<Pair<Integer, String>> dummyList = mShopController.createDummyList();
 
         mPopularProductsRecylerView.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -81,22 +85,32 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private class PopularProductsViewHolder extends RecyclerView.ViewHolder {
+    private class PopularProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private String mURL;
 
         PopularProductsViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
             super(inflater.inflate(R.layout.products_item, viewGroup, false));
+            itemView.setOnClickListener(this);
         }
 
-        void bind(int drawable) {
-            itemView.setBackgroundResource(drawable);
+        void bind(Pair<Integer, String> drawable) {
+            itemView.setBackgroundResource(drawable.first);
+            mURL = drawable.second;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mURL));
+            startActivity(browserIntent);
         }
     }
 
     private class PopularProductsAdapter extends RecyclerView.Adapter<PopularProductsViewHolder> {
 
-        ArrayList<Integer> mPopularProductsDrawableArrayList;
+        ArrayList<Pair<Integer, String>> mPopularProductsDrawableArrayList;
 
-        PopularProductsAdapter(ArrayList<Integer> popularProductsDrawableArrayList) {
+        PopularProductsAdapter(ArrayList<Pair<Integer, String>> popularProductsDrawableArrayList) {
             mPopularProductsDrawableArrayList = popularProductsDrawableArrayList;
         }
 
@@ -118,23 +132,33 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private class RecommendedProductsViewHolder extends RecyclerView.ViewHolder {
+    private class RecommendedProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private String mURL;
 
         RecommendedProductsViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
             super(inflater.inflate(R.layout.products_item, viewGroup, false));
+            itemView.setOnClickListener(this);
         }
 
-        void bind(int drawable) {
-            itemView.setBackgroundResource(drawable);
+        void bind(Pair<Integer,String> drawable) {
+            itemView.setBackgroundResource(drawable.first);
+            mURL = drawable.second;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mURL));
+            startActivity(browserIntent);
         }
     }
 
     private class RecommendedProductsAdapter extends
             RecyclerView.Adapter<RecommendedProductsViewHolder> {
 
-        ArrayList<Integer> mRecommendedProductsDrawableArrayList;
+        ArrayList<Pair<Integer, String>> mRecommendedProductsDrawableArrayList;
 
-        RecommendedProductsAdapter(ArrayList<Integer> recommendedProductsDrawableArrayList) {
+        RecommendedProductsAdapter(ArrayList<Pair<Integer, String>> recommendedProductsDrawableArrayList) {
             mRecommendedProductsDrawableArrayList = recommendedProductsDrawableArrayList;
         }
 
@@ -156,23 +180,33 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private class HalloweenProductsViewHolder extends RecyclerView.ViewHolder {
+    private class HalloweenProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private String mURL;
 
         HalloweenProductsViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
             super(inflater.inflate(R.layout.products_item, viewGroup, false));
+            itemView.setOnClickListener(this);
         }
 
-        void bind(int drawable) {
-            itemView.setBackgroundResource(drawable);
+        void bind(Pair<Integer,String> drawable){
+            itemView.setBackgroundResource(drawable.first);
+            mURL = drawable.second;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mURL));
+            startActivity(browserIntent);
         }
     }
 
     private class HalloweenProductsAdapter extends
             RecyclerView.Adapter<HalloweenProductsViewHolder> {
 
-        ArrayList<Integer> mHalloweenProductsDrawableArrayList;
+        ArrayList<Pair<Integer, String>> mHalloweenProductsDrawableArrayList;
 
-        HalloweenProductsAdapter(ArrayList<Integer> halloweenProductsDrawableArrayList) {
+        HalloweenProductsAdapter(ArrayList<Pair<Integer, String>> halloweenProductsDrawableArrayList) {
             mHalloweenProductsDrawableArrayList = halloweenProductsDrawableArrayList;
         }
 
