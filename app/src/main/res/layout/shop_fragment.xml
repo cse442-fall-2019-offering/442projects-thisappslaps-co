@@ -37,7 +37,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/back_icon"
+            android:src="@drawable/ic_back_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:src="@drawable/search_icon"
+            android:src="@drawable/ic_explore_icon"
             app:layout_constraintBottom_toBottomOf="@id/shop_search_bar_edit_text"
             app:layout_constraintEnd_toStartOf="@id/shop_search_bar_edit_text"
             app:layout_constraintTop_toTopOf="@id/shop_search_bar_edit_text" />
