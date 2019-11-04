@@ -1,7 +1,20 @@
 package com.example.a442projects_thisappslaps_co.Gallery;
 
-public class Gallery {
+public class Project {
 
     private String mUri;
-    private 
+    private long mTimestamp;
+
+    public Project(String uri, long timestamp) {
+        mUri = uri;
+        mTimestamp = timestamp;
+    }
+
+    String getUri() {
+        return mUri;
+    }
+
+    long getTimestamp() {
+        return mTimestamp;
+    }
 }

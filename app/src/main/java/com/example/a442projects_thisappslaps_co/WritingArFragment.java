@@ -1,5 +1,6 @@
-import android.Manifest;
+package com.example.a442projects_thisappslaps_co;
 
+import android.Manifest;
 import com.google.ar.sceneform.ux.ArFragment;
 
 public class WritingArFragment extends ArFragment {
