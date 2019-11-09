@@ -48,3 +48,78 @@ sceneform.asset('sampledata/bamboo_tree_tojamerlin/scene.gltf',
         'default',
         'sampledata/bamboo_tree_tojamerlin/scene.sfa',
         'src/main/res/raw/bamboo')
+
+sceneform.asset('sampledata/buddha_head_beachmouse/scene.gltf',
+        'default',
+        'sampledata/buddha_head_beachmouse/scene.sfa',
+        'src/main/res/raw/buddha')
+
+sceneform.asset('sampledata/flower_3d_model_Animium_3d_model/scene.gltf',
+        'default',
+        'sampledata/flower_3d_model_Animium_3d_model/scene.sfa',
+        'src/main/res/raw/flower')
+
+sceneform.asset('sampledata/flower_tojamerlin/scene.gltf',
+        'default',
+        'sampledata/flower_tojamerlin/scene.sfa',
+        'src/main/res/raw/flower2')
+
+sceneform.asset('sampledata/frog_garden_statue_vodzurk/scene.gltf',
+        'default',
+        'sampledata/frog_garden_statue_vodzurk/scene.sfa',
+        'src/main/res/raw/frog')
+
+sceneform.asset('sampledata/grass_2_falcon/scene.gltf',
+        'default',
+        'sampledata/grass_2_falcon/scene.sfa',
+        'src/main/res/raw/grass')
+
+sceneform.asset('sampledata/lupine_plant_rufusrockwell/scene.gltf',
+        'default',
+        'sampledata/lupine_plant_rufusrockwell/scene.sfa',
+        'src/main/res/raw/lupine')
+
+sceneform.asset('sampledata/mesh_garden_gnome/scene.gltf',
+        'default',
+        'sampledata/mesh_garden_gnome/scene.sfa',
+        'src/main/res/raw/gnome')
+
+sceneform.asset('sampledata/ornate_amphora_italian_gardens_hyde_park_thomas_flynn/scene.gltf',
+        'default',
+        'sampledata/ornate_amphora_italian_gardens_hyde_park_thomas_flynn/scene.sfa',
+        'src/main/res/raw/pot')
+
+sceneform.asset('sampledata/plants_4_falcon/scene.gltf',
+        'default',
+        'sampledata/plants_4_falcon/scene.sfa',
+        'src/main/res/raw/plant1')
+
+sceneform.asset('sampledata/plants_12_falcon/scene.gltf',
+        'default',
+        'sampledata/plants_12_falcon/scene.sfa',
+        'src/main/res/raw/plant2')
+
+sceneform.asset('sampledata/plants_14_falcon/scene.gltf',
+        'default',
+        'sampledata/plants_14_falcon/scene.sfa',
+        'src/main/res/raw/plant3')
+
+sceneform.asset('sampledata/plants_falcon/scene.gltf',
+        'default',
+        'sampledata/plants_falcon/scene.sfa',
+        'src/main/res/raw/plant4')
+
+sceneform.asset('sampledata/tree_farhad.guli/scene.gltf',
+        'default',
+        'sampledata/tree_farhad.guli/scene.sfa',
+        'src/main/res/raw/tree')
+
+sceneform.asset('sampledata/tree_pine_roket_kroket/scene.gltf',
+        'default',
+        'sampledata/tree_pine_roket_kroket/scene.sfa',
+        'src/main/res/raw/tree2')
+
+sceneform.asset('sampledata/worn_garden_table_lowpoly_toxiccrack/scene.gltf',
+        'default',
+        'sampledata/worn_garden_table_lowpoly_toxiccrack/scene.sfa',
+        'src/main/res/raw/bench')
