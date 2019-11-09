@@ -1,10 +1,11 @@
 package com.example.a442projects_thisappslaps_co;
 
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -21,16 +22,18 @@ import androidx.core.app.ActivityCompat;
 
 import com.example.a442projects_thisappslaps_co.ARObjects.ARFragment;
 
+import com.example.a442projects_thisappslaps_co.Database.DatabaseHelper;
+import com.example.a442projects_thisappslaps_co.Gallery.Project;
+import com.example.a442projects_thisappslaps_co.Gallery.ViewPhotoFragment;
 import com.example.a442projects_thisappslaps_co.Shop.ShopFragment;
 import com.example.a442projects_thisappslaps_co.Settings.SettingsFragment;
 import com.example.a442projects_thisappslaps_co.Explore.ExploreFragment;
 
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.a442projects_thisappslaps_co.Gallery.GalleryFragment;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.ar.sceneform.ArSceneView;
 import com.google.ar.sceneform.ux.ArFragment;
 
@@ -41,6 +44,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.GalleryTable.Cols.TIMESTAMP;
+import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.GalleryTable.Cols.URI;
+import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.GalleryTable.NAME;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static int MY_CAMERA_PERMISSIONS;
@@ -50,8 +57,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton mShopImageButton;
     private ImageButton mSettingsImageButton;
     private ImageButton mExploreImageButton;
+    private ImageButton mShutterImageButton;
 
     private ArFragment mARFragment;
+
+    private static SQLiteDatabase sSQLiteDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        sSQLiteDatabase = new DatabaseHelper(getApplicationContext()).getWritableDatabase();
     }
 
     @Override
@@ -83,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mShopImageButton = findViewById(R.id.shop_image_button);
         mSettingsImageButton = findViewById(R.id.settings_image_btn);
         mExploreImageButton = findViewById(R.id.explore_image_btn);
+        mShutterImageButton = findViewById(R.id.shutter_image_btn);
         mARFragment = (ArFragment)
                 getSupportFragmentManager().findFragmentById(R.id.sceneform_fragment);
     }
@@ -93,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mShopImageButton.setOnClickListener(this);
         mSettingsImageButton.setOnClickListener(this);
         mExploreImageButton.setOnClickListener(this);
+        mShutterImageButton.setOnClickListener(this);
     }
 
     private void requestPermissionForCamera() {
@@ -146,7 +158,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void startFragment(Fragment fragment, boolean shouldAddToBackStack) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        startFragment(fragment, getSupportFragmentManager(), shouldAddToBackStack);
+    }
+
+    public static void startFragment(
+            Fragment fragment,
+            FragmentManager fragmentManager,
+            boolean shouldAddToBackStack) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         if (shouldAddToBackStack) {
             fragmentTransaction.addToBackStack(null);
@@ -162,17 +181,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Environment.DIRECTORY_PICTURES) + File.separator + "Sceneform/" + date + "_screenshot.jpg";
     }
 
-    private void saveBitmapToDisk(Bitmap bitmap, String filename) throws IOException {
+    public static void saveBitmapToDisk(Bitmap bitmap, Project project) throws IOException {
 
-        File out = new File(filename);
+        File out = new File(project.getUri());
         if (!out.getParentFile().exists()) {
             out.getParentFile().mkdirs();
         }
-        try (FileOutputStream outputStream = new FileOutputStream(filename);
+        try (FileOutputStream outputStream = new FileOutputStream(project.getUri());
              ByteArrayOutputStream outputData = new ByteArrayOutputStream()) {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputData);
             outputData.writeTo(outputStream);
             outputStream.flush();
+            addProjectToDatabase(project);
         } catch (IOException ex) {
             throw new IOException("Failed to save bitmap to disk", ex);
         }
@@ -192,29 +212,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Make the request to copy.
         PixelCopy.request(view, bitmap, (copyResult) -> {
             if (copyResult == PixelCopy.SUCCESS) {
-                try {
-                    saveBitmapToDisk(bitmap, filename);
-                } catch (IOException e) {
-                    Toast toast = Toast.makeText(MainActivity.this, e.toString(),
-                            Toast.LENGTH_LONG);
-                    toast.show();
-                    return;
-                }
-                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),
-                        "Photo saved", Snackbar.LENGTH_LONG);
-                snackbar.setAction("Open in Photos", v -> {
-                    File photoFile = new File(filename);
-
-                    Uri photoURI = FileProvider.getUriForFile(MainActivity.this,
-                            MainActivity.this.getPackageName() + ".ar.codelab.name.provider",
-                            photoFile);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, photoURI);
-                    intent.setDataAndType(photoURI, "image/*");
-                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    startActivity(intent);
-
-                });
-                snackbar.show();
+                startFragment(new ViewPhotoFragment(
+                        new Project(filename, new Date().getTime()), bitmap, false), true);
             } else {
                 Toast toast = Toast.makeText(MainActivity.this,
                         "Failed to copyPixels: " + copyResult, Toast.LENGTH_LONG);
@@ -222,5 +221,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             handlerThread.quitSafely();
         }, new Handler(handlerThread.getLooper()));
+    }
+
+    private static void addProjectToDatabase(Project project) {
+        sSQLiteDatabase.insert(NAME, null, getContentValues(project));
+    }
+
+    private static ContentValues getContentValues(Project project) {
+        ContentValues values = new ContentValues();
+        values.put(URI, project.getUri());
+        values.put(TIMESTAMP, project.getTimestamp());
+        return values;
     }
 }

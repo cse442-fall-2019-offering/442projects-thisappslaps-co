@@ -1,4 +1,4 @@
-package com.example.a442projects_thisappslaps_co.Gallery.Database;
+package com.example.a442projects_thisappslaps_co.Database;
 
 public class DatabaseSchema {
     public static final class GalleryTable {

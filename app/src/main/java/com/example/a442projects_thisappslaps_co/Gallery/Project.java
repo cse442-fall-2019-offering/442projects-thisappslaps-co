@@ -10,11 +10,11 @@ public class Project {
         mTimestamp = timestamp;
     }
 
-    String getUri() {
+    public String getUri() {
         return mUri;
     }
 
-    long getTimestamp() {
+    public long getTimestamp() {
         return mTimestamp;
     }
 }
