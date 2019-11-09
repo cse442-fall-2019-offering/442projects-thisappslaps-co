@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.ar.sceneform.plugin'
 
 android {
     compileSdkVersion 29
@@ -31,9 +32,20 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    implementation 'com.google.ar:core:1.12.0'
-    implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.12.0'
-    implementation 'com.google.ar.sceneform:core:1.12.0'
+    implementation 'com.google.ar:core:1.13.0'
+    implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.13.0'
+    implementation 'com.google.ar.sceneform:core:1.13.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
 }
+
+
+sceneform.asset('sampledata/buddha_head/scene.gltf',
+        'default',
+        'sampledata/buddha_head/scene.sfa',
+        'src/main/assets/scene')
+
+sceneform.asset('sampledata/buddha_head/scene.gltf',
+        'default',
+        'sampledata/buddha_head/scene.sfa',
+        'src/main/res/raw/scene')
