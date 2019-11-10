@@ -4,8 +4,10 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -22,10 +24,31 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.a442projects_thisappslaps_co.Gallery.GalleryFragment;
+import com.google.ar.core.Anchor;
+import com.google.ar.core.HitResult;
+import com.google.ar.core.Plane;
+import com.google.ar.sceneform.AnchorNode;
+import com.google.ar.sceneform.rendering.ModelRenderable;
+import com.google.ar.sceneform.rendering.ViewRenderable;
+import com.google.ar.sceneform.ux.ArFragment;
+import com.google.ar.sceneform.ux.BaseArFragment;
+import com.google.ar.sceneform.ux.TransformableNode;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static int MY_CAMERA_PERMISSIONS;
+
+    ARFragment arFragment;
+    private ModelRenderable bambooRenderable,
+                            buddhaRenderable,
+                            frogRenderable,
+                            grassRenderable,
+                            lupineRenderable,
+                            sunflowerRenderable,
+                            treeRenderable;
+    ViewRenderable name_plant;
+    View arrayView[];
+    int selected = 1;
 
     private ImageButton mARObjectsImageButton;
     private ImageButton mGalleryImageButton;
@@ -45,6 +68,148 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        arFragment = (ARFragment)getSupportFragmentManager().findFragmentById(R.id.sceneform_ar_scene_view);
+
+        setUpModel();
+
+        //Need to find tapListener for AR fragment
+//        arFragment.setOnTapArPlaneListener(new BaseArFragment().OnTapArPlaneListener(){
+//
+//            @Override
+//            public void onTapPlane(HitResult hitResult, Plane plnae, MotionEvent motionEvent){
+//
+//
+//                    Anchor anchor = hitResult.createAnchor();
+//                    AnchorNode anchorNode = new AnchorNode(anchor);
+//                    anchorNode.setParent(arFragment.getArSceneView().getScene());
+//
+//                    createModel(anchorNode, selected);
+//
+//            }
+//        });
+    }
+
+    /*
+        Load up model so that it can be used for AR placement
+     */
+    private void setUpModel(){
+        ModelRenderable.builder()
+                .setSource(this, R.raw.bamboo)
+                .build().thenAccept(modelRenderable -> bambooRenderable = modelRenderable)
+                .exceptionally(
+                        throwable -> {
+                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                            return null;
+                        }
+                );
+
+        ModelRenderable.builder()
+                .setSource(this, R.raw.buddha)
+                .build().thenAccept(modelRenderable -> buddhaRenderable = modelRenderable)
+                .exceptionally(
+                        throwable -> {
+                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                            return null;
+                        }
+                );
+
+        ModelRenderable.builder()
+                .setSource(this, R.raw.frog)
+                .build().thenAccept(modelRenderable -> frogRenderable = modelRenderable)
+                .exceptionally(
+                        throwable -> {
+                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                            return null;
+                        }
+                );
+
+        ModelRenderable.builder()
+                .setSource(this, R.raw.grass)
+                .build().thenAccept(modelRenderable -> grassRenderable = modelRenderable)
+                .exceptionally(
+                        throwable -> {
+                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                            return null;
+                        }
+                );
+
+        ModelRenderable.builder()
+                .setSource(this, R.raw.lupine)
+                .build().thenAccept(modelRenderable -> lupineRenderable = modelRenderable)
+                .exceptionally(
+                        throwable -> {
+                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                            return null;
+                        }
+                );
+
+        ModelRenderable.builder()
+                .setSource(this, R.raw.sunflower)
+                .build().thenAccept(modelRenderable -> sunflowerRenderable = modelRenderable)
+                .exceptionally(
+                        throwable -> {
+                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                            return null;
+                        }
+                );
+
+        ModelRenderable.builder()
+                .setSource(this, R.raw.tree)
+                .build().thenAccept(modelRenderable -> treeRenderable = modelRenderable)
+                .exceptionally(
+                        throwable -> {
+                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                            return null;
+                        }
+                );
+
+    }
+
+    //Add more on for the other models TODO
+    private void createModel(AnchorNode anchorNode, int selected){
+        if(selected == 1){
+            TransformableNode bamboo = new TransformableNode((arFragment.getTransformationSystem());
+            bamboo.setParent(anchorNode);
+            bamboo.setRenderable(bambooRenderable);
+            bamboo.select();
+        }
+        else if(selected == 2){
+            TransformableNode buddha = new TransformableNode((arFragment.getTransformationSystem());
+            buddha.setParent(anchorNode);
+            buddha.setRenderable(bambooRenderable);
+            buddha.select();
+        }
+        else if(selected == 3){
+            TransformableNode frog = new TransformableNode((arFragment.getTransformationSystem());
+            frog.setParent(anchorNode);
+            frog.setRenderable(bambooRenderable);
+            frog.select();
+        }
+        else if(selected == 4){
+            TransformableNode grass = new TransformableNode((arFragment.getTransformationSystem());
+            grass.setParent(anchorNode);
+            grass.setRenderable(bambooRenderable);
+            grass.select();
+        }
+        else if(selected == 5){
+            TransformableNode lupine = new TransformableNode((arFragment.getTransformationSystem());
+            lupine.setParent(anchorNode);
+            lupine.setRenderable(bambooRenderable);
+            lupine.select();
+        }
+        else if(selected == 6){
+            TransformableNode sunflower = new TransformableNode((arFragment.getTransformationSystem());
+            sunflower.setParent(anchorNode);
+            sunflower.setRenderable(bambooRenderable);
+            sunflower.select();
+        }
+        else if(selected == 7){
+            TransformableNode tree = new TransformableNode((arFragment.getTransformationSystem());
+            tree.setParent(anchorNode);
+            tree.setRenderable(bambooRenderable);
+            tree.select();
+        }
+
 
     }
 
