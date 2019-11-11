@@ -1,0 +1,28 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateMyType($input: CreateMyTypeInput!) {
+  createMyType(input: $input) {
+    id
+    title
+    content
+    price
+    rating
+  }
+}
+mutation UpdateMyType($input: UpdateMyTypeInput!) {
+  updateMyType(input: $input) {
+    id
+    title
+    content
+    price
+    rating
+  }
+}
+mutation DeleteMyType($input: DeleteMyTypeInput!) {
+  deleteMyType(input: $input) {
+    id
+    title
+    content
+    price
+    rating
+  }
+}

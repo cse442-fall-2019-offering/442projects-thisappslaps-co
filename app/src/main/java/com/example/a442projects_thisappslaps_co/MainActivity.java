@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.amazonaws.mobile.config.AWSConfiguration;
+import com.amazonaws.mobileconnectors.appsync.AWSAppSyncClient;
 import com.example.a442projects_thisappslaps_co.ARObjects.ARFragment;
 
 import com.example.a442projects_thisappslaps_co.Shop.ShopFragment;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton mShopImageButton;
     private ImageButton mSettingsImageButton;
     private ImageButton mExploreImageButton;
+    private AWSAppSyncClient mAWSAppSyncClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//        mAWSAppSyncClient = AWSAppSyncClient.builder()
+//                .context(getApplicationContext())
+//                .awsConfiguration(new AWSConfiguration(getApplicationContext()))
+//                .build();
     }
 
     @Override

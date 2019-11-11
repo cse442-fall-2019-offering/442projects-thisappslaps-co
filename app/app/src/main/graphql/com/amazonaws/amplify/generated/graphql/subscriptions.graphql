@@ -1,0 +1,28 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateMyType {
+  onCreateMyType {
+    id
+    title
+    content
+    price
+    rating
+  }
+}
+subscription OnUpdateMyType {
+  onUpdateMyType {
+    id
+    title
+    content
+    price
+    rating
+  }
+}
+subscription OnDeleteMyType {
+  onDeleteMyType {
+    id
+    title
+    content
+    price
+    rating
+  }
+}
