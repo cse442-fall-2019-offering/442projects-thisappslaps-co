@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -39,13 +40,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static int MY_CAMERA_PERMISSIONS;
 
     ARFragment arFragment;
-    private ModelRenderable bambooRenderable,
-                            buddhaRenderable,
-                            frogRenderable,
-                            grassRenderable,
-                            lupineRenderable,
-                            sunflowerRenderable,
-                            treeRenderable;
+    private ModelRenderable ar1Renderable,
+                            ar2Renderable,
+                            ar3Renderable,
+                            ar4Renderable,
+                            ar5Renderable,
+                            ar6Renderable,
+                            ar7Renderable,
+                            ar8Renderable,
+                            ar9Renderable,
+                            ar10Renderable,
+                            ar11Renderable,
+                            ar12Renderable,
+                            ar13Renderable,
+                            ar14Renderable,
+                            ar15Renderable,
+                            ar16Renderable,
+                            ar17Renderable,
+                            ar18Renderable;
+
+
+
     ViewRenderable name_plant;
     View arrayView[];
     int selected = 1;
@@ -55,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton mShopImageButton;
     private ImageButton mSettingsImageButton;
     private ImageButton mExploreImageButton;
+
+
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +86,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        arFragment = (ARFragment)getSupportFragmentManager().findFragmentById(R.id.sceneform_ar_scene_view);
+//        arFragment = (ARFragment)getSupportFragmentManager().findFragmentById(R.id.sceneform_ar_scene_view);
+        ModelRenderable.builder()
+                .setSource(this, R.raw.sunflower)
+                .build()
+                .thenAccept( renderable -> ar8Renderable = renderable)
+                .exceptionally(
+                        throwable -> {
+                            Log.e(TAG, "Unable to load Renderable.", throwable);
+                            return null;
+                        }
+                );
 
-        setUpModel();
+
+
+
+
+//        setUpModel();
 
         //Need to find tapListener for AR fragment
 //        arFragment.setOnTapArPlaneListener(new BaseArFragment().OnTapArPlaneListener(){
@@ -92,126 +124,126 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /*
         Load up model so that it can be used for AR placement
      */
-    private void setUpModel(){
-        ModelRenderable.builder()
-                .setSource(this, R.raw.bamboo)
-                .build().thenAccept(modelRenderable -> bambooRenderable = modelRenderable)
-                .exceptionally(
-                        throwable -> {
-                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                            return null;
-                        }
-                );
-
-        ModelRenderable.builder()
-                .setSource(this, R.raw.buddha)
-                .build().thenAccept(modelRenderable -> buddhaRenderable = modelRenderable)
-                .exceptionally(
-                        throwable -> {
-                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                            return null;
-                        }
-                );
-
-        ModelRenderable.builder()
-                .setSource(this, R.raw.frog)
-                .build().thenAccept(modelRenderable -> frogRenderable = modelRenderable)
-                .exceptionally(
-                        throwable -> {
-                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                            return null;
-                        }
-                );
-
-        ModelRenderable.builder()
-                .setSource(this, R.raw.grass)
-                .build().thenAccept(modelRenderable -> grassRenderable = modelRenderable)
-                .exceptionally(
-                        throwable -> {
-                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                            return null;
-                        }
-                );
-
-        ModelRenderable.builder()
-                .setSource(this, R.raw.lupine)
-                .build().thenAccept(modelRenderable -> lupineRenderable = modelRenderable)
-                .exceptionally(
-                        throwable -> {
-                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                            return null;
-                        }
-                );
-
-        ModelRenderable.builder()
-                .setSource(this, R.raw.sunflower)
-                .build().thenAccept(modelRenderable -> sunflowerRenderable = modelRenderable)
-                .exceptionally(
-                        throwable -> {
-                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                            return null;
-                        }
-                );
-
-        ModelRenderable.builder()
-                .setSource(this, R.raw.tree)
-                .build().thenAccept(modelRenderable -> treeRenderable = modelRenderable)
-                .exceptionally(
-                        throwable -> {
-                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                            return null;
-                        }
-                );
-
-    }
+//    private void setUpModel(){
+//        ModelRenderable.builder()
+//                .setSource(this, R.raw.bamboo)
+//                .build().thenAccept(modelRenderable -> bambooRenderable = modelRenderable)
+//                .exceptionally(
+//                        throwable -> {
+//                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+//                            return null;
+//                        }
+//                );
+//
+//        ModelRenderable.builder()
+//                .setSource(this, R.raw.buddha)
+//                .build().thenAccept(modelRenderable -> buddhaRenderable = modelRenderable)
+//                .exceptionally(
+//                        throwable -> {
+//                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+//                            return null;
+//                        }
+//                );
+//
+//        ModelRenderable.builder()
+//                .setSource(this, R.raw.frog)
+//                .build().thenAccept(modelRenderable -> frogRenderable = modelRenderable)
+//                .exceptionally(
+//                        throwable -> {
+//                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+//                            return null;
+//                        }
+//                );
+//
+//        ModelRenderable.builder()
+//                .setSource(this, R.raw.grass)
+//                .build().thenAccept(modelRenderable -> grassRenderable = modelRenderable)
+//                .exceptionally(
+//                        throwable -> {
+//                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+//                            return null;
+//                        }
+//                );
+//
+//        ModelRenderable.builder()
+//                .setSource(this, R.raw.lupine)
+//                .build().thenAccept(modelRenderable -> lupineRenderable = modelRenderable)
+//                .exceptionally(
+//                        throwable -> {
+//                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+//                            return null;
+//                        }
+//                );
+//
+//        ModelRenderable.builder()
+//                .setSource(this, R.raw.sunflower)
+//                .build().thenAccept(modelRenderable -> sunflowerRenderable = modelRenderable)
+//                .exceptionally(
+//                        throwable -> {
+//                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+//                            return null;
+//                        }
+//                );
+//
+//        ModelRenderable.builder()
+//                .setSource(this, R.raw.tree)
+//                .build().thenAccept(modelRenderable -> treeRenderable = modelRenderable)
+//                .exceptionally(
+//                        throwable -> {
+//                            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+//                            return null;
+//                        }
+//                );
+//
+//    }
 
     //Add more on for the other models TODO
-    private void createModel(AnchorNode anchorNode, int selected){
-        if(selected == 1){
-            TransformableNode bamboo = new TransformableNode((arFragment.getTransformationSystem());
-            bamboo.setParent(anchorNode);
-            bamboo.setRenderable(bambooRenderable);
-            bamboo.select();
-        }
-        else if(selected == 2){
-            TransformableNode buddha = new TransformableNode((arFragment.getTransformationSystem());
-            buddha.setParent(anchorNode);
-            buddha.setRenderable(bambooRenderable);
-            buddha.select();
-        }
-        else if(selected == 3){
-            TransformableNode frog = new TransformableNode((arFragment.getTransformationSystem());
-            frog.setParent(anchorNode);
-            frog.setRenderable(bambooRenderable);
-            frog.select();
-        }
-        else if(selected == 4){
-            TransformableNode grass = new TransformableNode((arFragment.getTransformationSystem());
-            grass.setParent(anchorNode);
-            grass.setRenderable(bambooRenderable);
-            grass.select();
-        }
-        else if(selected == 5){
-            TransformableNode lupine = new TransformableNode((arFragment.getTransformationSystem());
-            lupine.setParent(anchorNode);
-            lupine.setRenderable(bambooRenderable);
-            lupine.select();
-        }
-        else if(selected == 6){
-            TransformableNode sunflower = new TransformableNode((arFragment.getTransformationSystem());
-            sunflower.setParent(anchorNode);
-            sunflower.setRenderable(bambooRenderable);
-            sunflower.select();
-        }
-        else if(selected == 7){
-            TransformableNode tree = new TransformableNode((arFragment.getTransformationSystem());
-            tree.setParent(anchorNode);
-            tree.setRenderable(bambooRenderable);
-            tree.select();
-        }
-
-
-    }
+//    private void createModel(AnchorNode anchorNode, int selected){
+////        if(selected == 1){
+////            TransformableNode bamboo = new TransformableNode(arFragment.getTransformationSystem());
+////            bamboo.setParent(anchorNode);
+////            bamboo.setRenderable(bambooRenderable);
+////            bamboo.select();
+////        }
+////        else if(selected == 2){
+////            TransformableNode buddha = new TransformableNode(arFragment.getTransformationSystem());
+////            buddha.setParent(anchorNode);
+////            buddha.setRenderable(bambooRenderable);
+////            buddha.select();
+////        }
+////        else if(selected == 3){
+////            TransformableNode frog = new TransformableNode(arFragment.getTransformationSystem());
+////            frog.setParent(anchorNode);
+////            frog.setRenderable(bambooRenderable);
+////            frog.select();
+////        }
+////        else if(selected == 4){
+////            TransformableNode grass = new TransformableNode(arFragment.getTransformationSystem());
+////            grass.setParent(anchorNode);
+////            grass.setRenderable(bambooRenderable);
+////            grass.select();
+////        }
+////        else if(selected == 5){
+////            TransformableNode lupine = new TransformableNode(arFragment.getTransformationSystem());
+////            lupine.setParent(anchorNode);
+////            lupine.setRenderable(bambooRenderable);
+////            lupine.select();
+////        }
+////        else if(selected == 6){
+////            TransformableNode sunflower = new TransformableNode(arFragment.getTransformationSystem());
+////            sunflower.setParent(anchorNode);
+////            sunflower.setRenderable(bambooRenderable);
+////            sunflower.select();
+////        }
+////        else if(selected == 7){
+////            TransformableNode tree = new TransformableNode(arFragment.getTransformationSystem());
+////            tree.setParent(anchorNode);
+////            tree.setRenderable(bambooRenderable);
+////            tree.select();
+////        }
+//
+//
+//    }
 
     @Override
     public void onResume() {

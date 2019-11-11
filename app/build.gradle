@@ -39,9 +39,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.7.0'
 }
 
-sceneform.asset('sampledata/sunflower_zvanstone/sunflower.gltf',
+sceneform.asset('sampledata/sunflower_zvanstone/scene.gltf',
         'default',
-        'sampledata/sunflower_zvanstone/sunflower.sfa',
+        'sampledata/sunflower_zvanstone/scene.sfa',
         'src/main/res/raw/sunflower')
 
 sceneform.asset('sampledata/bamboo_tree_tojamerlin/scene.gltf',
@@ -78,11 +78,6 @@ sceneform.asset('sampledata/lupine_plant_rufusrockwell/scene.gltf',
         'default',
         'sampledata/lupine_plant_rufusrockwell/scene.sfa',
         'src/main/res/raw/lupine')
-
-sceneform.asset('sampledata/mesh_garden_gnome/scene.gltf',
-        'default',
-        'sampledata/mesh_garden_gnome/scene.sfa',
-        'src/main/res/raw/gnome')
 
 sceneform.asset('sampledata/ornate_amphora_italian_gardens_hyde_park_thomas_flynn/scene.gltf',
         'default',
@@ -123,3 +118,18 @@ sceneform.asset('sampledata/worn_garden_table_lowpoly_toxiccrack/scene.gltf',
         'default',
         'sampledata/worn_garden_table_lowpoly_toxiccrack/scene.sfa',
         'src/main/res/raw/bench')
+
+sceneform.asset('sampledata/aster_red_tojamerlin/scene.gltf',
+        'default',
+        'sampledata/aster_red_tojamerlin/scene.sfa',
+        'src/main/res/raw/aster_red')
+
+sceneform.asset('sampledata/colored_flower_tojamerlin/scene.gltf',
+        'default',
+        'sampledata/colored_flower_tojamerlin/scene.sfa',
+        'src/main/res/raw/colored_flower')
+
+sceneform.asset('sampledata/lilyturf_tojamerlin/scene.gltf',
+        'default',
+        'sampledata/lilyturf_tojamerlin/scene.sfa',
+        'src/main/res/raw/lilyturf')

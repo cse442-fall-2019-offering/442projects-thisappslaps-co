@@ -45,7 +45,7 @@ public class ARFragment extends Fragment implements View.OnClickListener {
     private void setARObjectsAdapter() {
         mARObjectsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         mARObjectsRecyclerView.setAdapter(
-                new ARObjectsAdapter(new ARObjectsController().createARObjectsDummyList()));
+                new ARObjectsAdapter(new ARObjectsController().createARObjectThumbnail()));
     }
 
     @Override
