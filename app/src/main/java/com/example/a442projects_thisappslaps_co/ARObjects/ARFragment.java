@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a442projects_thisappslaps_co.R;
+import com.google.ar.sceneform.rendering.ViewRenderable;
 
 import java.util.ArrayList;
 
@@ -20,11 +22,36 @@ public class ARFragment extends Fragment implements View.OnClickListener {
     private RecyclerView mARObjectsRecyclerView;
     private ImageButton mBackButton;
 
+    View arrayView[];
+    ViewRenderable name_plant;
+    ImageView bamboo, buddha, frog, grass, lupine, sunflower, tree;
+
+    int selected = 1;
+
     public ARFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        setContentView(R.layout.ar_fragment);
+
+        //View
+        bamboo = (ImageView)findViewById(R.id.bamboo);
+        buddha = (ImageView)findViewById(R.id.buddha);
+        frog = (ImageView)findViewById(R.id.frog);
+        grass = (ImageView)findViewById(R.id.grass);
+        lupine = (ImageView)findViewById(R.id.lupine);
+        sunflower = (ImageView)findViewById(R.id.sunflower);
+        tree = (ImageView)findViewById(R.id.tree);
+
+        setArrayView();
+        setClickListener();
+    }
+
+    private void setClickListener() {
+        for(int i=0; i<arrayView.length; i++){
+            arrayView[i].setOnClickListener(this);
+        }
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
@@ -35,6 +62,12 @@ public class ARFragment extends Fragment implements View.OnClickListener {
         setARObjectsAdapter();
 
         return view;
+    }
+
+    private void setArrayView(){
+        arrayView = new View[] {
+                bamboo,buddha, frog, grass, lupine, sunflower, tree
+        };
     }
 
     private void initializeViewVariable(View view) {
