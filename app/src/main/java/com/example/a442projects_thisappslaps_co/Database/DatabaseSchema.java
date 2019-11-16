@@ -9,4 +9,14 @@ public class DatabaseSchema {
             public static final String URI = "uri";
         }
     }
+
+    public static final class ArticleTable{
+        public static final String NAME = "Article";
+
+        public static final class Cols {
+            public static final String TITLE = "title";
+            public static final String THUMBNAIL = "thumbnail";
+            public static final String URI = "uri";
+        }
+    }
 }

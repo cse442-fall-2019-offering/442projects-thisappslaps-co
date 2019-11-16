@@ -22,7 +22,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.example.a442projects_thisappslaps_co.ARObjects.ARFragment;
 
-import com.example.a442projects_thisappslaps_co.Database.DatabaseHelper;
+import com.example.a442projects_thisappslaps_co.Database.ProjectDatabaseHelper;
 import com.example.a442projects_thisappslaps_co.Gallery.Project;
 import com.example.a442projects_thisappslaps_co.Gallery.ViewPhotoFragment;
 import com.example.a442projects_thisappslaps_co.Shop.ShopFragment;
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sSQLiteDatabase = new DatabaseHelper(getApplicationContext()).getWritableDatabase();
+        sSQLiteDatabase = new ProjectDatabaseHelper(getApplicationContext()).getWritableDatabase();
     }
 
     @Override
