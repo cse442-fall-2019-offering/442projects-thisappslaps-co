@@ -42,94 +42,99 @@ dependencies {
 sceneform.asset('sampledata/aster_red_tojamerlin/scene.gltf',
         'default',
         'sampledata/aster_red_tojamerlin/scene.sfa',
-        'src/main/res/raw/ar01')
+        'src/main/assets/ar01')
 
 sceneform.asset('sampledata/bamboo_tree_tojamerlin/scene.gltf',
         'default',
         'sampledata/bamboo_tree_tojamerlin/scene.sfa',
-        'src/main/res/raw/ar02')
+        'src/main/assets/ar02')
 
 sceneform.asset('sampledata/worn_garden_table_lowpoly_toxiccrack/scene.gltf',
         'default',
         'sampledata/worn_garden_table_lowpoly_toxiccrack/scene.sfa',
-        'src/main/res/raw/ar03')
+        'src/main/assets/ar03')
 
 sceneform.asset('sampledata/buddha_head_beachmouse/scene.gltf',
         'default',
         'sampledata/buddha_head_beachmouse/scene.sfa',
-        'src/main/res/raw/ar04')
+        'src/main/assets/ar04')
 
 sceneform.asset('sampledata/colored_flower_tojamerlin/scene.gltf',
         'default',
         'sampledata/colored_flower_tojamerlin/scene.sfa',
-        'src/main/res/raw/ar05')
+        'src/main/assets/ar05')
 
 sceneform.asset('sampledata/flower_3d_model_Animium_3d_model/scene.gltf',
         'default',
         'sampledata/flower_3d_model_Animium_3d_model/scene.sfa',
-        'src/main/res/raw/ar06')
+        'src/main/assets/ar06')
 
 sceneform.asset('sampledata/flower_tojamerlin/scene.gltf',
         'default',
         'sampledata/flower_tojamerlin/scene.sfa',
-        'src/main/res/raw/ar07')
+        'src/main/assets/ar07')
 
 sceneform.asset('sampledata/frog_garden_statue_vodzurk/scene.gltf',
         'default',
         'sampledata/frog_garden_statue_vodzurk/scene.sfa',
-        'src/main/res/raw/ar08')
+        'src/main/assets/ar08')
 
 sceneform.asset('sampledata/grass_2_falcon/scene.gltf',
         'default',
         'sampledata/grass_2_falcon/scene.sfa',
-        'src/main/res/raw/ar09')
+        'src/main/assets/ar09')
 
 sceneform.asset('sampledata/lilyturf_tojamerlin/scene.gltf',
         'default',
         'sampledata/lilyturf_tojamerlin/scene.sfa',
-        'src/main/res/raw/ar10')
+        'src/main/assets/ar10')
 
 sceneform.asset('sampledata/lupine_plant_rufusrockwell/scene.gltf',
         'default',
         'sampledata/lupine_plant_rufusrockwell/scene.sfa',
-        'src/main/res/raw/ar11')
+        'src/main/assets/ar11')
 
 sceneform.asset('sampledata/plants_4_falcon/scene.gltf',
         'default',
         'sampledata/plants_4_falcon/scene.sfa',
-        'src/main/res/raw/ar12')
+        'src/main/assets/ar12')
 
 sceneform.asset('sampledata/plants_12_falcon/scene.gltf',
         'default',
         'sampledata/plants_12_falcon/scene.sfa',
-        'src/main/res/raw/ar13')
+        'src/main/assets/ar13')
 
 sceneform.asset('sampledata/plants_14_falcon/scene.gltf',
         'default',
         'sampledata/plants_14_falcon/scene.sfa',
-        'src/main/res/raw/ar14')
+        'src/main/assets/ar14')
 
 sceneform.asset('sampledata/plants_falcon/scene.gltf',
         'default',
         'sampledata/plants_falcon/scene.sfa',
-        'src/main/res/raw/ar15')
+        'src/main/assets/ar15')
 
 sceneform.asset('sampledata/ornate_amphora_italian_gardens_hyde_park_thomas_flynn/scene.gltf',
         'default',
         'sampledata/ornate_amphora_italian_gardens_hyde_park_thomas_flynn/scene.sfa',
-        'src/main/res/raw/ar16')
+        'src/main/assets/ar16')
 
 sceneform.asset('sampledata/sunflower_zvanstone/scene.gltf',
         'default',
         'sampledata/sunflower_zvanstone/scene.sfa',
-        'src/main/res/raw/ar17')
+        'src/main/assets/ar17')
 
 sceneform.asset('sampledata/tree_farhad.guli/scene.gltf',
         'default',
         'sampledata/tree_farhad.guli/scene.sfa',
-        'src/main/res/raw/ar18')
+        'src/main/assets/ar18')
 
 sceneform.asset('sampledata/tree_pine_roket_kroket/scene.gltf',
         'default',
         'sampledata/tree_pine_roket_kroket/scene.sfa',
-        'src/main/res/raw/ar19')
+        'src/main/assets/ar19')
+
+sceneform.asset('sampledata/aster_red_tojamerlin/scene.gltf',
+        'default',
+        'sampledata/aster_red_tojamerlin/scene.sfa',
+        'src/main/assets/scene')

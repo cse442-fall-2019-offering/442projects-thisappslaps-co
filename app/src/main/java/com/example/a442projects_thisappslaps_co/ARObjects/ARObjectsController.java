@@ -10,15 +10,15 @@ public class ARObjectsController {
 
     public ArrayList<Integer> createARObjectThumbnail() {
         ArrayList<Integer> thumbnailList = new ArrayList<>();
-        thumbnailList.add(R.drawable.ar1);
-        thumbnailList.add(R.drawable.ar2);
-        thumbnailList.add(R.drawable.ar3);
-        thumbnailList.add(R.drawable.ar4);
-        thumbnailList.add(R.drawable.ar5);
-        thumbnailList.add(R.drawable.ar6);
-        thumbnailList.add(R.drawable.ar7);
-        thumbnailList.add(R.drawable.ar8);
-        thumbnailList.add(R.drawable.ar9);
+        thumbnailList.add(R.drawable.ar01);
+        thumbnailList.add(R.drawable.ar02);
+        thumbnailList.add(R.drawable.ar03);
+        thumbnailList.add(R.drawable.ar04);
+        thumbnailList.add(R.drawable.ar05);
+        thumbnailList.add(R.drawable.ar06);
+        thumbnailList.add(R.drawable.ar07);
+        thumbnailList.add(R.drawable.ar08);
+        thumbnailList.add(R.drawable.ar09);
         thumbnailList.add(R.drawable.ar10);
         thumbnailList.add(R.drawable.ar11);
         thumbnailList.add(R.drawable.ar12);
@@ -28,6 +28,7 @@ public class ARObjectsController {
         thumbnailList.add(R.drawable.ar16);
         thumbnailList.add(R.drawable.ar17);
         thumbnailList.add(R.drawable.ar18);
+        thumbnailList.add(R.drawable.ar19);
 
         return thumbnailList;
     }
