@@ -1,0 +1,14 @@
+{
+    "gardenenv": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-garden-gardenenv-171113-authRole",
+            "UnauthRoleArn": "arn:aws:iam::683232883766:role/amplify-garden-gardenenv-171113-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::683232883766:role/amplify-garden-gardenenv-171113-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "amplify-garden-gardenenv-171113-deployment",
+            "UnauthRoleName": "amplify-garden-gardenenv-171113-unauthRole",
+            "StackName": "amplify-garden-gardenenv-171113",
+            "StackId": "arn:aws:cloudformation:us-east-2:683232883766:stack/amplify-garden-gardenenv-171113/d58eed70-07f4-11ea-8c76-0286ec33b064"
+        }
+    }
+}

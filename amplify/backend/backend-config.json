@@ -1,0 +1,20 @@
+{
+	"api": {
+		"gardenData": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "API_KEY",
+						"apiKeyConfig": {
+							"description": "Database for garden application",
+							"apiKeyExpirationDays": "60"
+						}
+					}
+				}
+			}
+		}
+	}
+}

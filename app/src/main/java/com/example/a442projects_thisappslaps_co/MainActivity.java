@@ -48,10 +48,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        mAWSAppSyncClient = AWSAppSyncClient.builder()
-//                .context(getApplicationContext())
-//                .awsConfiguration(new AWSConfiguration(getApplicationContext()))
-//                .build();
+        mAWSAppSyncClient = AWSAppSyncClient.builder()
+                .context(getApplicationContext())
+                .awsConfiguration(new AWSConfiguration(getApplicationContext()))
+                .build();
     }
 
     @Override
