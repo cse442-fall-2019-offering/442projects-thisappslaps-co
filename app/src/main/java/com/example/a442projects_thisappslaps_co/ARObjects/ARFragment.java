@@ -36,13 +36,13 @@ public class ARFragment extends Fragment implements View.OnClickListener {
 //        setContentView(R.layout.ar_fragment);
 
         //View
-        bamboo = (ImageView)findViewById(R.id.bamboo);
-        buddha = (ImageView)findViewById(R.id.buddha);
-        frog = (ImageView)findViewById(R.id.frog);
-        grass = (ImageView)findViewById(R.id.grass);
-        lupine = (ImageView)findViewById(R.id.lupine);
-        sunflower = (ImageView)findViewById(R.id.sunflower);
-        tree = (ImageView)findViewById(R.id.tree);
+//        bamboo = (ImageView)findViewById(R.id.bamboo);
+//        buddha = (ImageView)findViewById(R.id.buddha);
+//        frog = (ImageView)findViewById(R.id.frog);
+//        grass = (ImageView)findViewById(R.id.grass);
+//        lupine = (ImageView)findViewById(R.id.lupine);
+//        sunflower = (ImageView)findViewById(R.id.sunflower);
+//        tree = (ImageView)findViewById(R.id.tree);
 
         setArrayView();
         setClickListener();
