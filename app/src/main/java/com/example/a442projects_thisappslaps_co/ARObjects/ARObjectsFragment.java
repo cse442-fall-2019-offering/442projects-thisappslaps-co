@@ -17,7 +17,8 @@ import com.google.ar.sceneform.rendering.ViewRenderable;
 
 import java.util.ArrayList;
 
-public class ARObjectsFragment extends Fragment implements View.OnClickListener {
+
+public class ARObjectsFragment extends Fragment implements View.OnClickListener, OnItemClickListener {
 
     private RecyclerView mARObjectsRecyclerView;
     private ImageButton mBackButton;
@@ -44,14 +45,7 @@ public class ARObjectsFragment extends Fragment implements View.OnClickListener 
 //        ar17 = (ImageView)findViewById(R.id.ar17);
 //        ar18 = (ImageView)findViewById(R.id.ar18);
 
-        setArrayView();
-        setClickListener();
-    }
 
-    private void setClickListener() {
-        for(int i=0; i<arrayView.length; i++){
-            arrayView[i].setOnClickListener(this);
-        }
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
@@ -64,12 +58,6 @@ public class ARObjectsFragment extends Fragment implements View.OnClickListener 
         return view;
     }
 
-    private void setArrayView(){
-        arrayView = new View[] {
-                bamboo,buddha, frog, grass, lupine, sunflower, tree
-        };
-    }
-
     private void initializeViewVariable(View view) {
         mBackButton = view.findViewById(R.id.back_image_btn);
         mARObjectsRecyclerView = view.findViewById(R.id.ar_objects_recycler_view);
@@ -78,7 +66,7 @@ public class ARObjectsFragment extends Fragment implements View.OnClickListener 
     private void setARObjectsAdapter() {
         mARObjectsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         mARObjectsRecyclerView.setAdapter(
-                new ARObjectsAdapter(new ARObjectsController().createARObjectThumbnail()));
+                new ARObjectsAdapter(new ARObjectsController().createARObjectThumbnail(), this));
     }
 
     @Override
@@ -89,29 +77,47 @@ public class ARObjectsFragment extends Fragment implements View.OnClickListener 
         }
     }
 
-    private class ARObjectsHolder extends RecyclerView.ViewHolder {
+    @Override
+    public void onItemClick(int position) {
+        //Send Fragment Value
+        assert getFragmentManager() != null;
+        getFragmentManager().popBackStackImmediate();
+    }
 
-        ARObjectsHolder(LayoutInflater inflater, ViewGroup viewGroup) {
+    private class ARObjectsHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        OnItemClickListener listener;
+        ARObjectsHolder(LayoutInflater inflater, ViewGroup viewGroup, OnItemClickListener onItemClickListener) {
             super(inflater.inflate(R.layout.ar_object_item, viewGroup, false));
+            this.listener = onItemClickListener;
+            itemView.setOnClickListener(this);
         }
 
         void bind(Integer drawableRes) {
             itemView.setBackgroundResource(drawableRes);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onItemClick(getAdapterPosition());
+
         }
     }
 
     private class ARObjectsAdapter extends RecyclerView.Adapter<ARObjectsHolder> {
 
         private ArrayList<Integer> mARObjectDrawableResList;
+        private OnItemClickListener listener;
 
-        ARObjectsAdapter(ArrayList<Integer> arObjectDrawableResList) {
+        ARObjectsAdapter(ArrayList<Integer> arObjectDrawableResList, OnItemClickListener listener) {
             mARObjectDrawableResList = arObjectDrawableResList;
+            this.listener = listener;
         }
 
         @NonNull
         @Override
         public ARObjectsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ARObjectsHolder(LayoutInflater.from(getContext()), parent);
+            return new ARObjectsHolder(LayoutInflater.from(getContext()), parent, listener);
         }
 
         @Override
@@ -128,4 +134,6 @@ public class ARObjectsFragment extends Fragment implements View.OnClickListener 
 //    private void initializedGallery() {
 //
 //    }
+
 }
+
