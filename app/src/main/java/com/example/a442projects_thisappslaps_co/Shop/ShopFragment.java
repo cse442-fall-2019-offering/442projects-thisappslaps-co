@@ -8,8 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,10 +26,12 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
 
     private ShopController mShopController;
 
-    private ImageButton mHomeImageButton;
     private RecyclerView mPopularProductsRecylerView;
     private RecyclerView mRecommendedRecyclerView;
     private RecyclerView mHalloweenRecyclerView;
+
+    private ConstraintLayout mHeaderOneConstraintLayout;
+    private ConstraintLayout mHeaderTwoConstraintLayout;
 
     public ShopFragment() { }
 
@@ -39,23 +44,28 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         View view = inflater.inflate(R.layout.shop_fragment, container, false);
 
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(view1 -> {
+            assert getFragmentManager() != null;
+            getFragmentManager().popBackStackImmediate();
+        });
+
         initializeViewVariables(view);
-        setListeners();
         initializeRecyclerViewsAndSetAdapters();
+
+        mHeaderOneConstraintLayout.setOnClickListener(this);
+        mHeaderTwoConstraintLayout.setOnClickListener(this);
 
         return view;
     }
 
     private void initializeViewVariables(View view) {
-        mHomeImageButton = view.findViewById(R.id.shop_home_image_button);
         mPopularProductsRecylerView =
                 view.findViewById(R.id.shop_popular_products_horizontal_recycler_view);
         mRecommendedRecyclerView = view.findViewById(R.id.shop_recommended_recycler_view);
         mHalloweenRecyclerView = view.findViewById(R.id.shop_halloween_horizontal_recycler_view);
-    }
-
-    private void setListeners() {
-        mHomeImageButton.setOnClickListener(this);
+        mHeaderOneConstraintLayout = view.findViewById(R.id.header_1);
+        mHeaderTwoConstraintLayout = view.findViewById(R.id.header_2);
     }
 
     private void initializeRecyclerViewsAndSetAdapters() {
@@ -79,19 +89,23 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.shop_home_image_button) {
-            assert getFragmentManager() != null;
-            getFragmentManager().popBackStackImmediate();
+        if (view.getId() == R.id.header_1) {
+            // TODO
+        }
+        else if (view.getId() == R.id.header_2) {
+            // TODO
         }
     }
 
-    private class PopularProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class PopularProductsViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener, View.OnLongClickListener {
 
         private String mURL;
 
         PopularProductsViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
             super(inflater.inflate(R.layout.products_item, viewGroup, false));
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         void bind(Pair<Integer, String> drawable) {
@@ -103,6 +117,12 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         public void onClick(View v) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mURL));
             startActivity(browserIntent);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            Toast.makeText(getContext(), "Added to Wish List", Toast.LENGTH_SHORT).show();
+            return true;
         }
     }
 
@@ -132,13 +152,15 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private class RecommendedProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class RecommendedProductsViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener, View.OnLongClickListener {
 
         private String mURL;
 
         RecommendedProductsViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
             super(inflater.inflate(R.layout.products_item, viewGroup, false));
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         void bind(Pair<Integer,String> drawable) {
@@ -150,6 +172,12 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         public void onClick(View v) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mURL));
             startActivity(browserIntent);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            Toast.makeText(getContext(), "Added to Wish List", Toast.LENGTH_SHORT).show();
+            return true;
         }
     }
 
@@ -180,13 +208,15 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private class HalloweenProductsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class HalloweenProductsViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener, View.OnLongClickListener {
 
         private String mURL;
 
         HalloweenProductsViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
             super(inflater.inflate(R.layout.products_item, viewGroup, false));
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         void bind(Pair<Integer,String> drawable){
@@ -198,6 +228,12 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         public void onClick(View v) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mURL));
             startActivity(browserIntent);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            Toast.makeText(getContext(), "Added to Wish List", Toast.LENGTH_SHORT).show();
+            return true;
         }
     }
 
