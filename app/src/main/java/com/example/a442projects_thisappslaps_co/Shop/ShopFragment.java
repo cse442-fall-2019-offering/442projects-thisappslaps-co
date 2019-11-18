@@ -3,11 +3,9 @@ package com.example.a442projects_thisappslaps_co.Shop;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a442projects_thisappslaps_co.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 
 public class ShopFragment extends Fragment implements View.OnClickListener {
 
@@ -69,38 +67,57 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initializeRecyclerViewsAndSetAdapters() {
-        ArrayList<Pair<Integer, String>> dummyList = mShopController.createDummyList();
+        ArrayList<ShopItem> dummyList = mShopController.createDummyList();
 
         mPopularProductsRecylerView.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mPopularProductsRecylerView.setHorizontalScrollBarEnabled(true);
         mPopularProductsRecylerView.setAdapter(new PopularProductsAdapter(dummyList));
 
+        ArrayList<ShopItem> dummyList2 = new ArrayList<>(dummyList);
+        Collections.shuffle(dummyList2);
+
         mRecommendedRecyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mRecommendedRecyclerView.setHorizontalScrollBarEnabled(true);
-        mRecommendedRecyclerView.setAdapter(new RecommendedProductsAdapter(dummyList));
+        mRecommendedRecyclerView.setAdapter(new RecommendedProductsAdapter(dummyList2));
+
+        ArrayList<ShopItem> dummyList3 = new ArrayList<>(dummyList);
+        Collections.shuffle(dummyList3);
 
         mHalloweenRecyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mHalloweenRecyclerView.setHorizontalScrollBarEnabled(true);
-        mHalloweenRecyclerView.setAdapter(new HalloweenProductsAdapter(dummyList));
+        mHalloweenRecyclerView.setAdapter(new HalloweenProductsAdapter(dummyList3));
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.header_1) {
-            // TODO
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.dutchgrown.com/products/tulip-red-power?gclid=" +
+                            "CjwKCAiA_MPuBRB5EiwAHTTvMUx52iCbEXHs9NMRTrm5a1EtZR-TZrUCK_e" +
+                            "FgWdek92Gk9A8tm9SYBoCxk4QAvD_BwE"));
+            startActivity(browserIntent);
+            Toast.makeText(getContext(), "Here are some Tulips", Toast.LENGTH_SHORT).show();
         }
         else if (view.getId() == R.id.header_2) {
-            // TODO
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://www.bluestoneperennials.com/MXF.html?utm_source=" +
+                            "Froogle&utm_medium=cse&utm_campaign=Feed&utm_source=google&utm" +
+                            "_medium=cpc&utm_campaign=NB_PLA_CloseStates_GOOG&utm_term=shopp" +
+                            "ing&utm_content=subbwC8ly|pcrid|40107396943|pmt||pkw||pdv|c|&&gclid=C" +
+                            "jwKCAiA_MPuBRB5EiwAHTTvMQ_3_i6-UqRGKCLVHFJFikq80Hcgv11DSUXedz2fVpfQ" +
+                            "DcAr0ug6fxoCCNUQAvD_BwE"));
+            startActivity(browserIntent);
+            Toast.makeText(getContext(), "Here are some Mums", Toast.LENGTH_SHORT).show();
         }
     }
 
     private class PopularProductsViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener, View.OnLongClickListener {
 
-        private String mURL;
+        private ShopItem mShopItem;
 
         PopularProductsViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
             super(inflater.inflate(R.layout.products_item, viewGroup, false));
@@ -108,19 +125,20 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
             itemView.setOnLongClickListener(this);
         }
 
-        void bind(Pair<Integer, String> drawable) {
-            itemView.setBackgroundResource(drawable.first);
-            mURL = drawable.second;
+        void bind(ShopItem shopItem) {
+            itemView.setBackgroundResource(shopItem.getResourceId());
+            mShopItem = shopItem;
         }
 
         @Override
         public void onClick(View v) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mURL));
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mShopItem.getUrl()));
             startActivity(browserIntent);
         }
 
         @Override
         public boolean onLongClick(View view) {
+
             Toast.makeText(getContext(), "Added to Wish List", Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -128,9 +146,9 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
 
     private class PopularProductsAdapter extends RecyclerView.Adapter<PopularProductsViewHolder> {
 
-        ArrayList<Pair<Integer, String>> mPopularProductsDrawableArrayList;
+        ArrayList<ShopItem> mPopularProductsDrawableArrayList;
 
-        PopularProductsAdapter(ArrayList<Pair<Integer, String>> popularProductsDrawableArrayList) {
+        PopularProductsAdapter(ArrayList<ShopItem> popularProductsDrawableArrayList) {
             mPopularProductsDrawableArrayList = popularProductsDrawableArrayList;
         }
 
@@ -155,7 +173,7 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     private class RecommendedProductsViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener, View.OnLongClickListener {
 
-        private String mURL;
+        private ShopItem mShopItem;
 
         RecommendedProductsViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
             super(inflater.inflate(R.layout.products_item, viewGroup, false));
@@ -163,14 +181,14 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
             itemView.setOnLongClickListener(this);
         }
 
-        void bind(Pair<Integer,String> drawable) {
-            itemView.setBackgroundResource(drawable.first);
-            mURL = drawable.second;
+        void bind(ShopItem shopItem) {
+            itemView.setBackgroundResource(shopItem.getResourceId());
+            mShopItem = shopItem;
         }
 
         @Override
         public void onClick(View v) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mURL));
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mShopItem.getUrl()));
             startActivity(browserIntent);
         }
 
@@ -184,9 +202,9 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     private class RecommendedProductsAdapter extends
             RecyclerView.Adapter<RecommendedProductsViewHolder> {
 
-        ArrayList<Pair<Integer, String>> mRecommendedProductsDrawableArrayList;
+        ArrayList<ShopItem> mRecommendedProductsDrawableArrayList;
 
-        RecommendedProductsAdapter(ArrayList<Pair<Integer, String>> recommendedProductsDrawableArrayList) {
+        RecommendedProductsAdapter(ArrayList<ShopItem> recommendedProductsDrawableArrayList) {
             mRecommendedProductsDrawableArrayList = recommendedProductsDrawableArrayList;
         }
 
@@ -211,7 +229,7 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     private class HalloweenProductsViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener, View.OnLongClickListener {
 
-        private String mURL;
+        private ShopItem mShopItem;
 
         HalloweenProductsViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
             super(inflater.inflate(R.layout.products_item, viewGroup, false));
@@ -219,14 +237,14 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
             itemView.setOnLongClickListener(this);
         }
 
-        void bind(Pair<Integer,String> drawable){
-            itemView.setBackgroundResource(drawable.first);
-            mURL = drawable.second;
+        void bind(ShopItem shopItem){
+            itemView.setBackgroundResource(shopItem.getResourceId());
+            mShopItem = shopItem;
         }
 
         @Override
         public void onClick(View v) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mURL));
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mShopItem.getUrl()));
             startActivity(browserIntent);
         }
 
@@ -240,9 +258,9 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     private class HalloweenProductsAdapter extends
             RecyclerView.Adapter<HalloweenProductsViewHolder> {
 
-        ArrayList<Pair<Integer, String>> mHalloweenProductsDrawableArrayList;
+        ArrayList<ShopItem> mHalloweenProductsDrawableArrayList;
 
-        HalloweenProductsAdapter(ArrayList<Pair<Integer, String>> halloweenProductsDrawableArrayList) {
+        HalloweenProductsAdapter(ArrayList<ShopItem> halloweenProductsDrawableArrayList) {
             mHalloweenProductsDrawableArrayList = halloweenProductsDrawableArrayList;
         }
 
