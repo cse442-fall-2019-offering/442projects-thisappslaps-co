@@ -22,7 +22,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-<<<<<<< HEAD
 import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsFragment;
 import com.example.a442projects_thisappslaps_co.ARObjects.AddObjectListener;
 import com.example.a442projects_thisappslaps_co.Database.DatabaseHelper;
@@ -318,8 +317,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-}
 
     private String generateFilename() {
         String date =
