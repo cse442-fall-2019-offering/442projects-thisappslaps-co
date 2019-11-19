@@ -5,12 +5,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 
 import androidx.annotation.NonNull;
@@ -19,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsFragment;
+import com.example.a442projects_thisappslaps_co.ARObjects.AddObjectListener;
 import com.example.a442projects_thisappslaps_co.Shop.ShopFragment;
 import com.example.a442projects_thisappslaps_co.Settings.SettingsFragment;
 import com.example.a442projects_thisappslaps_co.Explore.ExploreFragment;
@@ -35,49 +32,22 @@ import com.google.ar.core.Trackable;
 import com.google.ar.core.TrackingState;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.rendering.ModelRenderable;
-import com.google.ar.sceneform.rendering.ViewRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
-import java.lang.ref.WeakReference;
-import java.net.URI;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ModelLoaderInterface, AddObjectListener {
 
     private static int MY_CAMERA_PERMISSIONS;
 
     private ArFragment fragment;
-    private ModelRenderable ar1Renderable,
-                            ar2Renderable,
-                            ar3Renderable,
-                            ar4Renderable,
-                            ar5Renderable,
-                            ar6Renderable,
-                            ar7Renderable,
-                            ar8Renderable,
-                            ar9Renderable,
-                            ar10Renderable,
-                            ar11Renderable,
-                            ar12Renderable,
-                            ar13Renderable,
-                            ar14Renderable,
-                            ar15Renderable,
-                            ar16Renderable,
-                            ar17Renderable,
-                            ar18Renderable,
-                            ar19Renderable;
 
     private PointerDrawable pointer = new PointerDrawable();
     private ModelLoader modelLoader;
 
-//    Check to see if ARCore is in tracking or hitting states
     private boolean isTracking;
     private boolean isHitting;
-
-    ViewRenderable name_plant;
-    View arrayView[];
-    int selected = 1;
 
     private ImageButton mARObjectsImageButton;
     private ImageButton mGalleryImageButton;
@@ -110,8 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             onUpdate();
         });
 
-        modelLoader = new ModelLoader(new WeakReference<>(this));
-        initializeGallery();
+        modelLoader = new ModelLoader(this, this);
     }
 
 
@@ -171,8 +140,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private android.graphics.Point getScreenCenter() {
-//        grab center of the screen
-
         View vw = findViewById(android.R.id.content);
         return new android.graphics.Point(vw.getWidth()/2, vw.getHeight()/2);
     }
@@ -187,19 +154,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initializeViewVariables() {
-//        mARObjectsImageButton = findViewById(R.id.ar_objects_image_btn);
-//        mGalleryImageButton = findViewById(R.id.gallery_image_btn);
+        mARObjectsImageButton = findViewById(R.id.ar_objects_image_btn);
+        mGalleryImageButton = findViewById(R.id.gallery_image_btn);
         mShopImageButton = findViewById(R.id.shop_image_button);
         mSettingsImageButton = findViewById(R.id.settings_image_btn);
-//        mExploreImageButton = findViewById(R.id.explore_image_btn);
+        mExploreImageButton = findViewById(R.id.explore_image_btn);
     }
 
     private void setListeners() {
-//        mARObjectsImageButton.setOnClickListener(this);
-//        mGalleryImageButton.setOnClickListener(this);
+        mARObjectsImageButton.setOnClickListener(this);
+        mGalleryImageButton.setOnClickListener(this);
         mShopImageButton.setOnClickListener(this);
         mSettingsImageButton.setOnClickListener(this);
-//        mExploreImageButton.setOnClickListener(this);
+        mExploreImageButton.setOnClickListener(this);
     }
 
     private void requestPermissionForCamera() {
@@ -229,21 +196,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-//            case R.id.ar_objects_image_btn:
-//                startFragment(new ARObjectsFragment(), true);
-//                break;
-//            case R.id.gallery_image_btn:
-//                startFragment(new GalleryFragment(), true);
-//                break;
+            case R.id.ar_objects_image_btn:
+                startFragment(new ARObjectsFragment(this), true);
+                break;
+            case R.id.gallery_image_btn:
+                startFragment(new GalleryFragment(), true);
+                break;
             case R.id.shop_image_button:
                 startFragment(new ShopFragment(), true);
                 break;
             case R.id.settings_image_btn:
                 startFragment(new SettingsFragment(), true);
                 break;
-//            case R.id.explore_image_btn:
-//                startFragment(new ExploreFragment(), true);
-//                break;
+            case R.id.explore_image_btn:
+                startFragment(new ExploreFragment(), true);
+                break;
             default:
                 break;
         }
@@ -258,38 +225,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentTransaction.commit();
     }
 
-    private void initializeGallery() {
-//        only being used to load the gallery liner layout thing at the bottom
-//        you probably only need to use the set on click function call with the uri parse thing
-
-        LinearLayout gallery = findViewById(R.id.gallery_layout);
-
-        ImageView ar1 = new ImageView(this);
-        ar1.setImageResource(R.drawable.ar01);
-        ar1.setContentDescription("ar object 1");
-        ar1.setOnClickListener(view -> {addObject(Uri.parse("ar01.sfb"));});
-        gallery.addView(ar1);
-
-        ImageView ar2 = new ImageView(this);
-        ar2.setImageResource(R.drawable.ar01);
-        ar2.setContentDescription("ar object 1");
-        ar2.setOnClickListener(view -> {addObject(Uri.parse("ar02.sfb"));});
-        gallery.addView(ar2);
-
-        ImageView ar3 = new ImageView(this);
-        ar3.setImageResource(R.drawable.ar01);
-        ar3.setContentDescription("ar object 1");
-        ar3.setOnClickListener(view -> {addObject(Uri.parse("ar03.sfb"));});
-        gallery.addView(ar3);
-
-        ImageView ar4 = new ImageView(this);
-        ar4.setImageResource(R.drawable.ar01);
-        ar4.setContentDescription("ar object 1");
-        ar4.setOnClickListener(view -> {addObject(Uri.parse("ar04.sfb"));});
-        gallery.addView(ar4);
-    }
-
-    private void addObject(Uri model) {
+    @Override
+    public void addObject(Uri model) {
 //      Uses the hit test to place where in the 3D world the object should be placed.
 
         Frame frame = fragment.getArSceneView().getArFrame();
@@ -308,6 +245,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
     public void addNodeToScene(Anchor anchor, ModelRenderable renderable) {
 //        Builds AnchorNode and TransformableNode and attaches them to the ArSceneView's scene object.
 //
@@ -323,6 +261,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         node.select();
     }
 
+    @Override
     public void onException(Throwable throwable){
 //      Helps with debugging
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -330,7 +269,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setTitle("GARDEN error!");
         AlertDialog dialog = builder.create();
         dialog.show();
-        return;
     }
 
 }

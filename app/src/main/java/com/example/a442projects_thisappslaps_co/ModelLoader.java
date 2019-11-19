@@ -1,5 +1,6 @@
 package com.example.a442projects_thisappslaps_co;
 
+import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
@@ -11,33 +12,32 @@ import java.lang.ref.WeakReference;
 public class ModelLoader {
 //    This class starts the asynchronous loading of the 3D model using the builder.
 
-    private final WeakReference<MainActivity> owner;
+    private final ModelLoaderInterface owner;
+    private Context mContext;
     private static final String TAG = "ModelLoader";
 
-    ModelLoader(WeakReference<MainActivity> owner) {
+    ModelLoader(ModelLoaderInterface owner, Context context) {
         this.owner = owner;
+        mContext = context;
     }
 
     void loadModel(Anchor anchor, Uri uri) {
-        if (owner.get() == null) {
+        if (owner == null) {
             Log.d(TAG, "Activity is null.  Cannot load model.");
             return;
         }
         ModelRenderable.builder()
-                .setSource(owner.get(), uri)
+                .setSource(mContext, uri)
                 .build()
                 .handle((renderable, throwable) -> {
-                    MainActivity activity = owner.get();
-                    if (activity == null) {
+                    if (owner == null) {
                         return null;
                     } else if (throwable != null) {
-                        activity.onException(throwable);
+                        owner.onException(throwable);
                     } else {
-                        activity.addNodeToScene(anchor, renderable);
+                        owner.addNodeToScene(anchor, renderable);
                     }
                     return null;
                 });
-
-        return;
     }
 }

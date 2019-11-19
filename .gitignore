@@ -12,3 +12,5 @@
 /captures
 .externalNativeBuild
 .cxx
+
+app/src/main/_DS_Store
