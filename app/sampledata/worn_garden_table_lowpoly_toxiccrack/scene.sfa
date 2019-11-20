@@ -75,7 +75,7 @@
     file: 'sampledata/worn_garden_table_lowpoly_toxiccrack/scene.gltf',
     name: 'scene',
     recenter: 'root',
-    scale: 0.21824499999999999,
+    scale: 0.1,
   },
   samplers: [
     {

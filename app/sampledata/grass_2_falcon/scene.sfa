@@ -75,7 +75,7 @@
     file: 'sampledata/grass_2_falcon/scene.gltf',
     name: 'scene',
     recenter: 'root',
-    scale: 0.0090449999999999992,
+    scale: 0.009,
   },
   samplers: [
     {

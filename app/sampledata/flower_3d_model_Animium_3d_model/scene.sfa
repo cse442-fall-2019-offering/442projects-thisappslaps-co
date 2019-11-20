@@ -267,7 +267,7 @@
     file: 'sampledata/flower_3d_model_Animium_3d_model/scene.gltf',
     name: 'scene',
     recenter: 'root',
-    scale: 0.031836999999999997,
+    scale: 0.01,
   },
   samplers: [
     {

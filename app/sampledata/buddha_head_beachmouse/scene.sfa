@@ -75,7 +75,7 @@
     file: 'sampledata/buddha_head_beachmouse/scene.gltf',
     name: 'scene',
     recenter: 'root',
-    scale: 0.49134800000000001,
+    scale: 0.1,
   },
   samplers: [
     {

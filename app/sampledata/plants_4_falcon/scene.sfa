@@ -75,7 +75,7 @@
     file: 'sampledata/plants_4_falcon/scene.gltf',
     name: 'scene',
     recenter: 'root',
-    scale: 0.021326000000000001,
+    scale: 0.004,
   },
   samplers: [
     {

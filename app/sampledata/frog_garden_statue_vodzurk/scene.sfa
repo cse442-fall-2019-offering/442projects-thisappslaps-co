@@ -75,7 +75,7 @@
     file: 'sampledata/frog_garden_statue_vodzurk/scene.gltf',
     name: 'scene',
     recenter: 'root',
-    scale: 0.157974,
+    scale: 0.05,
   },
   samplers: [
     {

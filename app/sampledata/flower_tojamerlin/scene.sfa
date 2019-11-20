@@ -331,7 +331,7 @@
     file: 'sampledata/flower_tojamerlin/scene.gltf',
     name: 'scene',
     recenter: 'root',
-    scale: 0.010534,
+    scale: 0.005,
   },
   samplers: [
     {

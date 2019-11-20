@@ -75,7 +75,7 @@
     file: 'sampledata/sunflower_zvanstone/scene.gltf',
     name: 'scene',
     recenter: 'root',
-    scale: 0.0075269999999999998,
+    scale: 0.003,
   },
   samplers: [
     {

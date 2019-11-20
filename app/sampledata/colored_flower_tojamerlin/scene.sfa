@@ -459,7 +459,7 @@
     file: 'sampledata/colored_flower_tojamerlin/scene.gltf',
     name: 'scene',
     recenter: 'root',
-    scale: 0.023472,
+    scale: 0.009,
   },
   samplers: [
     {

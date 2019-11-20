@@ -331,6 +331,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!out.getParentFile().exists()) {
             out.getParentFile().mkdirs();
         }
+        System.out.println(project.getUri());
         try (FileOutputStream outputStream = new FileOutputStream(project.getUri());
              ByteArrayOutputStream outputData = new ByteArrayOutputStream()) {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputData);

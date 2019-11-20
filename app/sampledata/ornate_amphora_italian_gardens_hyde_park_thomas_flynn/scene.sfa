@@ -139,7 +139,7 @@
     file: 'sampledata/ornate_amphora_italian_gardens_hyde_park_thomas_flynn/scene.gltf',
     name: 'scene',
     recenter: 'root',
-    scale: 0.19203899999999999,
+    scale: 0.05,
   },
   samplers: [
     {
