@@ -207,17 +207,17 @@
   },
   samplers: [
     {
-      file: 'sampledata/bamboo_tree_tojamerlin\\textures\\Mf_Grass_baseColor.png',
+      file: 'sampledata/bamboo_tree_tojamerlin/textures/Mf_Grass_baseColor.png',
       name: 'Mf_Grass_baseColor',
       pipeline_name: 'textures/Mf_Grass_baseColor.png',
     },
     {
-      file: 'sampledata/bamboo_tree_tojamerlin\\textures\\Trunk_baseColor.png',
+      file: 'sampledata/bamboo_tree_tojamerlin/textures/Trunk_baseColor.png',
       name: 'Trunk_baseColor',
       pipeline_name: 'textures/Trunk_baseColor.png',
     },
     {
-      file: 'sampledata/bamboo_tree_tojamerlin\\textures\\Trunk_normal.png',
+      file: 'sampledata/bamboo_tree_tojamerlin/textures/Trunk_normal.png',
       name: 'Trunk_normal',
       params: {
         usage_type: 'Normal',
@@ -225,7 +225,7 @@
       pipeline_name: 'textures/Trunk_normal.png',
     },
     {
-      file: 'sampledata/bamboo_tree_tojamerlin\\textures\\Leaf_baseColor.png',
+      file: 'sampledata/bamboo_tree_tojamerlin/textures/Leaf_baseColor.png',
       name: 'Leaf_baseColor',
       pipeline_name: 'textures/Leaf_baseColor.png',
     },

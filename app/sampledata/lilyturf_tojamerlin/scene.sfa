@@ -207,17 +207,17 @@
   },
   samplers: [
     {
-      file: 'sampledata/lilyturf_tojamerlin\\textures\\Stem_baseColor.png',
+      file: 'sampledata/lilyturf_tojamerlin/textures/Stem_baseColor.png',
       name: 'Stem_baseColor',
       pipeline_name: 'textures/Stem_baseColor.png',
     },
     {
-      file: 'sampledata/lilyturf_tojamerlin\\textures\\Leaf_baseColor.png',
+      file: 'sampledata/lilyturf_tojamerlin/textures/Leaf_baseColor.png',
       name: 'Leaf_baseColor',
       pipeline_name: 'textures/Leaf_baseColor.png',
     },
     {
-      file: 'sampledata/lilyturf_tojamerlin\\textures\\Grass_baseColor.png',
+      file: 'sampledata/lilyturf_tojamerlin/textures/Grass_baseColor.png',
       name: 'Grass_baseColor',
       pipeline_name: 'textures/Grass_baseColor.png',
     },

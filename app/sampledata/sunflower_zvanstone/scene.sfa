@@ -79,12 +79,12 @@
   },
   samplers: [
     {
-      file: 'sampledata/sunflower_zvanstone\\textures\\lambert2SG_baseColor.png',
+      file: 'sampledata/sunflower_zvanstone/textures/lambert2SG_baseColor.png',
       name: 'lambert2SG_baseColor',
       pipeline_name: 'textures/lambert2SG_baseColor.png',
     },
     {
-      file: 'sampledata/sunflower_zvanstone\\textures\\lambert2SG_metallicRoughness.png',
+      file: 'sampledata/sunflower_zvanstone/textures/lambert2SG_metallicRoughness.png',
       name: 'lambert2SG_metallicRoughness',
       params: {
         usage_type: 'Data',
@@ -92,7 +92,7 @@
       pipeline_name: 'textures/lambert2SG_metallicRoughness.png',
     },
     {
-      file: 'sampledata/sunflower_zvanstone\\textures\\lambert2SG_normal.png',
+      file: 'sampledata/sunflower_zvanstone/textures/lambert2SG_normal.png',
       name: 'lambert2SG_normal',
       params: {
         usage_type: 'Normal',
@@ -100,7 +100,7 @@
       pipeline_name: 'textures/lambert2SG_normal.png',
     },
     {
-      file: 'sampledata/sunflower_zvanstone\\textures\\lambert2SG_emissive.png',
+      file: 'sampledata/sunflower_zvanstone/textures/lambert2SG_emissive.png',
       name: 'lambert2SG_emissive',
       pipeline_name: 'textures/lambert2SG_emissive.png',
     },
