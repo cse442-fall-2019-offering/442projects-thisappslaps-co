@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -23,14 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.a442projects_thisappslaps_co.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private static ExploreController sExploreController;
     private ArticleAdapter adapter;
-    private List<Article> articleList;
     private RecyclerView recyclerView;
 
     public HomeFragment(ExploreController exploreController) {
@@ -48,16 +45,13 @@ public class HomeFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler_view);
 
-        articleList = new ArrayList<>();
-        adapter = new ArticleAdapter(getContext(), articleList);
+        adapter = new ArticleAdapter(getContext(), sExploreController.getArticleList());
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
-        prepareArticles();
 
         return view;
     }
@@ -84,13 +78,19 @@ public class HomeFragment extends Fragment {
 
             void bind(Article article) {
                 mArticle = article;
+                mFavorite.setImageDrawable(getResources().getDrawable(article.isFavorited()
+                        ? R.drawable.ic_star_icon
+                        : R.drawable.ic_star_border, null));
             }
 
             @Override
             public void onClick(View v) {
                 if (v.getId() == R.id.favorite) {
-                    sExploreController.addArticleToDatabase(mArticle);
-                    mFavorite.setBackground(getResources().getDrawable(R.drawable.ic_star_icon, null));
+                    mArticle.setFavorited(!mArticle.isFavorited());
+                    sExploreController.updateArticle(mArticle);
+                    mFavorite.setImageDrawable(getResources().getDrawable(mArticle.isFavorited()
+                            ? R.drawable.ic_star_icon
+                            : R.drawable.ic_star_border, null));
                     return;
                 }
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mArticle.getUrl()));
@@ -123,61 +123,6 @@ public class HomeFragment extends Fragment {
         public int getItemCount() {
             return articleList.size();
         }
-    }
-
-    private void prepareArticles() {
-
-        int[] covers = new int[]{
-                R.drawable.article1,
-                R.drawable.article2,
-                R.drawable.article3,
-                R.drawable.article4,
-                R.drawable.article5,
-                R.drawable.article6,
-                R.drawable.article7,
-                R.drawable.article8,
-                R.drawable.article9,
-                R.drawable.article10,
-                R.drawable.article11,
-                R.drawable.article12};
-
-        Article a = new Article("Small Space Garden Strategies", "https://www.bhg.com/gardening/plans/small-space-garden-strategies/", covers[0]);
-        articleList.add(a);
-
-        a = new Article("Five Fabulous Garden Plans", "https://www.bhg.com/gardening/plans/easy/five-fab-garden-plans/", covers[1]);
-        articleList.add(a);
-
-        a = new Article("Easy-Care Summer Garden Plan", "https://www.bhg.com/gardening/plans/easy/easy-care-summer-garden-plan/", covers[2]);
-        articleList.add(a);
-
-        a = new Article("No-Fuss Garden Plans", "https://www.bhg.com/gardening/plans/easy/15-no-fuss-garden-plans/", covers[3]);
-        articleList.add(a);
-
-        a = new Article("25 Best Fall Plants and Flowers to Beautify Your Front Yard This Season", "https://www.countryliving.com/gardening/garden-ideas/g4662/fall-flowers/", covers[4]);
-        articleList.add(a);
-
-        a = new Article("Our Best Cactus Garden Tips for Creating a Stunning, at-Home Oasis", "https://www.countryliving.com/gardening/garden-ideas/a26265781/cactus-garden/", covers[5]);
-        articleList.add(a);
-
-        a = new Article("15 Best Low-Maintenance Flowers for Any Kind of Garden", "https://www.countryliving.com/gardening/garden-ideas/g27092607/low-maintenance-flowers/", covers[6]);
-        articleList.add(a);
-
-        a = new Article("22 Creative DIY Bench Ideas to Add to Your Garden This Year", "https://www.countryliving.com/gardening/garden-ideas/g3120/upcycled-garden-benches/", covers[7]);
-        articleList.add(a);
-
-        a = new Article("Colorful planting around an arbor", "https://www.gardengatemagazine.com/articles/garden-plans/entries/colorful-planting-around-an-arbor/", covers[8]);
-        articleList.add(a);
-
-        a = new Article("Budget-friendly garden border", "https://www.gardengatemagazine.com/articles/garden-plans/beds-borders/budget-friendly-garden-border/", covers[9]);
-        articleList.add(a);
-
-        a = new Article("Butterfly-friendly garden plan", "https://www.gardengatemagazine.com/articles/garden-plans/wildlife-friendly/create-a-butterfly-friendly-garden/", covers[10]);
-        articleList.add(a);
-
-        a = new Article("Plant a garden that will attract pollinators all season", "https://www.gardengatemagazine.com/articles/garden-plans/wildlife-friendly/plant-a-garden-that-will-attract-pollinators-all-season/", covers[11]);
-        articleList.add(a);
-
-        adapter.notifyDataSetChanged();
     }
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {

@@ -6,6 +6,8 @@ import android.database.CursorWrapper;
 import com.example.a442projects_thisappslaps_co.Explore.Article;
 import com.example.a442projects_thisappslaps_co.Gallery.Project;
 
+import java.util.UUID;
+
 public class DatabaseCursorWrapper extends CursorWrapper {
 
     public DatabaseCursorWrapper(Cursor cursor) {
@@ -20,14 +22,18 @@ public class DatabaseCursorWrapper extends CursorWrapper {
     }
 
     public Article getArticle(){
+        String id =  getString(getColumnIndex(DatabaseSchema.ArticleTable.Cols.ID));
         String url = getString(getColumnIndex(DatabaseSchema.ArticleTable.Cols.URI));
         String title = getString(getColumnIndex(DatabaseSchema.ArticleTable.Cols.TITLE));
         int thumbnail = getInt(getColumnIndex(DatabaseSchema.ArticleTable.Cols.THUMBNAIL));
+        int favorited = getInt(getColumnIndex(DatabaseSchema.ArticleTable.Cols.FAVORITED));
 
         Article article = new Article();
+        article.setUUID(id);
         article.setThumbnail(thumbnail);
         article.setUrl(url);
         article.setName(title);
+        article.setFavorited(favorited == 1);
 
         return article;
     }

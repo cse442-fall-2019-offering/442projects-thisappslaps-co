@@ -54,6 +54,7 @@
                 android:layout_marginRight="15dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_star_border"
+                android:background="@android:color/transparent"
                 android:tint="@color/card_icon_colors" />
 
             <!--            <ImageView-->

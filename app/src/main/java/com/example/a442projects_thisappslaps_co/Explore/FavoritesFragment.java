@@ -1,7 +1,6 @@
 package com.example.a442projects_thisappslaps_co.Explore;
 
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,12 +18,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.a442projects_thisappslaps_co.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavoritesFragment extends Fragment {
 
     private static ExploreController sExploreController;
     private RecyclerView mFavoritesRecyclerView;
+    private FavoriteRecyclerAdapter mFavoritesRecyclerAdapter;
+    private ArrayList<Article> mFavoritesArticleList;
 
     FavoritesFragment(ExploreController exploreController){
         sExploreController = exploreController;
@@ -39,9 +41,18 @@ public class FavoritesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle){
         View view = inflater.inflate(R.layout.explore_content, container, false);
 
+        mFavoritesArticleList = new ArrayList<>();
+
+        for (Article article : sExploreController.getArticleList()) {
+            if (article.isFavorited()) {
+                mFavoritesArticleList.add(article);
+            }
+        }
+
         mFavoritesRecyclerView = view.findViewById(R.id.recycler_view);
         mFavoritesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        mFavoritesRecyclerView.setAdapter(new FavoriteRecyclerAdapter(sExploreController.getArticleList()));
+        mFavoritesRecyclerAdapter = new FavoriteRecyclerAdapter(mFavoritesArticleList);
+        mFavoritesRecyclerView.setAdapter(mFavoritesRecyclerAdapter);
 
         return view;
     }
@@ -51,11 +62,14 @@ public class FavoritesFragment extends Fragment {
         private ImageView mThumbnailImageView;
         private TextView mTitleTextView;
         private Article mArticle;
+        private ImageButton mIsFavoritedButton;
 
         public FavoritesViewHolder(LayoutInflater inflater, ViewGroup viewGroup) {
             super(inflater.inflate(R.layout.explore_item, viewGroup, false));
             mThumbnailImageView = itemView.findViewById(R.id.article_img);
             mTitleTextView = itemView.findViewById(R.id.article_title);
+            mIsFavoritedButton = itemView.findViewById(R.id.favorite);
+            mIsFavoritedButton.setOnClickListener(this);
             itemView.setOnClickListener(this);
         }
 
@@ -63,10 +77,18 @@ public class FavoritesFragment extends Fragment {
             mArticle = article;
             Glide.with(getContext()).load(article.getThumbnail()).into(mThumbnailImageView);
             mTitleTextView.setText(article.getName());
+            mIsFavoritedButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_star_icon, null));
         }
 
         @Override
         public void onClick(View v) {
+            if (v.getId() == R.id.favorite) {
+                mArticle.setFavorited(false);
+                mFavoritesArticleList.remove(mArticle);
+                sExploreController.updateArticle(mArticle);
+                mFavoritesRecyclerAdapter.notifyDataSetChanged();
+                return;
+            }
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mArticle.getUrl()));
             startActivity(browserIntent);
         }

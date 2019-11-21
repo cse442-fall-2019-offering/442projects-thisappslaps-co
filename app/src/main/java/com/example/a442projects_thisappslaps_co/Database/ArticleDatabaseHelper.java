@@ -17,9 +17,11 @@ public class ArticleDatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("create table "
                 + DatabaseSchema.ArticleTable.NAME +  "("
                 + "_id integer primary key autoincrement, "
+                + DatabaseSchema.ArticleTable.Cols.ID + ", "
                 + DatabaseSchema.ArticleTable.Cols.THUMBNAIL + ", "
                 + DatabaseSchema.ArticleTable.Cols.URI + ", "
-                + DatabaseSchema.ArticleTable.Cols.TITLE + ")");
+                + DatabaseSchema.ArticleTable.Cols.TITLE + ", "
+                + DatabaseSchema.ArticleTable.Cols.FAVORITED + ")");
     }
 
     @Override
