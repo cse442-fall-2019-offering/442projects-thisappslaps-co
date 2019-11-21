@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.a442projects_thisappslaps_co.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class ShopFragment extends Fragment implements View.OnClickListener {
+public class ShopFragment extends Fragment {
 
     private ShopController mShopController;
 
@@ -26,7 +26,9 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         View view = inflater.inflate(R.layout.shop_fragment, container, false);
 
-        mShopController = ShopController.getInstance();
+        mShopController = ShopController.getInstance(getActivity());
+
+        startFragment(new ShopHomeFragment(mShopController));
 
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(view1 -> {
@@ -35,20 +37,17 @@ public class ShopFragment extends Fragment implements View.OnClickListener {
         });
 
         BottomNavigationView bottomNavigationView = view.findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnClickListener(this);
+        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
+            if (menuItem.getItemId() == R.id.home){
+                startFragment(new ShopHomeFragment(mShopController));
+            }
+            else if(menuItem.getItemId() == R.id.favorites){
+                startFragment(new ShopCartFragment(mShopController));
+            }
+            return true;
+        });
 
         return view;
-    }
-
-
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.home) {
-            startFragment(new ShopHomeFragment(mShopController));
-        }
-        else if (view.getId() == R.id.favorites) {
-            startFragment(new ShopCartFragment(mShopController));
-        }
     }
 
     private void startFragment(Fragment fragment) {

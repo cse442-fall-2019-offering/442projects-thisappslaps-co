@@ -19,7 +19,8 @@ import com.example.a442projects_thisappslaps_co.R;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ShopHomeFragment extends Fragment implements View.OnClickListener {
+public class ShopHomeFragment extends Fragment
+        implements View.OnClickListener, View.OnLongClickListener {
 
     private ShopController mShopController;
 
@@ -49,17 +50,19 @@ public class ShopHomeFragment extends Fragment implements View.OnClickListener {
         initializeViewVariables(view);
         initializeRecyclerViewsAndSetAdapters();
 
-        mHeaderOneConstraintLayout.setOnClickListener(this);
-        mHeaderTwoConstraintLayout.setOnClickListener(this);
-
         for (ShopItem shopItem : mShopController.getShopList()) {
-            if (shopItem.getTitle().equals("Red Tulips")) {
+            if (shopItem.getTitle().equals("Red Tulip")) {
                 mHeaderOneShopItem = shopItem;
             }
             else if (shopItem.getTitle().equals("Yellow Mums")) {
                 mHeaderTwoShopItem = shopItem;
             }
         }
+
+        mHeaderOneConstraintLayout.setOnClickListener(this);
+        mHeaderTwoConstraintLayout.setOnClickListener(this);
+        mHeaderOneConstraintLayout.setOnLongClickListener(this);
+        mHeaderTwoConstraintLayout.setOnLongClickListener(this);
 
         return view;
     }
@@ -115,6 +118,23 @@ public class ShopHomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @Override
+    public boolean onLongClick(View view) {
+        if (view.getId() == R.id.header_1) {
+            mHeaderOneShopItem.setIsAddedToCart(true);
+            mShopController.updateEntry(mHeaderOneShopItem);
+            Toast.makeText(getContext(), "Added to Wish List", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        else if (view.getId() == R.id.header_2) {
+            mHeaderTwoShopItem.setIsAddedToCart(true);
+            mShopController.updateEntry(mHeaderTwoShopItem);
+            Toast.makeText(getContext(), "Added to Wish List", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
+    }
+
     private class PopularProductsViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener, View.OnLongClickListener {
 
@@ -143,7 +163,8 @@ public class ShopHomeFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public boolean onLongClick(View view) {
-
+            mShopItem.setIsAddedToCart(true);
+            mShopController.updateEntry(mShopItem);
             Toast.makeText(getContext(), "Added to Wish List", Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -203,6 +224,8 @@ public class ShopHomeFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public boolean onLongClick(View view) {
+            mShopItem.setIsAddedToCart(true);
+            mShopController.updateEntry(mShopItem);
             Toast.makeText(getContext(), "Added to Wish List", Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -263,6 +286,8 @@ public class ShopHomeFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public boolean onLongClick(View view) {
+            mShopItem.setIsAddedToCart(true);
+            mShopController.updateEntry(mShopItem);
             Toast.makeText(getContext(), "Added to Wish List", Toast.LENGTH_SHORT).show();
             return true;
         }

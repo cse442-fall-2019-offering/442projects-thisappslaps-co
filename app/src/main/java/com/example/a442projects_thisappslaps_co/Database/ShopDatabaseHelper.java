@@ -21,7 +21,8 @@ public class ShopDatabaseHelper extends SQLiteOpenHelper {
                 + DatabaseSchema.ShopItemTable.Cols.RESOURCE_NAME + ", "
                 + DatabaseSchema.ShopItemTable.Cols.TITLE + ", "
                 + DatabaseSchema.ShopItemTable.Cols.URL + ", "
-                + DatabaseSchema.ShopItemTable.Cols.DESCRIPTION + ")");
+                + DatabaseSchema.ShopItemTable.Cols.DESCRIPTION + ", "
+                + DatabaseSchema.ShopItemTable.Cols.ADDED_TO_CART + ")");
     }
 
     @Override
