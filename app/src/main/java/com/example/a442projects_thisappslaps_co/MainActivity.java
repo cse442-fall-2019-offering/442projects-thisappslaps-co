@@ -94,6 +94,10 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initializeViewVariables();
+        setListeners();
+        
         sSQLiteDatabase = new DatabaseHelper(getApplicationContext()).getWritableDatabase();
 
         mARFragment.getArSceneView().getScene().addOnUpdateListener(frameTime -> {
@@ -108,9 +112,6 @@ public class MainActivity extends AppCompatActivity
     public void onResume() {
         super.onResume();
         requestPermissionForCamera();
-
-        initializeViewVariables();
-        setListeners();
     }
 
     private void initializeViewVariables() {
@@ -326,8 +327,11 @@ public class MainActivity extends AppCompatActivity
 
     private void takePhoto() {
         final String filename = generateFilename();
+        mARFragment.getPlaneDiscoveryController().hide();
+
         ArSceneView view = mARFragment.getArSceneView();
 
+        mARFragment.getPlaneDiscoveryController().show();
         // Create a bitmap the size of the scene view.
         final Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),
                 Bitmap.Config.ARGB_8888);
