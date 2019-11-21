@@ -23,8 +23,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.example.a442projects_thisappslaps_co.ARObjects.ARFragment;
-
 import com.example.a442projects_thisappslaps_co.Database.ProjectDatabaseHelper;
 import com.example.a442projects_thisappslaps_co.Explore.Article;
 import com.example.a442projects_thisappslaps_co.Explore.ExploreController;
