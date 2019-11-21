@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +23,7 @@ public class ARObjectsFragment extends Fragment implements View.OnClickListener 
 
     private RecyclerView mARObjectsRecyclerView;
     private AddObjectListener mAddObjectListener;
-    private ImageButton mBackButton;
+    private Toolbar mToolbar;
 
     public ARObjectsFragment(AddObjectListener addObjectListener) {
         mAddObjectListener = addObjectListener;
@@ -37,15 +38,16 @@ public class ARObjectsFragment extends Fragment implements View.OnClickListener 
         View view = inflater.inflate(R.layout.ar_fragment, container, false);
 
         initializeViewVariable(view);
-        mBackButton.setOnClickListener(this);
         setARObjectsAdapter();
+
+        mToolbar.setNavigationOnClickListener(this);
 
         return view;
     }
 
     private void initializeViewVariable(View view) {
-        mBackButton = view.findViewById(R.id.back_image_btn);
         mARObjectsRecyclerView = view.findViewById(R.id.ar_objects_recycler_view);
+        mToolbar = view.findViewById(R.id.toolbar);
     }
 
     private void setARObjectsAdapter() {
@@ -56,9 +58,7 @@ public class ARObjectsFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.back_image_btn) {
-            popBackStack();
-        }
+        popBackStack();
     }
 
     public void popBackStack(){
