@@ -1,0 +1,231 @@
+{
+  materials: [
+    {
+      name: '04___Default',
+      parameters: [
+        {
+          baseColorFactor: [
+            0.58819999999999995,
+            0.58819999999999995,
+            0.58819999999999995,
+            0.72122699999999995,
+          ],
+        },
+        {
+          baseColor: '04___Default_baseColor',
+        },
+        {
+          diffuseColorFactor: null,
+        },
+        {
+          diffuseColor: null,
+        },
+        {
+          normal: null,
+        },
+        {
+          metallicFactor: 0,
+        },
+        {
+          roughnessFactor: 1,
+        },
+        {
+          specularFactor: null,
+        },
+        {
+          glossinessFactor: null,
+        },
+        {
+          specularGlossiness: null,
+        },
+        {
+          specularGlossinessCalculation: null,
+        },
+        {
+          metallicRoughness: null,
+        },
+        {
+          occlusion: null,
+        },
+        {
+          emissiveFactor: [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        {
+          emissive: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/gltf_material.sfm',
+    },
+    {
+      name: 'branches',
+      parameters: [
+        {
+          baseColorFactor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColor: 'branches_baseColor',
+        },
+        {
+          diffuseColorFactor: null,
+        },
+        {
+          diffuseColor: null,
+        },
+        {
+          normal: null,
+        },
+        {
+          metallicFactor: 0,
+        },
+        {
+          roughnessFactor: 0.75781200000000004,
+        },
+        {
+          specularFactor: null,
+        },
+        {
+          glossinessFactor: null,
+        },
+        {
+          specularGlossiness: null,
+        },
+        {
+          specularGlossinessCalculation: null,
+        },
+        {
+          metallicRoughness: null,
+        },
+        {
+          occlusion: null,
+        },
+        {
+          emissiveFactor: [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        {
+          emissive: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/gltf_material.sfm',
+    },
+    {
+      name: 'tree_trunk',
+      parameters: [
+        {
+          baseColorFactor: [
+            0.58999999999999997,
+            0.58999999999999997,
+            0.58999999999999997,
+            1,
+          ],
+        },
+        {
+          baseColor: 'tree_trunk_baseColor',
+        },
+        {
+          diffuseColorFactor: null,
+        },
+        {
+          diffuseColor: null,
+        },
+        {
+          normal: null,
+        },
+        {
+          metallicFactor: 0,
+        },
+        {
+          roughnessFactor: 0.81000000000000005,
+        },
+        {
+          specularFactor: null,
+        },
+        {
+          glossinessFactor: null,
+        },
+        {
+          specularGlossiness: null,
+        },
+        {
+          specularGlossinessCalculation: null,
+        },
+        {
+          metallicRoughness: null,
+        },
+        {
+          occlusion: null,
+        },
+        {
+          emissiveFactor: [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        {
+          emissive: 'tree_trunk_emissive',
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/gltf_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/tree_pine_roket_kroket/scene.gltf',
+    name: 'scene',
+    recenter: 'root',
+    scale: 0.001,
+  },
+  samplers: [
+    {
+      file: 'sampledata/tree_pine_roket_kroket/textures/tree_trunk_baseColor.jpeg',
+      name: 'tree_trunk_baseColor',
+      pipeline_name: 'textures/tree_trunk_baseColor.jpeg',
+    },
+    {
+      file: 'sampledata/tree_pine_roket_kroket/textures/tree_trunk_emissive.jpeg',
+      name: 'tree_trunk_emissive',
+      pipeline_name: 'textures/tree_trunk_emissive.jpeg',
+    },
+    {
+      file: 'sampledata/tree_pine_roket_kroket/textures/branches_baseColor.png',
+      name: 'branches_baseColor',
+      pipeline_name: 'textures/branches_baseColor.png',
+    },
+    {
+      file: 'sampledata/tree_pine_roket_kroket/textures/04___Default_baseColor.png',
+      name: '04___Default_baseColor',
+      pipeline_name: 'textures/04___Default_baseColor.png',
+    },
+  ],
+  version: '0.54:2',
+}

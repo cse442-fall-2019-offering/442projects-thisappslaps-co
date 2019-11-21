@@ -1,0 +1,226 @@
+{
+  materials: [
+    {
+      name: 'Stem',
+      parameters: [
+        {
+          baseColorFactor: [
+            0.45927099999999998,
+            0.45927099999999998,
+            0.45927099999999998,
+            1,
+          ],
+        },
+        {
+          baseColor: 'Stem_baseColor',
+        },
+        {
+          diffuseColorFactor: null,
+        },
+        {
+          diffuseColor: null,
+        },
+        {
+          normal: null,
+        },
+        {
+          metallicFactor: 0,
+        },
+        {
+          roughnessFactor: 0.59999999999999998,
+        },
+        {
+          specularFactor: null,
+        },
+        {
+          glossinessFactor: null,
+        },
+        {
+          specularGlossiness: null,
+        },
+        {
+          specularGlossinessCalculation: null,
+        },
+        {
+          metallicRoughness: null,
+        },
+        {
+          occlusion: null,
+        },
+        {
+          emissiveFactor: [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        {
+          emissive: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/gltf_material.sfm',
+    },
+    {
+      name: 'Leaf',
+      parameters: [
+        {
+          baseColorFactor: [
+            0.47802099999999997,
+            0.47802099999999997,
+            0.47802099999999997,
+            1,
+          ],
+        },
+        {
+          baseColor: 'Leaf_baseColor',
+        },
+        {
+          diffuseColorFactor: null,
+        },
+        {
+          diffuseColor: null,
+        },
+        {
+          normal: null,
+        },
+        {
+          metallicFactor: 0,
+        },
+        {
+          roughnessFactor: 0.59999999999999998,
+        },
+        {
+          specularFactor: null,
+        },
+        {
+          glossinessFactor: null,
+        },
+        {
+          specularGlossiness: null,
+        },
+        {
+          specularGlossinessCalculation: null,
+        },
+        {
+          metallicRoughness: null,
+        },
+        {
+          occlusion: null,
+        },
+        {
+          emissiveFactor: [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        {
+          emissive: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/gltf_material.sfm',
+    },
+    {
+      name: 'Grass',
+      parameters: [
+        {
+          baseColorFactor: [
+            0.45927099999999998,
+            0.45927099999999998,
+            0.45927099999999998,
+            1,
+          ],
+        },
+        {
+          baseColor: 'Grass_baseColor',
+        },
+        {
+          diffuseColorFactor: null,
+        },
+        {
+          diffuseColor: null,
+        },
+        {
+          normal: null,
+        },
+        {
+          metallicFactor: 0,
+        },
+        {
+          roughnessFactor: 0.59999999999999998,
+        },
+        {
+          specularFactor: null,
+        },
+        {
+          glossinessFactor: null,
+        },
+        {
+          specularGlossiness: null,
+        },
+        {
+          specularGlossinessCalculation: null,
+        },
+        {
+          metallicRoughness: null,
+        },
+        {
+          occlusion: null,
+        },
+        {
+          emissiveFactor: [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        {
+          emissive: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/gltf_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/lilyturf_tojamerlin/scene.gltf',
+    name: 'scene',
+    recenter: 'root',
+    scale: 0.0079740000000000002,
+  },
+  samplers: [
+    {
+      file: 'sampledata/lilyturf_tojamerlin/textures/Stem_baseColor.png',
+      name: 'Stem_baseColor',
+      pipeline_name: 'textures/Stem_baseColor.png',
+    },
+    {
+      file: 'sampledata/lilyturf_tojamerlin/textures/Leaf_baseColor.png',
+      name: 'Leaf_baseColor',
+      pipeline_name: 'textures/Leaf_baseColor.png',
+    },
+    {
+      file: 'sampledata/lilyturf_tojamerlin/textures/Grass_baseColor.png',
+      name: 'Grass_baseColor',
+      pipeline_name: 'textures/Grass_baseColor.png',
+    },
+  ],
+  version: '0.54:2',
+}
