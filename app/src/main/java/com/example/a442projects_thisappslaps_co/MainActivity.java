@@ -66,8 +66,6 @@ public class MainActivity extends AppCompatActivity
 
     private static int MY_CAMERA_PERMISSIONS;
 
-    private ArFragment fragment;
-
     private PointerDrawable pointer = new PointerDrawable();
     private ModelLoader modelLoader;
 
@@ -85,8 +83,6 @@ public class MainActivity extends AppCompatActivity
 
     private static SQLiteDatabase sSQLiteDatabase;
 
-    private static final String TAG = "MainActivity";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try{
@@ -100,10 +96,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         sSQLiteDatabase = new DatabaseHelper(getApplicationContext()).getWritableDatabase();
 
-        fragment = (ArFragment)getSupportFragmentManager().findFragmentById(R.id.sceneform_fragment);
-
-        fragment.getArSceneView().getScene().addOnUpdateListener(frameTime -> {
-            fragment.onUpdate(frameTime);
+        mARFragment.getArSceneView().getScene().addOnUpdateListener(frameTime -> {
+            mARFragment.onUpdate(frameTime);
             onUpdate();
         });
 
@@ -229,7 +223,7 @@ public class MainActivity extends AppCompatActivity
 
     // Using ARCore's camera state and returns true if tracking state has changed since last call
     private boolean updateTracking() {
-        Frame frame = fragment.getArSceneView().getArFrame();
+        Frame frame = mARFragment.getArSceneView().getArFrame();
         boolean wasTracking = isTracking;
         isTracking = frame != null &&
                 frame.getCamera().getTrackingState() == TrackingState.TRACKING;
@@ -238,7 +232,7 @@ public class MainActivity extends AppCompatActivity
 
     // Looks for a hit
     private boolean updateHitTest() {
-        Frame frame = fragment.getArSceneView().getArFrame();
+        Frame frame = mARFragment.getArSceneView().getArFrame();
         android.graphics.Point pt = getScreenCenter();
         List<HitResult> hits;
         boolean wasHitting = isHitting;
@@ -265,7 +259,7 @@ public class MainActivity extends AppCompatActivity
     // Uses the hit test to place where in the 3D world the object should be placed.
     @Override
     public void addObject(Uri model) {
-        Frame frame = fragment.getArSceneView().getArFrame();
+        Frame frame = mARFragment.getArSceneView().getArFrame();
         android.graphics.Point pt = getScreenCenter();
         List<HitResult> hits;
         if (frame != null) {
@@ -289,10 +283,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void addNodeToScene(Anchor anchor, ModelRenderable renderable) {
         AnchorNode anchorNode = new AnchorNode(anchor);
-        TransformableNode node = new TransformableNode(fragment.getTransformationSystem());
+        TransformableNode node = new TransformableNode(mARFragment.getTransformationSystem());
         node.setRenderable(renderable);
         node.setParent(anchorNode);
-        fragment.getArSceneView().getScene().addChild(anchorNode);
+        mARFragment.getArSceneView().getScene().addChild(anchorNode);
         node.select();
     }
 
