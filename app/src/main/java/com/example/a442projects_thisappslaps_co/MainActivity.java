@@ -30,6 +30,7 @@ import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsFragment;
 import com.example.a442projects_thisappslaps_co.ARObjects.AddObjectListener;
 import com.example.a442projects_thisappslaps_co.Gallery.Project;
 import com.example.a442projects_thisappslaps_co.Gallery.ViewPhotoFragment;
+import com.example.a442projects_thisappslaps_co.Shop.ShopController;
 import com.example.a442projects_thisappslaps_co.Shop.ShopFragment;
 import com.example.a442projects_thisappslaps_co.Settings.SettingsFragment;
 import com.example.a442projects_thisappslaps_co.Explore.ExploreFragment;
@@ -39,6 +40,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.a442projects_thisappslaps_co.Gallery.GalleryFragment;
+import com.example.a442projects_thisappslaps_co.Shop.ShopItem;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.Frame;
 import com.google.ar.core.HitResult;
@@ -93,10 +95,16 @@ public class MainActivity extends AppCompatActivity
 
         if (sharedPreferences.getBoolean("first_time", true)) {
             ExploreController exploreController = ExploreController.getInstance(this);
+            ShopController shopController = ShopController.getInstance(this);
 
             for (Article article : exploreController.prepareArticles()) {
                 exploreController.addArticleToDatabase(article);
             }
+
+            for (ShopItem shopItem : shopController.createDummyList()) {
+                shopController.addToDatabase(shopItem);
+            }
+
             sharedPreferences.edit().putBoolean("first_time", false).apply();
         }
 
@@ -367,10 +375,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     private static void addProjectToDatabase(Project project) {
-        sSQLiteDatabase.insert(NAME, null, getContentValues(project));
+        sSQLiteDatabase.insert(NAME, null, getProjectContentValues(project));
     }
 
-    private static ContentValues getContentValues(Project project) {
+    private static ContentValues getProjectContentValues(Project project) {
         ContentValues values = new ContentValues();
         values.put(URI, project.getUri());
         values.put(TIMESTAMP, project.getTimestamp());

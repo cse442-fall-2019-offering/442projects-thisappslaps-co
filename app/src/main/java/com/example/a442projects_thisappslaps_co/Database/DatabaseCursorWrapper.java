@@ -5,8 +5,7 @@ import android.database.CursorWrapper;
 
 import com.example.a442projects_thisappslaps_co.Explore.Article;
 import com.example.a442projects_thisappslaps_co.Gallery.Project;
-
-import java.util.UUID;
+import com.example.a442projects_thisappslaps_co.Shop.ShopItem;
 
 public class DatabaseCursorWrapper extends CursorWrapper {
 
@@ -38,4 +37,14 @@ public class DatabaseCursorWrapper extends CursorWrapper {
         return article;
     }
 
+    public ShopItem getShopItem() {
+        String uuid = getString(getColumnIndex(DatabaseSchema.ShopItemTable.Cols.ID));
+        String resourceName = getString(getColumnIndex(DatabaseSchema.ShopItemTable.Cols.RESOURCE_NAME));
+        String url = getString(getColumnIndex(DatabaseSchema.ShopItemTable.Cols.URL));
+        String title = getString(getColumnIndex(DatabaseSchema.ShopItemTable.Cols.TITLE));
+        String description = getString(getColumnIndex(DatabaseSchema.ShopItemTable.Cols.DESCRIPTION));
+        int addedToCart = getInt(getColumnIndex(DatabaseSchema.ShopItemTable.Cols.ADDED_TO_CART));
+
+        return new ShopItem(uuid,resourceName, url, title, description, addedToCart == 1);
+    }
 }
