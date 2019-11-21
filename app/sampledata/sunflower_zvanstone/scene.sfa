@@ -1,0 +1,109 @@
+{
+  materials: [
+    {
+      name: 'lambert2SG',
+      parameters: [
+        {
+          baseColorFactor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColor: 'lambert2SG_baseColor',
+        },
+        {
+          diffuseColorFactor: null,
+        },
+        {
+          diffuseColor: null,
+        },
+        {
+          normal: 'lambert2SG_normal',
+        },
+        {
+          metallicFactor: 0,
+        },
+        {
+          roughnessFactor: 0.67854400000000004,
+        },
+        {
+          specularFactor: null,
+        },
+        {
+          glossinessFactor: null,
+        },
+        {
+          specularGlossiness: null,
+        },
+        {
+          specularGlossinessCalculation: null,
+        },
+        {
+          metallicRoughness: null,
+        },
+        {
+          occlusion: 'lambert2SG_metallicRoughness',
+        },
+        {
+          emissiveFactor: [
+            0.50495400000000001,
+            0.50495400000000001,
+            0.50495400000000001,
+            1,
+          ],
+        },
+        {
+          emissive: 'lambert2SG_emissive',
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/gltf_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/sunflower_zvanstone/scene.gltf',
+    name: 'scene',
+    recenter: 'root',
+    scale: 0.003,
+  },
+  samplers: [
+    {
+      file: 'sampledata/sunflower_zvanstone/textures/lambert2SG_baseColor.png',
+      name: 'lambert2SG_baseColor',
+      pipeline_name: 'textures/lambert2SG_baseColor.png',
+    },
+    {
+      file: 'sampledata/sunflower_zvanstone/textures/lambert2SG_metallicRoughness.png',
+      name: 'lambert2SG_metallicRoughness',
+      params: {
+        usage_type: 'Data',
+      },
+      pipeline_name: 'textures/lambert2SG_metallicRoughness.png',
+    },
+    {
+      file: 'sampledata/sunflower_zvanstone/textures/lambert2SG_normal.png',
+      name: 'lambert2SG_normal',
+      params: {
+        usage_type: 'Normal',
+      },
+      pipeline_name: 'textures/lambert2SG_normal.png',
+    },
+    {
+      file: 'sampledata/sunflower_zvanstone/textures/lambert2SG_emissive.png',
+      name: 'lambert2SG_emissive',
+      pipeline_name: 'textures/lambert2SG_emissive.png',
+    },
+  ],
+  version: '0.54:2',
+}

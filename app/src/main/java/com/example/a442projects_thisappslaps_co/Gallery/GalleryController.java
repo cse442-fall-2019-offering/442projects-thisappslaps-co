@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.a442projects_thisappslaps_co.Database.DatabaseCursorWrapper;
-import com.example.a442projects_thisappslaps_co.Database.DatabaseHelper;
+import com.example.a442projects_thisappslaps_co.Database.ProjectDatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +17,7 @@ class GalleryController {
     private SQLiteDatabase mSQLiteDatabase;
 
     GalleryController(Context context) {
-        mSQLiteDatabase = new DatabaseHelper(context.getApplicationContext()).getWritableDatabase();
+        mSQLiteDatabase = new ProjectDatabaseHelper(context.getApplicationContext()).getWritableDatabase();
     }
 
     ArrayList<Project> getProjectList() {
