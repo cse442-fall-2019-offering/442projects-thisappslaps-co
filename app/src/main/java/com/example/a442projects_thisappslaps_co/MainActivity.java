@@ -49,7 +49,6 @@ import com.google.ar.sceneform.ux.TransformableNode;
 
 import java.util.List;
 import com.google.ar.sceneform.ArSceneView;
-import com.google.ar.sceneform.ux.ArFragment;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -62,7 +61,8 @@ import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.G
 import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.GalleryTable.Cols.URI;
 import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.GalleryTable.NAME;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, ModelLoaderInterface, AddObjectListener {
+public class MainActivity extends AppCompatActivity
+        implements View.OnClickListener, ModelLoaderInterface, AddObjectListener {
 
     private static int MY_CAMERA_PERMISSIONS;
 
@@ -85,10 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static SQLiteDatabase sSQLiteDatabase;
 
-
     private static final String TAG = "MainActivity";
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,82 +96,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Thread.currentThread().interrupt();
         }
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sSQLiteDatabase = new DatabaseHelper(getApplicationContext()).getWritableDatabase();
 
-//        Initialize arObjectsFragment
         fragment = (ArFragment)getSupportFragmentManager().findFragmentById(R.id.sceneform_fragment);
 
-//        Listener to  make ARCore calls and update status of pointer
         fragment.getArSceneView().getScene().addOnUpdateListener(frameTime -> {
             fragment.onUpdate(frameTime);
             onUpdate();
         });
 
         modelLoader = new ModelLoader(this, this);
-    }
-
-
-    private void onUpdate() {
-//        enable pointer if the phone is pointing towards a plane
-
-        boolean trackingChanged = updateTracking();
-        View contentView = findViewById(android.R.id.content);
-        if(trackingChanged) {
-            if (isTracking) {
-                contentView.getOverlay().add(pointer);
-            }
-            else {
-                contentView.getOverlay().remove(pointer);
-            }
-            contentView.invalidate();
-        }
-        if (isTracking) {
-            boolean hitTestChanged = updateHitTest();
-            if (hitTestChanged) {
-                pointer.setEnabled(isHitting);
-                contentView.invalidate();
-            }
-        }
-    }
-
-    private boolean updateTracking() {
-//        Using ARCore's camera state and returns true if tracking state has changed since last call
-
-        Frame frame = fragment.getArSceneView().getArFrame();
-        boolean wasTracking = isTracking;
-        isTracking = frame != null &&
-                frame.getCamera().getTrackingState() == TrackingState.TRACKING;
-        return isTracking != wasTracking;
-    }
-
-    private boolean updateHitTest() {
-//        Looks for a hit
-
-        Frame frame = fragment.getArSceneView().getArFrame();
-        android.graphics.Point pt = getScreenCenter();
-        List<HitResult> hits;
-        boolean wasHitting = isHitting;
-        isHitting = false;
-        if (frame != null) {
-            hits = frame.hitTest(pt.x, pt.y);
-            for (HitResult hit : hits) {
-                Trackable trackable = hit.getTrackable();
-                if (trackable instanceof Plane &&
-                        ((Plane) trackable).isPoseInPolygon(hit.getHitPose())) {
-                    isHitting = true;
-                    break;
-                }
-            }
-        }
-        return wasHitting != isHitting;
-    }
-
-    private android.graphics.Point getScreenCenter() {
-        View vw = findViewById(android.R.id.content);
-        return new android.graphics.Point(vw.getWidth()/2, vw.getHeight()/2);
     }
 
     @Override
@@ -272,10 +205,66 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentTransaction.commit();
     }
 
+    private void onUpdate() {
+//        enable pointer if the phone is pointing towards a plane
+        boolean trackingChanged = updateTracking();
+        View contentView = findViewById(android.R.id.content);
+        if(trackingChanged) {
+            if (isTracking) {
+                contentView.getOverlay().add(pointer);
+            }
+            else {
+                contentView.getOverlay().remove(pointer);
+            }
+            contentView.invalidate();
+        }
+        if (isTracking) {
+            boolean hitTestChanged = updateHitTest();
+            if (hitTestChanged) {
+                pointer.setEnabled(isHitting);
+                contentView.invalidate();
+            }
+        }
+    }
+
+    // Using ARCore's camera state and returns true if tracking state has changed since last call
+    private boolean updateTracking() {
+        Frame frame = fragment.getArSceneView().getArFrame();
+        boolean wasTracking = isTracking;
+        isTracking = frame != null &&
+                frame.getCamera().getTrackingState() == TrackingState.TRACKING;
+        return isTracking != wasTracking;
+    }
+
+    // Looks for a hit
+    private boolean updateHitTest() {
+        Frame frame = fragment.getArSceneView().getArFrame();
+        android.graphics.Point pt = getScreenCenter();
+        List<HitResult> hits;
+        boolean wasHitting = isHitting;
+        isHitting = false;
+        if (frame != null) {
+            hits = frame.hitTest(pt.x, pt.y);
+            for (HitResult hit : hits) {
+                Trackable trackable = hit.getTrackable();
+                if (trackable instanceof Plane &&
+                        ((Plane) trackable).isPoseInPolygon(hit.getHitPose())) {
+                    isHitting = true;
+                    break;
+                }
+            }
+        }
+        return wasHitting != isHitting;
+    }
+
+    private android.graphics.Point getScreenCenter() {
+        View vw = findViewById(android.R.id.content);
+        return new android.graphics.Point(vw.getWidth()/2, vw.getHeight()/2);
+    }
+
+    // Uses the hit test to place where in the 3D world the object should be placed.
     @Override
     public void addObject(Uri model) {
-//      Uses the hit test to place where in the 3D world the object should be placed.
-
         Frame frame = fragment.getArSceneView().getArFrame();
         android.graphics.Point pt = getScreenCenter();
         List<HitResult> hits;
@@ -292,14 +281,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /*
+      Builds AnchorNode and TransformableNode and attaches them to the ArSceneView's scene object.
+      Anchor nodes are positioned based on the pose of an ARCore Anchor. Basically the object stays in place.
+      Transform Node allows the user to interact with the object.
+    */
     @Override
     public void addNodeToScene(Anchor anchor, ModelRenderable renderable) {
-//        Builds AnchorNode and TransformableNode and attaches them to the ArSceneView's scene object.
-//
-
-
-//      Anchor nodes are positioned based on the pose of an ARCore Anchor. Basically the object stays in place.
-//      Transform Node allows the user to interact with the object.
         AnchorNode anchorNode = new AnchorNode(anchor);
         TransformableNode node = new TransformableNode(fragment.getTransformationSystem());
         node.setRenderable(renderable);
@@ -310,7 +298,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onException(Throwable throwable){
-//      Helps with debugging
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(throwable.getMessage())
                 .setTitle("GARDEN error!");

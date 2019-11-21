@@ -7,10 +7,8 @@ import android.util.Log;
 import com.google.ar.core.Anchor;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 
-import java.lang.ref.WeakReference;
 
 public class ModelLoader {
-//    This class starts the asynchronous loading of the 3D model using the builder.
 
     private final ModelLoaderInterface owner;
     private Context mContext;
