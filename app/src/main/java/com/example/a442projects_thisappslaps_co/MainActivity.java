@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -17,11 +18,12 @@ import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.example.a442projects_thisappslaps_co.ARObjects.ARFragment;
-
+import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsFragment;
+import com.example.a442projects_thisappslaps_co.ARObjects.AddObjectListener;
 import com.example.a442projects_thisappslaps_co.Database.DatabaseHelper;
 import com.example.a442projects_thisappslaps_co.Gallery.Project;
 import com.example.a442projects_thisappslaps_co.Gallery.ViewPhotoFragment;
@@ -34,8 +36,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.a442projects_thisappslaps_co.Gallery.GalleryFragment;
-import com.google.ar.sceneform.ArSceneView;
+import com.google.ar.core.Anchor;
+import com.google.ar.core.Frame;
+import com.google.ar.core.HitResult;
+import com.google.ar.core.Plane;
+import com.google.ar.core.Trackable;
+import com.google.ar.core.TrackingState;
+import com.google.ar.sceneform.AnchorNode;
+import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
+import com.google.ar.sceneform.ux.TransformableNode;
+
+import java.util.List;
+import com.google.ar.sceneform.ArSceneView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -48,9 +61,16 @@ import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.G
 import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.GalleryTable.Cols.URI;
 import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.GalleryTable.NAME;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity
+        implements View.OnClickListener, ModelLoaderInterface, AddObjectListener {
 
     private static int MY_CAMERA_PERMISSIONS;
+
+    private PointerDrawable pointer = new PointerDrawable();
+    private ModelLoader modelLoader;
+
+    private boolean isTracking;
+    private boolean isHitting;
 
     private ImageButton mARObjectsImageButton;
     private ImageButton mGalleryImageButton;
@@ -72,19 +92,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Thread.currentThread().interrupt();
         }
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initializeViewVariables();
+        setListeners();
+
         sSQLiteDatabase = new DatabaseHelper(getApplicationContext()).getWritableDatabase();
+
+        mARFragment.getArSceneView().getScene().addOnUpdateListener(frameTime -> {
+            mARFragment.onUpdate(frameTime);
+            onUpdate();
+        });
+
+        mARFragment.getArSceneView().getPlaneRenderer().setVisible(false);
+
+        modelLoader = new ModelLoader(this, this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         requestPermissionForCamera();
-
-        initializeViewVariables();
-        setListeners();
     }
 
     private void initializeViewVariables() {
@@ -135,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ar_objects_image_btn:
-                startFragment(new ARFragment(), true);
+                startFragment(new ARObjectsFragment(this), true);
                 break;
             case R.id.gallery_image_btn:
                 startFragment(new GalleryFragment(), true);
@@ -173,6 +202,105 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentTransaction.commit();
     }
 
+    private void onUpdate() {
+//        enable pointer if the phone is pointing towards a plane
+        boolean trackingChanged = updateTracking();
+        View contentView = findViewById(android.R.id.content);
+        if(trackingChanged) {
+            if (isTracking) {
+                contentView.getOverlay().add(pointer);
+            }
+            else {
+                contentView.getOverlay().remove(pointer);
+            }
+            contentView.invalidate();
+        }
+        if (isTracking) {
+            boolean hitTestChanged = updateHitTest();
+            if (hitTestChanged) {
+                pointer.setEnabled(isHitting);
+                contentView.invalidate();
+            }
+        }
+    }
+
+    // Using ARCore's camera state and returns true if tracking state has changed since last call
+    private boolean updateTracking() {
+        Frame frame = mARFragment.getArSceneView().getArFrame();
+        boolean wasTracking = isTracking;
+        isTracking = frame != null &&
+                frame.getCamera().getTrackingState() == TrackingState.TRACKING;
+        return isTracking != wasTracking;
+    }
+
+    // Looks for a hit
+    private boolean updateHitTest() {
+        Frame frame = mARFragment.getArSceneView().getArFrame();
+        android.graphics.Point pt = getScreenCenter();
+        List<HitResult> hits;
+        boolean wasHitting = isHitting;
+        isHitting = false;
+        if (frame != null) {
+            hits = frame.hitTest(pt.x, pt.y);
+            for (HitResult hit : hits) {
+                Trackable trackable = hit.getTrackable();
+                if (trackable instanceof Plane &&
+                        ((Plane) trackable).isPoseInPolygon(hit.getHitPose())) {
+                    isHitting = true;
+                    break;
+                }
+            }
+        }
+        return wasHitting != isHitting;
+    }
+
+    private android.graphics.Point getScreenCenter() {
+        View vw = findViewById(android.R.id.content);
+        return new android.graphics.Point(vw.getWidth()/2, vw.getHeight()/2);
+    }
+
+    // Uses the hit test to place where in the 3D world the object should be placed.
+    @Override
+    public void addObject(Uri model) {
+        Frame frame = mARFragment.getArSceneView().getArFrame();
+        android.graphics.Point pt = getScreenCenter();
+        List<HitResult> hits;
+        if (frame != null) {
+            hits = frame.hitTest(pt.x, pt.y);
+            for (HitResult hit : hits) {
+                Trackable trackable = hit.getTrackable();
+                if (trackable instanceof Plane &&
+                        ((Plane) trackable).isPoseInPolygon(hit.getHitPose())) {
+                    modelLoader.loadModel(hit.createAnchor(), model);
+                    break;
+                }
+            }
+        }
+    }
+
+    /*
+      Builds AnchorNode and TransformableNode and attaches them to the ArSceneView's scene object.
+      Anchor nodes are positioned based on the pose of an ARCore Anchor. Basically the object stays in place.
+      Transform Node allows the user to interact with the object.
+    */
+    @Override
+    public void addNodeToScene(Anchor anchor, ModelRenderable renderable) {
+        AnchorNode anchorNode = new AnchorNode(anchor);
+        TransformableNode node = new TransformableNode(mARFragment.getTransformationSystem());
+        node.setRenderable(renderable);
+        node.setParent(anchorNode);
+        mARFragment.getArSceneView().getScene().addChild(anchorNode);
+        node.select();
+    }
+
+    @Override
+    public void onException(Throwable throwable){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(throwable.getMessage())
+                .setTitle("GARDEN error!");
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
     private String generateFilename() {
         String date =
@@ -187,6 +315,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!out.getParentFile().exists()) {
             out.getParentFile().mkdirs();
         }
+        System.out.println(project.getUri());
         try (FileOutputStream outputStream = new FileOutputStream(project.getUri());
              ByteArrayOutputStream outputData = new ByteArrayOutputStream()) {
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputData);
