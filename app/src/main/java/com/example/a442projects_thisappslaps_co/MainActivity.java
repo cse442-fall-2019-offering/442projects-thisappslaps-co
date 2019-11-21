@@ -97,13 +97,15 @@ public class MainActivity extends AppCompatActivity
 
         initializeViewVariables();
         setListeners();
-        
+
         sSQLiteDatabase = new DatabaseHelper(getApplicationContext()).getWritableDatabase();
 
         mARFragment.getArSceneView().getScene().addOnUpdateListener(frameTime -> {
             mARFragment.onUpdate(frameTime);
             onUpdate();
         });
+
+        mARFragment.getArSceneView().getPlaneRenderer().setVisible(false);
 
         modelLoader = new ModelLoader(this, this);
     }
@@ -327,11 +329,8 @@ public class MainActivity extends AppCompatActivity
 
     private void takePhoto() {
         final String filename = generateFilename();
-        mARFragment.getPlaneDiscoveryController().hide();
-
         ArSceneView view = mARFragment.getArSceneView();
 
-        mARFragment.getPlaneDiscoveryController().show();
         // Create a bitmap the size of the scene view.
         final Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),
                 Bitmap.Config.ARGB_8888);
