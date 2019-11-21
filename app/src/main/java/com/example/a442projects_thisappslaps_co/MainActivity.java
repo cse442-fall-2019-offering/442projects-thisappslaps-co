@@ -3,6 +3,7 @@ package com.example.a442projects_thisappslaps_co;
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,9 +23,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.a442projects_thisappslaps_co.ARObjects.ARFragment;
+
+import com.example.a442projects_thisappslaps_co.Database.ProjectDatabaseHelper;
+import com.example.a442projects_thisappslaps_co.Explore.Article;
+import com.example.a442projects_thisappslaps_co.Explore.ExploreController;
 import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsFragment;
 import com.example.a442projects_thisappslaps_co.ARObjects.AddObjectListener;
-import com.example.a442projects_thisappslaps_co.Database.DatabaseHelper;
 import com.example.a442projects_thisappslaps_co.Gallery.Project;
 import com.example.a442projects_thisappslaps_co.Gallery.ViewPhotoFragment;
 import com.example.a442projects_thisappslaps_co.Shop.ShopFragment;
@@ -64,6 +69,7 @@ import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.G
 public class MainActivity extends AppCompatActivity
         implements View.OnClickListener, ModelLoaderInterface, AddObjectListener {
 
+    private static final String PREFS_NAME = "SharedPrefs";
     private static int MY_CAMERA_PERMISSIONS;
 
     private PointerDrawable pointer = new PointerDrawable();
@@ -85,6 +91,17 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
+
+        if (sharedPreferences.getBoolean("first_time", true)) {
+            ExploreController exploreController = ExploreController.getInstance(this);
+
+            for (Article article : exploreController.prepareArticles()) {
+                exploreController.addArticleToDatabase(article);
+            }
+            sharedPreferences.edit().putBoolean("first_time", false).apply();
+        }
+
         try{
             Thread.sleep(4000);
         }
@@ -94,11 +111,10 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sSQLiteDatabase = new ProjectDatabaseHelper(getApplicationContext()).getWritableDatabase();
 
         initializeViewVariables();
         setListeners();
-
-        sSQLiteDatabase = new DatabaseHelper(getApplicationContext()).getWritableDatabase();
 
         mARFragment.getArSceneView().getScene().addOnUpdateListener(frameTime -> {
             mARFragment.onUpdate(frameTime);
