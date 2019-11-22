@@ -3,6 +3,7 @@ package com.example.a442projects_thisappslaps_co;
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,11 +23,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.example.a442projects_thisappslaps_co.Database.ProjectDatabaseHelper;
+import com.example.a442projects_thisappslaps_co.Explore.Article;
+import com.example.a442projects_thisappslaps_co.Explore.ExploreController;
 import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsFragment;
 import com.example.a442projects_thisappslaps_co.ARObjects.AddObjectListener;
-import com.example.a442projects_thisappslaps_co.Database.DatabaseHelper;
 import com.example.a442projects_thisappslaps_co.Gallery.Project;
 import com.example.a442projects_thisappslaps_co.Gallery.ViewPhotoFragment;
+import com.example.a442projects_thisappslaps_co.Shop.ShopController;
 import com.example.a442projects_thisappslaps_co.Shop.ShopFragment;
 import com.example.a442projects_thisappslaps_co.Settings.SettingsFragment;
 import com.example.a442projects_thisappslaps_co.Explore.ExploreFragment;
@@ -36,6 +40,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.a442projects_thisappslaps_co.Gallery.GalleryFragment;
+import com.example.a442projects_thisappslaps_co.Shop.ShopItem;
 import com.google.ar.core.Anchor;
 import com.google.ar.core.Frame;
 import com.google.ar.core.HitResult;
@@ -64,6 +69,7 @@ import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.G
 public class MainActivity extends AppCompatActivity
         implements View.OnClickListener, ModelLoaderInterface, AddObjectListener {
 
+    private static final String PREFS_NAME = "SharedPrefs";
     private static int MY_CAMERA_PERMISSIONS;
 
     private PointerDrawable pointer = new PointerDrawable();
@@ -85,6 +91,23 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sharedPreferences = getSharedPreferences(PREFS_NAME, 0);
+
+        if (sharedPreferences.getBoolean("first_time", true)) {
+            ExploreController exploreController = ExploreController.getInstance(this);
+            ShopController shopController = ShopController.getInstance(this);
+
+            for (Article article : exploreController.prepareArticles()) {
+                exploreController.addArticleToDatabase(article);
+            }
+
+            for (ShopItem shopItem : shopController.createDummyList()) {
+                shopController.addToDatabase(shopItem);
+            }
+
+            sharedPreferences.edit().putBoolean("first_time", false).apply();
+        }
+
         try{
             Thread.sleep(4000);
         }
@@ -95,10 +118,10 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sSQLiteDatabase = new ProjectDatabaseHelper(getApplicationContext()).getWritableDatabase();
+
         initializeViewVariables();
         setListeners();
-
-        sSQLiteDatabase = new DatabaseHelper(getApplicationContext()).getWritableDatabase();
 
         mARFragment.getArSceneView().getScene().addOnUpdateListener(frameTime -> {
             mARFragment.onUpdate(frameTime);
@@ -342,7 +365,7 @@ public class MainActivity extends AppCompatActivity
         PixelCopy.request(view, bitmap, (copyResult) -> {
             if (copyResult == PixelCopy.SUCCESS) {
                 startFragment(new ViewPhotoFragment(
-                        new Project(filename, new Date().getTime()), bitmap, false), true);
+                        new Project(filename, new Date().getTime()), bitmap, null, false), true);
             } else {
                 Toast toast = Toast.makeText(MainActivity.this,
                         "Failed to copyPixels: " + copyResult, Toast.LENGTH_LONG);
@@ -353,10 +376,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     private static void addProjectToDatabase(Project project) {
-        sSQLiteDatabase.insert(NAME, null, getContentValues(project));
+        sSQLiteDatabase.insert(NAME, null, getProjectContentValues(project));
     }
 
-    private static ContentValues getContentValues(Project project) {
+    private static ContentValues getProjectContentValues(Project project) {
         ContentValues values = new ContentValues();
         values.put(URI, project.getUri());
         values.put(TIMESTAMP, project.getTimestamp());

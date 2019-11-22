@@ -1,41 +1,62 @@
 package com.example.a442projects_thisappslaps_co.Explore;
 
+import java.util.UUID;
+
 public class Article {
-    private String name;
-    private int thumbnail;
-    private String url;
 
-    public Article() {
+    private String mUUID;
+    private String mName;
+    private String mUrl;
+    private int mThumbnail;
+    private boolean mIsFavorited;
 
+    public Article() { }
+
+    public Article(String uuid, String name, String url, int thumbnail, boolean isFavorited) {
+        mUUID = uuid;
+        mName = name;
+        mThumbnail = thumbnail;
+        mUrl = url;
+        mIsFavorited = isFavorited;
     }
 
-    public Article(String name, String url, int thumbnail) {
-        this.name = name;
-        this.thumbnail = thumbnail;
-        this.url = url;
+    public String getUUID() {
+        return mUUID;
+    }
+
+    public void setUUID(String uuid) {
+        mUUID = uuid;
     }
 
     public String getName(){
-        return name;
+        return mName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.mName = name;
     }
 
     public int getThumbnail() {
-        return thumbnail;
+        return mThumbnail;
     }
 
     public void setThumbnail(int thumbnail) {
-        this.thumbnail = thumbnail;
+        this.mThumbnail = thumbnail;
     }
 
     public String getUrl() {
-        return url;
+        return mUrl;
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        this.mUrl = url;
+    }
+
+    public boolean isFavorited() {
+        return mIsFavorited;
+    }
+
+    public void setFavorited(boolean favorited) {
+        mIsFavorited = favorited;
     }
 }

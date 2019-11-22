@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
@@ -41,8 +41,8 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
         mGalleryRecyclerView = view.findViewById(R.id.gallery_recycler_view);
         mGalleryRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), getSpanCount()));
 
-        ImageButton backImageButton = view.findViewById(R.id.back_button);
-        backImageButton.setOnClickListener(this);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(this);
 
         return view;
     }
@@ -76,10 +76,8 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.back_button) {
-            assert getFragmentManager() != null;
-            getFragmentManager().popBackStackImmediate();
-        }
+        assert getFragmentManager() != null;
+        getFragmentManager().popBackStackImmediate();
     }
 
     private class GalleryViewHolder extends RecyclerView.ViewHolder {
@@ -95,7 +93,7 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
             itemView.setBackground(roundedBitmapDrawable);
             itemView.setOnClickListener(view -> {
                 if (getFragmentManager() != null) {
-                    startFragment(new ViewPhotoFragment(project, null, true), getFragmentManager(), true);
+                    startFragment(new ViewPhotoFragment(project, null, mGalleryController, true), getFragmentManager(), true);
                 }
             });
         }
