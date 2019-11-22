@@ -22,14 +22,17 @@ public class ViewPhotoFragment extends Fragment {
 
     private Project mCurrentProject;
     private Bitmap mBitmap;
+    private GalleryController mGalleryController;
     private boolean mIsViewedFromGallery;
 
     public ViewPhotoFragment(
             Project project,
             Bitmap bitmap,
+            GalleryController galleryController,
             boolean isViewedFromGallery) {
         mCurrentProject = project;
         mBitmap = bitmap;
+        mGalleryController = galleryController;
         mIsViewedFromGallery = isViewedFromGallery;
     }
 
@@ -54,6 +57,16 @@ public class ViewPhotoFragment extends Fragment {
             acceptFloatingActionButton.setVisibility(View.VISIBLE);
             acceptFloatingActionButton.setOnClickListener(view12 -> {
                 acceptPhoto();
+                if (getFragmentManager() != null) {
+                    getFragmentManager().popBackStackImmediate();
+                }
+            });
+        }
+        else {
+            ImageButton deleteImageButton = view.findViewById(R.id.delete_image_btn);
+            deleteImageButton.setVisibility(View.VISIBLE);
+            deleteImageButton.setOnClickListener(view13 -> {
+                mGalleryController.deleteProject(mCurrentProject);
                 if (getFragmentManager() != null) {
                     getFragmentManager().popBackStackImmediate();
                 }
