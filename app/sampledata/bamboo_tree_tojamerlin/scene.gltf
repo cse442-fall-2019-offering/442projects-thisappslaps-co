@@ -1,0 +1,704 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 26337,
+      "max": [
+        129.92608642578125,
+        425.29034423828125,
+        115.95229339599609
+      ],
+      "min": [
+        -122.79891204833984,
+        -0.14236477017402649,
+        -118.95939636230469
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 316044,
+      "componentType": 5126,
+      "count": 26337,
+      "max": [
+        0.99573063850402832,
+        0.99988359212875366,
+        0.99873417615890503
+      ],
+      "min": [
+        -0.99995285272598267,
+        -0.99984508752822876,
+        -0.99941706657409668
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 26337,
+      "max": [
+        0.9999319314956665,
+        0.99990159273147583,
+        0.99994379281997681,
+        -1
+      ],
+      "min": [
+        -0.99991405010223389,
+        -0.99990338087081909,
+        -0.99994385242462158,
+        -1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 26337,
+      "max": [
+        1,
+        1
+      ],
+      "min": [
+        0,
+        -1
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 210696,
+      "componentType": 5126,
+      "count": 26337,
+      "max": [
+        1,
+        1
+      ],
+      "min": [
+        0,
+        -1
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 421392,
+      "componentType": 5126,
+      "count": 26337,
+      "max": [
+        1,
+        1
+      ],
+      "min": [
+        0,
+        -1
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 127272,
+      "max": [
+        26336
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 632088,
+      "componentType": 5126,
+      "count": 19301,
+      "max": [
+        49.202480316162109,
+        53.395076751708984,
+        49.178825378417969
+      ],
+      "min": [
+        -47.641986846923828,
+        -0.035732083022594452,
+        -50.894378662109375
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 863700,
+      "componentType": 5126,
+      "count": 19301,
+      "max": [
+        0.99996185302734375,
+        0.69687920808792114,
+        0.99999076128005981
+      ],
+      "min": [
+        -0.99999541044235229,
+        -0.43048298358917236,
+        -0.99999350309371948
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 421392,
+      "componentType": 5126,
+      "count": 19301,
+      "max": [
+        0.99996912479400635,
+        0.59225344657897949,
+        0.99999332427978516,
+        -1
+      ],
+      "min": [
+        -0.99993646144866943,
+        -0.49727025628089905,
+        -0.9999808669090271,
+        -1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 632088,
+      "componentType": 5126,
+      "count": 19301,
+      "max": [
+        -0,
+        2
+      ],
+      "min": [
+        -1,
+        1
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 509088,
+      "componentType": 5125,
+      "count": 56367,
+      "max": [
+        19300
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1095312,
+      "componentType": 5126,
+      "count": 65533,
+      "max": [
+        154.65531921386719,
+        430.5274658203125,
+        147.3607177734375
+      ],
+      "min": [
+        -157.82339477539062,
+        183.31745910644531,
+        -143.52334594726562
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1881708,
+      "componentType": 5126,
+      "count": 65533,
+      "max": [
+        0.99999701976776123,
+        0.99999791383743286,
+        0.99995261430740356
+      ],
+      "min": [
+        -0.99999725818634033,
+        -0.99999809265136719,
+        -0.99986851215362549
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 730208,
+      "componentType": 5126,
+      "count": 65533,
+      "max": [
+        0.99985319375991821,
+        0.80310475826263428,
+        0.9996984601020813,
+        1
+      ],
+      "min": [
+        -0.99974668025970459,
+        -0.80571383237838745,
+        -0.99917149543762207,
+        -1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 786496,
+      "componentType": 5126,
+      "count": 65533,
+      "max": [
+        1,
+        1
+      ],
+      "min": [
+        0,
+        0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1310760,
+      "componentType": 5126,
+      "count": 65533,
+      "max": [
+        1,
+        1
+      ],
+      "min": [
+        0,
+        0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 734556,
+      "componentType": 5125,
+      "count": 223869,
+      "max": [
+        65532
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 2668104,
+      "componentType": 5126,
+      "count": 53643,
+      "max": [
+        154.65531921386719,
+        430.5274658203125,
+        147.3607177734375
+      ],
+      "min": [
+        -157.82339477539062,
+        183.31745910644531,
+        -143.52334594726562
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 3311820,
+      "componentType": 5126,
+      "count": 53643,
+      "max": [
+        0.9999358057975769,
+        0.98761516809463501,
+        0.99999243021011353
+      ],
+      "min": [
+        -0.99998539686203003,
+        -0.9982566237449646,
+        -0.99996417760848999
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 1778736,
+      "componentType": 5126,
+      "count": 53643,
+      "max": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "min": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 1835024,
+      "componentType": 5126,
+      "count": 53643,
+      "max": [
+        1,
+        1
+      ],
+      "min": [
+        0,
+        0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 2264168,
+      "componentType": 5126,
+      "count": 53643,
+      "max": [
+        1,
+        1
+      ],
+      "min": [
+        0,
+        0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 1630032,
+      "componentType": 5125,
+      "count": 127251,
+      "max": [
+        53642
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "tojamerlin (https://sketchfab.com/tojamerlin)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/models/d0161434cf6844a8bc6eaeb0c0692ed0",
+      "title": "bamboo tree"
+    },
+    "generator": "Sketchfab-3.33.1",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 2139036,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 2693312,
+      "byteOffset": 2139036,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 3955536,
+      "byteOffset": 4832348,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 2637024,
+      "byteOffset": 8787884,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 11424908,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/Mf_Grass_baseColor.png"
+    },
+    {
+      "uri": "textures/Leaf_baseColor.png"
+    },
+    {
+      "uri": "textures/Trunk_normal.png"
+    },
+    {
+      "uri": "textures/Trunk_baseColor.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Trunk",
+      "normalTexture": {
+        "index": 2,
+        "scale": 1,
+        "texCoord": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseColorTexture": {
+          "index": 3,
+          "texCoord": 0
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.95243171540000005
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Mf_Grass",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseColorTexture": {
+          "index": 0,
+          "texCoord": 0
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.59999999999999998
+      }
+    },
+    {
+      "doubleSided": true,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "Leaf",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseColorTexture": {
+          "index": 1,
+          "texCoord": 0
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 0.95243171540000005
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "bamboo_tree_Trunk_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3,
+            "TEXCOORD_1": 4,
+            "TEXCOORD_2": 5
+          },
+          "indices": 6,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "bamboo_tree_Mf_Grass_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 8,
+            "POSITION": 7,
+            "TANGENT": 9,
+            "TEXCOORD_0": 10
+          },
+          "indices": 11,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "bamboo_tree_Leaf_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 13,
+            "POSITION": 12,
+            "TANGENT": 14,
+            "TEXCOORD_0": 15,
+            "TEXCOORD_1": 16
+          },
+          "indices": 17,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "bamboo_tree_Leaf_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 19,
+            "POSITION": 18,
+            "TANGENT": 20,
+            "TEXCOORD_0": 21,
+            "TEXCOORD_1": 22
+          },
+          "indices": 23,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "Bamboo Tree.fbx"
+    },
+    {
+      "children": [
+        4
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "name": "bamboo_tree"
+    },
+    {
+      "mesh": 0,
+      "name": "bamboo_tree_Trunk_0"
+    },
+    {
+      "mesh": 1,
+      "name": "bamboo_tree_Mf_Grass_0"
+    },
+    {
+      "mesh": 2,
+      "name": "bamboo_tree_Leaf_0"
+    },
+    {
+      "mesh": 3,
+      "name": "bamboo_tree_Leaf_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    },
+    {
+      "sampler": 0,
+      "source": 3
+    }
+  ]
+}
+

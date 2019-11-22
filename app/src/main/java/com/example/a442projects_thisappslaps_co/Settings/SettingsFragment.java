@@ -63,6 +63,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         username_edit_text = view.findViewById(R.id.user_name_edit_text);
 
         password_edit_text = view.findViewById(R.id.password_edit_text);
+        password_saveButton = view.findViewById(R.id.password_save_button);
 
         username_saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
