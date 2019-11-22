@@ -6,33 +6,20 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <ImageButton
-        android:id="@+id/back_image_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/ic_back_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/recycler_view_top_guideline"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ar_objects"
-        android:textSize="30sp"
-        android:textColor="@color/colorWhite"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/recycler_view_top_guideline"/>
-
-    <View
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/colorBlack"
-        app:layout_constraintTop_toTopOf="@id/recycler_view_top_guideline"/>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorWhite">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_back_icon_black"
+            app:title="@string/ar_objects"
+            app:titleTextColor="@color/colorBlack" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ar_objects_recycler_view"
