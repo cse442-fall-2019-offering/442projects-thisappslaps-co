@@ -364,7 +364,7 @@ public class MainActivity extends AppCompatActivity
         PixelCopy.request(view, bitmap, (copyResult) -> {
             if (copyResult == PixelCopy.SUCCESS) {
                 startFragment(new ViewPhotoFragment(
-                        new Project(filename, new Date().getTime()), bitmap, false), true);
+                        new Project(filename, new Date().getTime()), bitmap, null, false), true);
             } else {
                 Toast toast = Toast.makeText(MainActivity.this,
                         "Failed to copyPixels: " + copyResult, Toast.LENGTH_LONG);
