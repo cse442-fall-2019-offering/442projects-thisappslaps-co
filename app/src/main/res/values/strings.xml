@@ -27,4 +27,9 @@
     <string name="edit_username">Edit Username</string>
     <string name="save">Save</string>
     <string name="wish_list">Wish List</string>
+
+    <string name="enable_plane_renderer">Enable Plane Renderer</string>
+    <string name="credits">Credits</string>
+
+    <string name="copyrights">All 3D models were sourced legally from sketchfab.com\nThe artists include:\n- tojamerlin\n- beachmouse\n- Animium 3d model\n- vodzurk\n- F A L C O N\n- rufusrockwell\n- Thomas Flynn\n- zvanstone\n- farhad.Guli\n- roket_kroket\n- toxiccrack</string>
 </resources>
