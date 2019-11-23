@@ -30,6 +30,7 @@ import com.example.a442projects_thisappslaps_co.ARObjects.ARObjectsFragment;
 import com.example.a442projects_thisappslaps_co.ARObjects.AddObjectListener;
 import com.example.a442projects_thisappslaps_co.Gallery.Project;
 import com.example.a442projects_thisappslaps_co.Gallery.ViewPhotoFragment;
+import com.example.a442projects_thisappslaps_co.Settings.SettingsChangedListener;
 import com.example.a442projects_thisappslaps_co.Shop.ShopController;
 import com.example.a442projects_thisappslaps_co.Shop.ShopFragment;
 import com.example.a442projects_thisappslaps_co.Settings.SettingsFragment;
@@ -65,11 +66,15 @@ import java.util.Date;
 import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.GalleryTable.Cols.TIMESTAMP;
 import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.GalleryTable.Cols.URI;
 import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.GalleryTable.NAME;
+import static com.example.a442projects_thisappslaps_co.Settings.SettingsFragment.PLANE_RENDERER;
 
-public class MainActivity extends AppCompatActivity
-        implements View.OnClickListener, ModelLoaderInterface, AddObjectListener {
+public class MainActivity extends AppCompatActivity implements
+        View.OnClickListener,
+        ModelLoaderInterface,
+        AddObjectListener,
+        SettingsChangedListener {
 
-    private static final String PREFS_NAME = "SharedPrefs";
+    public static final String PREFS_NAME = "SharedPrefs";
     private static int MY_CAMERA_PERMISSIONS;
 
     private PointerDrawable pointer = new PointerDrawable();
@@ -128,7 +133,7 @@ public class MainActivity extends AppCompatActivity
             onUpdate();
         });
 
-        mARFragment.getArSceneView().getPlaneRenderer().setVisible(false);
+        mARFragment.getArSceneView().getPlaneRenderer().setVisible(sharedPreferences.getBoolean(PLANE_RENDERER, false));
 
         modelLoader = new ModelLoader(this, this);
     }
@@ -196,7 +201,7 @@ public class MainActivity extends AppCompatActivity
                 startFragment(new ShopFragment(), true);
                 break;
             case R.id.settings_image_btn:
-                startFragment(new SettingsFragment(), true);
+                startFragment(new SettingsFragment(this), true);
                 break;
             case R.id.explore_image_btn:
                 startFragment(new ExploreFragment(), true);
@@ -384,5 +389,10 @@ public class MainActivity extends AppCompatActivity
         values.put(URI, project.getUri());
         values.put(TIMESTAMP, project.getTimestamp());
         return values;
+    }
+
+    @Override
+    public void enablePlaneRendering(boolean enabled) {
+        mARFragment.getArSceneView().getPlaneRenderer().setVisible(enabled);
     }
 }
