@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.view.MotionEvent;
 import android.view.PixelCopy;
 import android.view.View;
 import android.widget.ImageButton;
@@ -49,10 +50,15 @@ import com.google.ar.core.Plane;
 import com.google.ar.core.Trackable;
 import com.google.ar.core.TrackingState;
 import com.google.ar.sceneform.AnchorNode;
+import com.google.ar.sceneform.HitTestResult;
+import com.google.ar.sceneform.Node;
+import com.google.ar.sceneform.Scene;
+import com.google.ar.sceneform.collision.Ray;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.ar.sceneform.ArSceneView;
 
@@ -89,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements
     private ImageButton mSettingsImageButton;
     private ImageButton mExploreImageButton;
     private ImageButton mShutterImageButton;
+    private ImageButton mDeleteImageButton;
 
     private ArFragment mARFragment;
 
@@ -151,10 +158,11 @@ public class MainActivity extends AppCompatActivity implements
         mSettingsImageButton = findViewById(R.id.settings_image_btn);
         mExploreImageButton = findViewById(R.id.explore_image_btn);
         mShutterImageButton = findViewById(R.id.shutter_image_btn);
+        mDeleteImageButton = findViewById(R.id.delete_image_btn);
         mARFragment = (ArFragment)
                 getSupportFragmentManager().findFragmentById(R.id.sceneform_fragment);
     }
-
+    public Scene.OnPeekTouchListener touchListener;
     private void setListeners() {
         mARObjectsImageButton.setOnClickListener(this);
         mGalleryImageButton.setOnClickListener(this);
@@ -162,6 +170,26 @@ public class MainActivity extends AppCompatActivity implements
         mSettingsImageButton.setOnClickListener(this);
         mExploreImageButton.setOnClickListener(this);
         mShutterImageButton.setOnClickListener(this);
+        mDeleteImageButton.setOnClickListener(this);
+//        for deletion of objects:
+        mDeleteImageButton.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View view) {
+                Toast.makeText(view.getContext(),"Tap on objects to delete", Toast.LENGTH_SHORT).show();
+                mDeleteImageButton.setImageResource(R.drawable.ic_delete_red);
+                mARFragment.getArSceneView().getScene().addOnPeekTouchListener(touchListener = new Scene.OnPeekTouchListener(){
+                    @Override
+                    public void onPeekTouch(HitTestResult hitTestResult, MotionEvent motionEvent) {
+                        if(hitTestResult.getNode()!= null) {
+                            Node hitNode = hitTestResult.getNode();
+                            hitNode.setParent(null);
+                        }
+                    }
+                });
+                return true;
+            }
+        });
     }
 
     private void requestPermissionForCamera() {
@@ -208,6 +236,11 @@ public class MainActivity extends AppCompatActivity implements
                 break;
             case R.id.shutter_image_btn:
                 takePhoto();
+                break;
+            case R.id.delete_image_btn:
+                Toast.makeText(view.getContext(),"Hold to delete", Toast.LENGTH_SHORT).show();
+                mDeleteImageButton.setImageResource(R.drawable.ic_delete_white);
+                mARFragment.getArSceneView().getScene().removeOnPeekTouchListener(touchListener);
                 break;
             default:
                 break;
