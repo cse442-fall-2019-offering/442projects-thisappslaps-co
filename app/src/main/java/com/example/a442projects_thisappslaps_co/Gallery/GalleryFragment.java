@@ -1,15 +1,16 @@
 package com.example.a442projects_thisappslaps_co.Gallery;
 
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,30 +20,38 @@ import com.example.a442projects_thisappslaps_co.R;
 
 import java.util.List;
 
+import static com.example.a442projects_thisappslaps_co.MainActivity.startFragment;
+
 public class GalleryFragment extends Fragment implements View.OnClickListener {
 
     private GalleryController mGalleryController;
+    private RecyclerView mGalleryRecyclerView;
 
     public GalleryFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mGalleryController = new GalleryController();
+        mGalleryController = new GalleryController(getContext());
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         View view = inflater.inflate(R.layout.gallery_fragment, container, false);
 
-        RecyclerView galleryRecyclerView = view.findViewById(R.id.gallery_recycler_view);
-        galleryRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), getSpanCount()));
-        GalleryAdapter galleryAdapter = new GalleryAdapter(mGalleryController.createDummyList());
-        galleryRecyclerView.setAdapter(galleryAdapter);
+        mGalleryRecyclerView = view.findViewById(R.id.gallery_recycler_view);
+        mGalleryRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), getSpanCount()));
 
-        ImageButton backImageButton = view.findViewById(R.id.back_button);
-        backImageButton.setOnClickListener(this);
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        GalleryAdapter galleryAdapter = new GalleryAdapter(mGalleryController.getProjectList());
+        mGalleryRecyclerView.setAdapter(galleryAdapter);
     }
 
     private int getSpanCount() {
@@ -67,10 +76,8 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.back_button) {
-            assert getFragmentManager() != null;
-            getFragmentManager().popBackStackImmediate();
-        }
+        assert getFragmentManager() != null;
+        getFragmentManager().popBackStackImmediate();
     }
 
     private class GalleryViewHolder extends RecyclerView.ViewHolder {
@@ -79,21 +86,25 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
             super(inflater.inflate(R.layout.gallery_item, viewGroup, false));
         }
 
-        void bind(int color) {
-            Drawable drawable =
-                    AppCompatResources.getDrawable(getContext(), R.drawable.rectangle_border);
-            Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
-            DrawableCompat.setTint(wrappedDrawable, getContext().getColor(color));
-            itemView.setBackground(drawable);
+        void bind(Project project) {
+            Bitmap bitmap = BitmapFactory.decodeFile(project.getUri(), new BitmapFactory.Options());
+            RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+            roundedBitmapDrawable.setCornerRadius(20f);
+            itemView.setBackground(roundedBitmapDrawable);
+            itemView.setOnClickListener(view -> {
+                if (getFragmentManager() != null) {
+                    startFragment(new ViewPhotoFragment(project, null, mGalleryController, true), getFragmentManager(), true);
+                }
+            });
         }
     }
 
     private class GalleryAdapter extends RecyclerView.Adapter<GalleryViewHolder> {
 
-        private List<Integer> mGalleryColorList;
+        private List<Project> mGalleryList;
 
-        private GalleryAdapter(List<Integer> galleryColorList) {
-            mGalleryColorList = galleryColorList;
+        private GalleryAdapter(List<Project> galleryColorList) {
+            mGalleryList = galleryColorList;
         }
 
         @NonNull
@@ -104,12 +115,12 @@ public class GalleryFragment extends Fragment implements View.OnClickListener {
 
         @Override
         public void onBindViewHolder(@NonNull GalleryViewHolder holder, int position) {
-            holder.bind(mGalleryColorList.get(position));
+            holder.bind(mGalleryList.get(position));
         }
 
         @Override
         public int getItemCount() {
-            return mGalleryColorList.size();
+            return mGalleryList.size();
         }
     }
 }

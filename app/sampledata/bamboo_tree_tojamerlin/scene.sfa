@@ -1,0 +1,234 @@
+{
+  materials: [
+    {
+      name: 'Trunk',
+      parameters: [
+        {
+          baseColorFactor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColor: 'Trunk_baseColor',
+        },
+        {
+          diffuseColorFactor: null,
+        },
+        {
+          diffuseColor: null,
+        },
+        {
+          normal: 'Trunk_normal',
+        },
+        {
+          metallicFactor: 0,
+        },
+        {
+          roughnessFactor: 0.95243199999999995,
+        },
+        {
+          specularFactor: null,
+        },
+        {
+          glossinessFactor: null,
+        },
+        {
+          specularGlossiness: null,
+        },
+        {
+          specularGlossinessCalculation: null,
+        },
+        {
+          metallicRoughness: null,
+        },
+        {
+          occlusion: null,
+        },
+        {
+          emissiveFactor: [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        {
+          emissive: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/gltf_material.sfm',
+    },
+    {
+      name: 'Mf_Grass',
+      parameters: [
+        {
+          baseColorFactor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColor: 'Mf_Grass_baseColor',
+        },
+        {
+          diffuseColorFactor: null,
+        },
+        {
+          diffuseColor: null,
+        },
+        {
+          normal: null,
+        },
+        {
+          metallicFactor: 0,
+        },
+        {
+          roughnessFactor: 0.59999999999999998,
+        },
+        {
+          specularFactor: null,
+        },
+        {
+          glossinessFactor: null,
+        },
+        {
+          specularGlossiness: null,
+        },
+        {
+          specularGlossinessCalculation: null,
+        },
+        {
+          metallicRoughness: null,
+        },
+        {
+          occlusion: null,
+        },
+        {
+          emissiveFactor: [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        {
+          emissive: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/gltf_material.sfm',
+    },
+    {
+      name: 'Leaf',
+      parameters: [
+        {
+          baseColorFactor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColor: 'Leaf_baseColor',
+        },
+        {
+          diffuseColorFactor: null,
+        },
+        {
+          diffuseColor: null,
+        },
+        {
+          normal: null,
+        },
+        {
+          metallicFactor: 0,
+        },
+        {
+          roughnessFactor: 0.95243199999999995,
+        },
+        {
+          specularFactor: null,
+        },
+        {
+          glossinessFactor: null,
+        },
+        {
+          specularGlossiness: null,
+        },
+        {
+          specularGlossinessCalculation: null,
+        },
+        {
+          metallicRoughness: null,
+        },
+        {
+          occlusion: null,
+        },
+        {
+          emissiveFactor: [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        {
+          emissive: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/gltf_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/bamboo_tree_tojamerlin/scene.gltf',
+    name: 'scene',
+    recenter: 'root',
+    scale: 0.0034380000000000001,
+  },
+  samplers: [
+    {
+      file: 'sampledata/bamboo_tree_tojamerlin/textures/Mf_Grass_baseColor.png',
+      name: 'Mf_Grass_baseColor',
+      pipeline_name: 'textures/Mf_Grass_baseColor.png',
+    },
+    {
+      file: 'sampledata/bamboo_tree_tojamerlin/textures/Trunk_baseColor.png',
+      name: 'Trunk_baseColor',
+      pipeline_name: 'textures/Trunk_baseColor.png',
+    },
+    {
+      file: 'sampledata/bamboo_tree_tojamerlin/textures/Trunk_normal.png',
+      name: 'Trunk_normal',
+      params: {
+        usage_type: 'Normal',
+      },
+      pipeline_name: 'textures/Trunk_normal.png',
+    },
+    {
+      file: 'sampledata/bamboo_tree_tojamerlin/textures/Leaf_baseColor.png',
+      name: 'Leaf_baseColor',
+      pipeline_name: 'textures/Leaf_baseColor.png',
+    },
+  ],
+  version: '0.54:2',
+}

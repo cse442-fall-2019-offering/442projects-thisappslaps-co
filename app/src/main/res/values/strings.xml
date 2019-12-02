@@ -2,8 +2,9 @@
     <string name="app_name">garden</string>
     <string name="action_settings">Settings</string>
     <string name="my_projects_text_view">My Projects</string>
+    <string name="shop">Shop</string>
     <string name="shop_header_1_content">Tulips Starting \n Only at</string>
-    <string name="shop_header_1_price">$9.99</string>
+    <string name="shop_header_1_price">$9.80</string>
     <string name="shop_header_2_content">Give a Gift \n For Mom</string>
     <string name="shop_header_2_price">Mums $19.95</string>
     <string name="shop_search_bar_hint">What are you looking for?</string>
@@ -25,4 +26,10 @@
 
     <string name="edit_username">Edit Username</string>
     <string name="save">Save</string>
+    <string name="wish_list">Wish List</string>
+
+    <string name="enable_plane_renderer">Enable Plane Renderer</string>
+    <string name="credits">Credits</string>
+
+    <string name="copyrights">All 3D models were sourced legally from sketchfab.com\nThe artists include:\n- tojamerlin\n- beachmouse\n- Animium 3d model\n- vodzurk\n- F A L C O N\n- rufusrockwell\n- Thomas Flynn\n- zvanstone\n- farhad.Guli\n- roket_kroket\n- toxiccrack</string>
 </resources>

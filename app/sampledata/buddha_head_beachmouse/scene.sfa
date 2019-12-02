@@ -1,0 +1,88 @@
+{
+  materials: [
+    {
+      name: 'buddha_head',
+      parameters: [
+        {
+          baseColorFactor: [
+            1,
+            1,
+            1,
+            1,
+          ],
+        },
+        {
+          baseColor: 'buddha_head_baseColor',
+        },
+        {
+          diffuseColorFactor: null,
+        },
+        {
+          diffuseColor: null,
+        },
+        {
+          normal: null,
+        },
+        {
+          metallicFactor: 0,
+        },
+        {
+          roughnessFactor: 0.59999999999999998,
+        },
+        {
+          specularFactor: null,
+        },
+        {
+          glossinessFactor: null,
+        },
+        {
+          specularGlossiness: null,
+        },
+        {
+          specularGlossinessCalculation: null,
+        },
+        {
+          metallicRoughness: null,
+        },
+        {
+          occlusion: null,
+        },
+        {
+          emissiveFactor: [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        {
+          emissive: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/gltf_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/buddha_head_beachmouse/scene.gltf',
+    name: 'scene',
+    recenter: 'root',
+    scale: 0.1,
+  },
+  samplers: [
+    {
+      file: 'sampledata/buddha_head_beachmouse/textures/buddha_head_baseColor.jpeg',
+      name: 'buddha_head_baseColor',
+      pipeline_name: 'textures/buddha_head_baseColor.jpeg',
+    },
+  ],
+  version: '0.54:2',
+}

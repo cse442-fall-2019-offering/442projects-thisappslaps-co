@@ -1,32 +1,55 @@
 package com.example.a442projects_thisappslaps_co.Gallery;
 
-import com.example.a442projects_thisappslaps_co.R;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import com.example.a442projects_thisappslaps_co.Database.DatabaseCursorWrapper;
+import com.example.a442projects_thisappslaps_co.Database.ProjectDatabaseHelper;
+
+import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+
+import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.GalleryTable.Cols.TIMESTAMP;
+import static com.example.a442projects_thisappslaps_co.Database.DatabaseSchema.GalleryTable.NAME;
 
 class GalleryController {
 
-    GalleryController() { }
+    private SQLiteDatabase mSQLiteDatabase;
 
-    List<Integer> createDummyList() {
-        List<Integer> dummyList = new ArrayList<>();
+    GalleryController(Context context) {
+        mSQLiteDatabase = new ProjectDatabaseHelper(context.getApplicationContext()).getWritableDatabase();
+    }
 
-        for (int i = 0; i < 50; i++) {
-            if (i % 5 == 0) {
-                dummyList.add(R.color.colorPrimaryDark);
-            }
-            else if (i % 3 == 0) {
-                dummyList.add(R.color.colorWhite);
-            }
-            else if (i % 2 == 0) {
-                dummyList.add(R.color.design_default_color_primary);
-            }
-            else {
-                dummyList.add(R.color.colorAccent);
+    ArrayList<Project> getProjectList() {
+        ArrayList<Project> projects = new ArrayList<>();
+
+        try (DatabaseCursorWrapper cursorWrapper = queryProjects()) {
+            cursorWrapper.moveToFirst();
+            while (!cursorWrapper.isAfterLast()) {
+                projects.add(cursorWrapper.getProject());
+                cursorWrapper.moveToNext();
             }
         }
 
-        return dummyList;
+        Collections.reverse(projects);
+
+        return projects;
+    }
+
+    private DatabaseCursorWrapper queryProjects() {
+        Cursor cursor = mSQLiteDatabase.query(NAME, null, null, null, null, null, null);
+        return new DatabaseCursorWrapper(cursor);
+    }
+
+    void deleteProject(Project project) {
+        if (mSQLiteDatabase.delete(NAME, TIMESTAMP + "=" + project.getTimestamp(), null) > 0) {
+            File projectFile = new File(project.getUri());
+            if (projectFile.delete()) {
+                Log.d("Gallery", "File Deleted");
+            }
+        }
     }
 }
